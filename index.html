@@ -981,34 +981,44 @@ let CURRENT_STATE = null;       // clientGetFullState() payload for whoever is l
 let CURRENT_COACH_STATE = null; // clientGetCoachState() payload for whoever is logged in as staff
 
 async function loadPlayerState(memberId){
-  if(!memberId) return;
+  if(!memberId) return false;
   let res;
   try{ res = await callApi('getFullState', { memberId }); }
-  catch(e){ showToast('Could not load your data — check your connection'); return; }
-  if(!res.success){ showToast(res.error || 'Could not load your data'); return; }
+  catch(e){ console.error('getFullState network error:', e); showToast('Could not load your data — check your connection'); return false; }
+  if(!res.success){ console.error('getFullState failed:', res.error); showToast(res.error || 'Could not load your data'); return false; }
+  console.log('getFullState payload:', res.data); // TEMP DEBUG — check DevTools console
   CURRENT_STATE = res.data;
-  applyStateToUI();
+  try{ applyStateToUI(); }
+  catch(e){ console.error('applyStateToUI crashed:', e); showToast('Loaded data, but UI failed to render — check console'); return false; }
+  return true;
 }
 
 async function loadCoachState(coachId, tenantId){
-  if(!coachId) return;
+  if(!coachId) return false;
   let res;
   try{ res = await callApi('getCoachState', { coachId, tenantId }); }
-  catch(e){ showToast('Could not load staff data'); return; }
-  if(!res.success){ showToast(res.error || 'Could not load staff data'); return; }
+  catch(e){ showToast('Could not load staff data'); return false; }
+  if(!res.success){ showToast(res.error || 'Could not load staff data'); return false; }
   CURRENT_COACH_STATE = res.data;
+  document.getElementById('home-player-title').textContent = (CURRENT_COACH_STATE.staffName || 'Staff').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = CURRENT_COACH_STATE.academy || 'Academy';
+  document.getElementById('home-status-txt').textContent = `· ${CURRENT_COACH_STATE.staffRole || 'Staff'}`;
+  const greetEl = document.getElementById('home-greeting-line');
+  if(greetEl) greetEl.textContent = `${timeGreeting()},`;
   const titleEl = document.getElementById('coach-panel-title');
   if(titleEl) titleEl.textContent = 'Coach panel · ' + CURRENT_COACH_STATE.staffName;
   if(document.getElementById('coach-tab-roster').style.display !== 'none') renderAdminRoster();
   if(document.getElementById('coach-tab-sessions').style.display !== 'none') renderAdminSessions();
+  return true;
 }
 
 function applyStateToUI(){
   if(!CURRENT_STATE) return;
   const s = CURRENT_STATE;
+  if(!s.member){ console.error('applyStateToUI: s.member is missing from payload', s); return; }
 
-  document.getElementById('home-player-title').textContent = s.member.name.split(' ')[0];
-  document.getElementById('home-academy-title').textContent = s.member.academy;
+  document.getElementById('home-player-title').textContent = (s.member.name || 'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = s.member.academy || 'Academy';
   document.getElementById('home-status-txt').textContent = `· ${s.member.coach || 'No coach assigned'}`;
   const greetEl = document.getElementById('home-greeting-line');
   if(greetEl) greetEl.textContent = `${timeGreeting()},`;
@@ -1406,7 +1416,7 @@ function openAllActivity(){
 /* ===== MODULE: Profile ===== */
 function renderProfileSheet(){
   const s = CURRENT_STATE;
-  const total = s ? s.score.total : 0;
+  const total = (s && s.score) ? s.score.total : 0;
   const level = s ? s.score.level : '—';
   const points = s ? s.points : 0;
   const pct = s ? s.attendance.pct : 0;
@@ -1727,7 +1737,7 @@ function obBack(){
   document.getElementById(prev).classList.remove('hidden');
   obCurrentId = prev;
   renderObDots(prev);
-  document.getElementById('ob-back-btn').style.visibility = 'visible';
+  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-verify' && !obFromSignIn) ? 'hidden' : 'visible';
 }
 function exitSignupToSignIn(){
   haptic('light');
@@ -1972,13 +1982,24 @@ function routeAfterSignIn(account){
     return;
   }
   if(account.role === 'staff'){
+    document.getElementById('home-player-title').textContent = (account.name || 'Staff').split(' ')[0];
+    document.getElementById('home-academy-title').textContent = account.academy || 'Academy';
+    document.getElementById('home-status-txt').textContent = `· ${account.staffRole || 'Staff'}`;
+    const greetElS = document.getElementById('home-greeting-line');
+    if(greetElS) greetElS.textContent = `${timeGreeting()},`;
     document.getElementById('onboard-overlay').classList.add('hidden');
     loadCoachState(account.accountId, account.tenantId);
     showScreen('home');
     showToast(`Signed in as ${account.name.split(' ')[0]} — open Profile → Coach panel`);
     return;
   }
+  document.getElementById('home-player-title').textContent = (account.name || 'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = account.academy || 'Academy';
+  document.getElementById('home-status-txt').textContent = `· ${account.coach || 'No coach assigned'}`;
+  const greetEl0 = document.getElementById('home-greeting-line');
+  if(greetEl0) greetEl0.textContent = `${timeGreeting()},`;
   loadPlayerState(account.memberId);
+  if(account.onboarded) markOnboarded();
   if(hasOnboarded()){
     document.getElementById('onboard-overlay').classList.add('hidden');
     showScreen('home');
@@ -2044,21 +2065,45 @@ function renderSigninEntry(){
 /* Resume an existing session on reload — ACCOUNTS{} is in-memory only and
    is empty after a reload, so we re-fetch straight from the server using
    the saved memberId/tenantId instead of relying on the cache. */
-(function initSessionOnLoad(){
+(async function initSessionOnLoad(){
   if(hasSession()){
-    document.getElementById('signin-overlay').classList.add('hidden');
+    // Sign-in stays visible (default state) until the cached session is
+    // confirmed valid against the server. No dashboard is shown on a guess.
     try{
-      const role = localStorage.getItem(ROLE_KEY);
-      const memberId = localStorage.getItem(MEMBER_ID_KEY);
-      const tenantId = localStorage.getItem(TENANT_ID_KEY);
-      const accountKey = localStorage.getItem(ACCOUNT_KEY);
-      if(role === 'staff' && accountKey){
-        loadCoachState(accountKey.toUpperCase(), tenantId);
-      } else if(memberId){
-        loadPlayerState(memberId);
+      const cachedName = getTrustedDeviceName();
+      if(cachedName && cachedName !== 'there'){
+        document.getElementById('home-player-title').textContent = cachedName.split(' ')[0];
       }
     }catch(e){}
-    if(hasOnboarded()){
+
+    const role = localStorage.getItem(ROLE_KEY);
+    const memberId = localStorage.getItem(MEMBER_ID_KEY);
+    const tenantId = localStorage.getItem(TENANT_ID_KEY);
+    const accountKey = localStorage.getItem(ACCOUNT_KEY);
+
+    let sessionValid = false;
+    try{
+      if(role === 'staff' && accountKey){
+        sessionValid = await loadCoachState(accountKey.toUpperCase(), tenantId);
+      } else if(memberId){
+        sessionValid = await loadPlayerState(memberId);
+      }
+    }catch(e){ sessionValid = false; }
+
+    if(!sessionValid){
+      // Stale/invalid/expired session: never leave the person on an empty
+      // dashboard — force back to the real entry point, the login screen.
+      clearSession();
+      CURRENT_STATE = null;
+      CURRENT_COACH_STATE = null;
+      renderSigninEntry();
+      document.getElementById('signin-overlay').classList.remove('hidden');
+      document.getElementById('onboard-overlay').classList.add('hidden');
+      return;
+    }
+
+    document.getElementById('signin-overlay').classList.add('hidden');
+    if(role === 'staff' || role === 'parent' || hasOnboarded()){
       document.getElementById('onboard-overlay').classList.add('hidden');
     } else {
       document.getElementById('onboard-overlay').classList.remove('hidden');
