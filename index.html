@@ -1240,8 +1240,22 @@ async function callApi(action, payload){
         return sbOk({});
       }
 
+      case 'claimAccount': {
+        const { data, error } = await sb.rpc('rpc_claim_account', {
+          p_role: payload.role, p_tenant_id: payload.tenantId, p_pin: payload.pin, p_name: payload.name,
+          p_age: payload.age ? parseInt(payload.age, 10) : null,
+          p_parent_name: payload.parentName || null, p_parent_contact: payload.parentContact || null,
+          p_parent_email: payload.parentEmail || null, p_club: payload.club || null,
+          p_coach_id: payload.coachId || null,
+          p_email: payload.email || null, p_phone: payload.phone || null
+        });
+        if(error) return sbErr(error, 'Could not create your account.');
+        const row = data && data[0];
+        if(!row) return sbErr(null, 'Could not create your account.');
+        return sbOk({ accountId: row.account_id, memberId: row.member_id, tenantId: row.tenant_id });
+      }
+
       /* ----- TODO: iprito mo ito same pattern (table/RPC pointers) -----
-        claimAccount     -> insert to members/staff/parents + check tenant_invites.status
         getCoaches       -> sb.from('staff').select('*').eq('tenant_id',payload.tenantId).eq('role','COACH')
         assignCoach      -> sb.from('members').update({coach_id:payload.coachId}).eq('member_id',payload.memberId)
         markOnboarded    -> sb.from('members').update({onboarded_at:new Date().toISOString()}).eq('member_id',payload.memberId)
