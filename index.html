@@ -8,13 +8,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    /* §1.1 core palette — pitch green + gold, same family as the other Arti apps */
     --gold:#E8CC7A; --gold-deep:#C9A84C;
     --pitch:#1F6B3C; --pitch-deep:#154A2A;
     --bg-dark:#12211a; --surface-dark:#0e1913;
     --border-gold:rgba(232,204,122,0.18);
     --app-bg:#ECE4D6;
+    /* §1.2 semantic */
     --green:#34C759; --red:#FF453A; --orange:#FF9F0A; --blue:#4A9DE0; --purple:#9B59B6; --gray:#8E8E93;
+    /* §1.3 text ramp */
     --t1:#1c1c1e; --t2:rgba(60,60,67,0.55); --t3:rgba(60,60,67,0.45); --t4:rgba(60,60,67,0.35);
+    /* §5 easing */
     --ease-sheet-in:cubic-bezier(0.23,1,0.32,1);
     --ease-sheet-out:cubic-bezier(0.32,0.72,0.33,1);
     --ease-settle:cubic-bezier(0.16,1,0.3,1);
@@ -29,8 +33,10 @@
   html,body{ margin:0; padding:0; }
   body{ font-family:var(--font-ui); color:var(--t1); background:#0d0d0d; display:flex; justify-content:center; align-items:flex-start; height:100dvh; overflow-y:auto; overflow-x:hidden; }
   ::-webkit-scrollbar{ width:0; height:0; background:transparent; }
+
   .phone{ width:430px; max-width:100vw; height:100dvh; background:var(--app-bg) !important; position:relative; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 0 0 1px rgba(255,255,255,0.06), 0 30px 80px rgba(0,0,0,0.5); }
   @media (min-width:431px){ .phone{ height:min(932px, 100dvh); margin:24px 0; border-radius:44px; } }
+
   .screen{ flex:1; overflow-y:auto; padding-top:max(14px, env(safe-area-inset-top)); padding-bottom:max(110px, calc(96px + env(safe-area-inset-bottom))); }
   #screen-home{ padding-top:0; }
   .screen.hidden{ display:none; }
@@ -38,11 +44,14 @@
   .screen.entering{ animation:screenFadeIn .45s var(--ease-settle) forwards; }
   @keyframes screenFadeOut{ from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-6px)} }
   @keyframes screenFadeIn{ from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+
   .eyebrow{ font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--t3); }
   .screen-title{ font-family:var(--font-display); font-size:26px; font-weight:700; letter-spacing:-.01em; margin:3px 0 2px; }
   .row-title{ font-size:15.5px; font-weight:600; }
   .row-sub{ font-size:12.5px; color:var(--t2); margin-top:1px; }
+
   .header{ padding:6px 22px 16px; }
+
   .top-header{ margin:0 20px 18px; padding:max(14px, env(safe-area-inset-top)) 20px 22px; background:rgba(255,255,255,0.72); border-radius:22px; box-shadow:0 1px 2px rgba(0,0,0,0.04); position:relative; overflow:hidden; }
   .top-header-icons{ display:flex; justify-content:flex-end; gap:12px; position:relative; z-index:1; }
   .th-icon-btn{ position:relative; width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,0.05); border:0; display:flex; align-items:center; justify-content:center; transition:transform .12s, background .12s; }
@@ -59,49 +68,69 @@
   .th-vehicle-line span.status{ color:var(--t2); font-size:13px; }
   .th-stats-row{ display:flex; gap:8px; margin-top:14px; position:relative; z-index:1; }
   .th-stat-pill{ flex:1; display:flex; align-items:center; gap:7px; padding:9px 12px; border-radius:14px; background:rgba(0,0,0,0.04); border:0; }
+  .th-stat-ic{ font-size:14px; line-height:1; flex-shrink:0; }
+  .th-stat-v{ font-family:var(--font-mono); font-size:13.5px; font-weight:700; color:var(--t1); line-height:1.1; }
+  .th-stat-l{ font-size:9.5px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--t3); margin-top:1px; }
+
   .qa-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:7px; margin:0 20px 18px; }
   .qa-tile{ display:flex; flex-direction:column; align-items:center; gap:6px; padding:12px 2px; background:rgba(255,255,255,0.72); border-radius:16px; border:0; box-shadow:0 1px 2px rgba(0,0,0,0.04); transition:transform .12s, opacity .12s; }
   .qa-tile:active{ transform:scale(.93); opacity:.8; }
   .qa-ic-tile{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.05); color:#1c1c1e; }
+  .qa-ic-tile svg{ width:18px; height:18px; }
+  .qa-lbl{ font-size:11px; font-weight:600; color:var(--t1); text-align:center; line-height:1.2; font-family:var(--font-ui); }
   .notif-row{ display:flex; align-items:flex-start; gap:12px; padding:13px 15px; position:relative; }
   .notif-row:not(:last-child)::before{ content:""; position:absolute; left:54px; right:0; bottom:0; height:1px; background:rgba(0,0,0,0.06); }
+  .notif-row .icon-tile{ margin-top:1px; }
   .notif-row .n-time{ font-size:11.5px; color:var(--t3); margin-top:2px; }
+
   .grouped-card{ margin:0 20px; background:rgba(255,255,255,0.72); border-radius:20px; box-shadow:0 1px 2px rgba(0,0,0,0.04); overflow:hidden; }
   .grouped-row{ display:flex; align-items:center; gap:12px; padding:13px 15px; position:relative; }
   .grouped-row:not(:last-child)::before{ content:""; position:absolute; left:54px; right:0; bottom:0; height:1px; background:rgba(0,0,0,0.06); }
   #screen-profile .grouped-row::before, #sheet-store .grouped-row::before, #sheet-achievements .grouped-row::before, #switch-academy-list .grouped-row::before, #admin-roster-list .grouped-row::before{ display:none; }
   .icon-tile{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:rgba(0,0,0,0.05); color:#1c1c1e; }
   .icon-tile svg{ width:18px; height:18px; }
+
   .badge-status{ padding:4px 11px; border-radius:20px; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
   .badge-green{ background:rgba(52,199,89,0.14); color:#1c8a3e; }
   .badge-orange{ background:rgba(255,159,10,0.16); color:#a15b00; }
   .badge-red{ background:rgba(255,69,58,0.14); color:#c22a20; }
   .badge-gray{ background:rgba(0,0,0,0.06); color:var(--t2); }
+
   .gold-hero{ margin:0 20px 18px; padding:22px 20px; background:rgba(255,255,255,0.78); border-radius:22px; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
   .gold-hero .l{ color:var(--t2); font-size:12.5px; }
   .gold-hero .n{ font-family:var(--font-display); font-size:44px; font-weight:700; color:var(--pitch); letter-spacing:-.02em; }
   .gold-hero .n span{ font-size:22px; color:var(--t2); margin-left:2px; }
   .gold-hero .status-row{ display:flex; align-items:center; gap:7px; margin-top:10px; }
   .gold-hero .status-txt{ color:var(--t1); font-size:13.5px; font-weight:600; }
+
   .frost-card{ margin:0 20px 18px; padding:18px; background:rgba(255,255,255,0.72); border-radius:20px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+  .frost-card .badge{ display:flex; align-items:center; gap:8px; margin-bottom:11px; }
+  .frost-card .badge span{ font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--t2); }
   .check-row{ display:flex; align-items:center; gap:9px; font-size:14px; padding:5px 0; }
   .check-row .c{ color:var(--pitch); font-weight:700; }
+
   .sec-head{ display:flex; justify-content:space-between; align-items:baseline; margin:24px 22px 10px; }
   .sec-head h3{ font-size:17px; font-weight:700; margin:0; letter-spacing:-.01em; }
   .sec-head a{ font-size:12.5px; color:var(--t2); text-decoration:none; font-weight:500; cursor:pointer; }
+
   .chip{ padding:8px 15px; border-radius:20px; border:1px solid rgba(0,0,0,0.1); background:rgba(255,255,255,0.72); color:var(--t1); font-size:12.5px; font-weight:600; }
   .chip.active{ background:#1c1c1e; color:var(--app-bg); border-color:#1c1c1e; }
+
   .badge-scroll{ display:flex; gap:13px; padding:2px 20px 4px; overflow-x:auto; }
   .badge-card{ flex:0 0 30%; height:120px; border-radius:20px; padding:14px; display:flex; flex-direction:column; justify-content:space-between; align-items:center; text-align:center; background:rgba(255,255,255,0.72); box-shadow:0 1px 2px rgba(0,0,0,0.04); }
   .badge-card.locked{ opacity:.4; }
   .badge-card .b-ic{ font-size:28px; }
   .badge-card .b-lbl{ font-size:11px; font-weight:700; line-height:1.25; }
+
   .redeem-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:0 20px 12px; }
   .redeem-tile{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:14px 4px; background:rgba(255,255,255,0.72); border-radius:16px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
-  .redeem-tile .r-ic{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.05); font-size:16px; }
+  .redeem-tile .r-ic{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.05); color:#1c1c1e; }
+  .redeem-tile .r-ic svg{ width:18px; height:18px; }
   .redeem-tile .r-lbl{ font-size:11px; font-weight:600; color:var(--t1); text-align:center; line-height:1.25; }
+
   .pbar-track{ height:5px; background:rgba(0,0,0,0.08); border-radius:3px; overflow:hidden; margin-top:6px; }
   .pbar-fill{ height:100%; border-radius:inherit; transition:width .4s var(--ease-settle); }
+
   .sheet-overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.45); backdrop-filter:blur(8px); z-index:700; opacity:0; pointer-events:none; transition:opacity .26s var(--ease-exit); }
   .sheet-overlay.show{ opacity:1; pointer-events:auto; }
   .share-sheet{ position:fixed; left:50%; bottom:0; transform:translateX(-50%) translateY(100%); width:100%; max-width:430px; max-height:88vh; background:var(--app-bg); border-radius:20px 20px 0 0; z-index:701; padding:0 0 max(20px, env(safe-area-inset-bottom)); overflow-y:auto; }
@@ -115,6 +144,7 @@
   .fact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-top:6px; }
   .fact-l{ font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--t3); }
   .fact-v{ font-family:var(--font-mono); font-size:14.5px; margin-top:2px; }
+
   .chat-log{ display:flex; flex-direction:column; gap:9px; padding:6px 0 12px; min-height:40px; }
   .bubble{ max-width:82%; padding:11px 14px; border-radius:16px; font-size:14px; line-height:1.45; }
   .bubble.ai{ align-self:flex-start; background:rgba(255,255,255,0.82); border-bottom-left-radius:4px; }
@@ -129,20 +159,25 @@
   .au-plus-menu-row{ display:flex; align-items:center; gap:11px; padding:11px 14px; position:relative; }
   .au-plus-menu-row:active{ background:rgba(0,0,0,0.045); }
   .au-plus-menu-ic{ width:28px; height:28px; border-radius:9px; background:rgba(28,28,30,0.06); color:#1c1c1e; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .au-plus-menu-ic svg{ width:15px; height:15px; }
   .au-plus-menu-lbl{ font-size:13.5px; font-weight:600; color:var(--t1); }
   .au-input-field{ flex:1; min-width:0; border:0; background:transparent; font-size:14.5px; color:var(--t1); outline:none; font-family:var(--font-ui); padding:6px 0; }
   .au-input-field::placeholder{ color:var(--t3); }
   .au-inline-mic{ width:42px; height:42px; border-radius:50%; border:0; background:none; display:flex; align-items:center; justify-content:center; color:var(--t2); flex-shrink:0; transition:transform .12s, color .12s; }
+  .au-inline-mic:active{ transform:scale(.88); }
   .au-mic-btn{ width:42px; height:42px; border-radius:50%; background:var(--pitch); display:flex; align-items:center; justify-content:center; font-size:17px; color:#fff; flex-shrink:0; box-shadow:0 3px 10px rgba(31,107,60,.32); transition:transform .12s, background .12s; }
   .au-mic-btn:active{ transform:scale(.90); }
+
   #sheet-vex{ display:flex; flex-direction:column; }
   #sheet-vex .sheet-body{ flex:1; display:flex; flex-direction:column; overflow:hidden; }
   #sheet-vex .chat-log{ flex:1; overflow-y:auto; }
+
   .gold-menu-btn{ position:absolute; top:14px; left:16px; width:36px; height:36px; border-radius:10px; background:none; border:0; display:flex; align-items:center; justify-content:center; z-index:6; transition:transform .12s, opacity .12s; }
   .gold-menu-btn:active{ transform:scale(.90); opacity:.6; }
   .gold-header-icons{ position:absolute; top:14px; right:16px; display:flex; align-items:center; gap:4px; z-index:6; }
   .gold-header-icon-btn{ width:36px; height:36px; border-radius:10px; background:none; border:0; display:flex; align-items:center; justify-content:center; color:#1c1c1e; transition:transform .12s, opacity .12s, background .12s; }
   .gold-header-icon-btn:active{ transform:scale(.90); background:rgba(0,0,0,0.06); }
+  .gold-header-icon-btn svg{ width:19px; height:19px; }
   .gold-menu-overlay{ position:absolute; inset:0; background:rgba(0,0,0,0.22); backdrop-filter:blur(10px) saturate(140%); -webkit-backdrop-filter:blur(10px) saturate(140%); opacity:0; pointer-events:none; transition:opacity .22s var(--ease-exit); z-index:15; border-radius:20px 20px 0 0; }
   .gold-menu-overlay.show{ opacity:1; pointer-events:auto; }
   .gold-menu{ position:absolute; top:0; left:0; bottom:0; width:80%; max-width:300px; background:var(--app-bg); box-shadow:3px 0 26px rgba(0,0,0,0.18); transform:translateX(-100%); transition:transform .32s var(--ease-spring); z-index:20; display:flex; flex-direction:column; border-radius:0 20px 20px 0; overflow:hidden; }
@@ -152,21 +187,33 @@
   .gold-menu-scroll{ flex:1; overflow-y:auto; padding-bottom:max(14px, env(safe-area-inset-bottom)); }
   .gold-menu-section-label{ font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--t3); margin:8px 18px 6px; }
   .gold-recent-row{ display:flex; align-items:center; gap:11px; padding:10px 18px; }
+  .gold-recent-row:active{ background:rgba(0,0,0,0.045); }
+  .gold-recent-ic{ width:30px; height:30px; border-radius:9px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; color:#1c1c1e; flex-shrink:0; }
+  .gold-recent-ic svg{ width:15px; height:15px; }
+  .gold-recent-text{ flex:1; min-width:0; }
+  .gold-recent-title{ font-size:13.5px; font-weight:600; color:var(--t1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .gold-recent-time{ font-size:11px; color:var(--t3); margin-top:1px; }
   .gold-menu-divider{ height:1px; background:rgba(0,0,0,0.07); margin:10px 18px; flex-shrink:0; }
   .gold-menu-row{ display:flex; align-items:center; gap:14px; padding:12px 18px; }
   .gold-menu-row:active{ background:rgba(0,0,0,0.045); }
   .gold-menu-ic{ color:#1c1c1e; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .gold-menu-ic svg{ width:20px; height:20px; }
   .gold-menu-lbl{ font-size:14.5px; font-weight:600; color:var(--t1); }
+
   .toggle{ position:relative; width:51px; height:31px; border-radius:16px; background:#ddd; flex-shrink:0; cursor:pointer; }
   .toggle .knob{ position:absolute; top:2px; left:2px; width:27px; height:27px; border-radius:50%; background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.2); transition:left .25s var(--ease-settle); }
   .toggle.on{ background:var(--green); }
   .toggle.on .knob{ left:22px; }
+
   .navbar{ position:absolute; bottom:0; left:0; right:0; display:flex; justify-content:space-around; align-items:center; padding:10px 10px max(14px, env(safe-area-inset-bottom)); background:rgba(255,255,255,0.72); backdrop-filter:blur(20px) saturate(180%); border-top:1px solid rgba(0,0,0,0.06); z-index:100; }
   .nav-btn{ display:flex; flex-direction:column; align-items:center; gap:3px; background:none; border:none; color:var(--gray); font-family:var(--font-ui); font-size:10px; font-weight:500; padding:4px 12px; }
+  .nav-btn .ic{ font-size:19px; }
   .nav-btn.active{ color:#1c1c1e; }
+
   .toast{ position:fixed; bottom:190px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:rgba(28,28,30,0.92); backdrop-filter:blur(20px) saturate(180%); border-radius:14px; padding:12px 20px; color:#fff; font-size:13px; font-weight:500; z-index:9900; pointer-events:none; }
   .toast.show{ animation:toastIn .3s var(--ease-sheet-in) forwards; }
   @keyframes toastIn{ to{ opacity:1; transform:translateX(-50%) translateY(0); } }
+
   .profile-hero{ margin:0 20px 18px; padding:24px; background:rgba(255,255,255,0.72); border-radius:20px; text-align:center; }
   .avatar{ width:60px; height:60px; border-radius:50%; margin:0 auto 12px; background:linear-gradient(150deg,var(--pitch),var(--pitch-deep)); }
   .profile-badge-premium{ display:inline-flex; align-items:center; gap:4px; margin-top:6px; padding:4px 12px; border-radius:20px; background:linear-gradient(150deg,var(--gold),var(--gold-deep)); color:#3a2e08; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
@@ -174,6 +221,7 @@
   .profile-stat-tile{ padding:16px 14px; background:rgba(255,255,255,0.72); border-radius:18px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
   .profile-stat-tile .v{ font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--t1); letter-spacing:-.01em; }
   .profile-stat-tile .l{ font-size:11.5px; color:var(--t2); font-weight:600; margin-top:2px; }
+
   .onboard-overlay{ position:absolute; inset:0; z-index:900; background:var(--app-bg); display:flex; flex-direction:column; }
   .onboard-overlay.hidden{ display:none; }
   .onboard-topbar{ display:flex; align-items:center; justify-content:space-between; padding:max(20px, env(safe-area-inset-top)) 22px 6px; min-height:22px; flex-shrink:0; }
@@ -203,6 +251,10 @@
   .btn-secondary:active{ transform:scale(.97); opacity:.85; }
   .btn-ghost{ width:100%; padding:14px 0 2px; text-align:center; font-size:13.5px; color:var(--t2); font-weight:600; background:none; border:0; }
   .onboard-footer{ margin-top:auto; padding-top:16px; flex-shrink:0; }
+  .method-card{ display:flex; align-items:center; gap:14px; padding:15px; background:rgba(255,255,255,0.72); border-radius:18px; margin-bottom:10px; border:1.5px solid transparent; }
+  .method-card:active{ transform:scale(.98); }
+  .method-card .mic{ width:44px; height:44px; border-radius:13px; background:rgba(0,0,.05); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:19px; color:#1c1c1e; }
+  .method-card .mic svg{ width:20px; height:20px; }
   .field-row{ display:flex; justify-content:space-between; align-items:center; padding:13px 15px; position:relative; gap:10px; }
   .field-row:not(:last-child)::before{ content:""; position:absolute; left:15px; right:0; bottom:0; height:1px; background:rgba(0,0,0,0.06); }
   .field-row input{ border:0; background:transparent; text-align:right; font-family:var(--font-mono); font-size:14.5px; color:var(--t1); width:60%; outline:none; }
@@ -210,6 +262,29 @@
   .hist-opts{ display:flex; gap:8px; margin-top:11px; flex-wrap:wrap; }
   .hist-chip{ padding:8px 13px; border-radius:14px; background:rgba(0,0,0,.05); font-size:12px; font-weight:600; color:var(--t1); border:1.5px solid transparent; }
   .hist-chip.active{ background:#1c1c1e; color:var(--app-bg); }
+  .drive-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:4px; }
+  .drive-card{ padding:18px 14px; background:rgba(255,255,255,0.72); border-radius:18px; text-align:center; border:1.5px solid transparent; }
+  .drive-card.active{ background:linear-gradient(150deg,var(--pitch),var(--pitch-deep)); color:#fff; border-color:var(--gold); }
+  .drive-card .ic{ font-size:23px; margin-bottom:8px; display:flex; align-items:center; justify-content:center; color:#1c1c1e; }
+  .drive-card.active .ic{ color:#fff; }
+  .drive-card .ic svg{ width:23px; height:23px; }
+  .drive-card .lbl{ font-size:13px; font-weight:600; }
+  .activation-wrap{ flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:10px 4px; }
+  .activation-mark{ width:88px; height:88px; border-radius:26px; background:linear-gradient(150deg,var(--surface-dark),var(--bg-dark)); border:1px solid var(--border-gold); display:flex; align-items:center; justify-content:center; margin-bottom:20px; position:relative; }
+  .activation-mark::after{ content:""; position:absolute; inset:-6px; border-radius:30px; border:1px solid var(--border-gold); animation:ringPulse 1.6s ease-out infinite; }
+  @keyframes ringPulse{ 0%{transform:scale(.94); opacity:.9;} 100%{transform:scale(1.18); opacity:0;} }
+  .activation-status{ font-size:13px; color:var(--t2); font-family:var(--font-mono); text-align:center; min-height:18px; letter-spacing:.01em; }
+  .activation-result{ width:100%; margin-top:22px; }
+  .activation-result.hidden{ display:none; }
+  .result-card{ background:linear-gradient(160deg,var(--surface-dark),var(--bg-dark)); border:1px solid var(--border-gold); border-radius:22px; padding:22px 20px; text-align:left; }
+  .result-veh{ color:#fff; font-family:var(--font-display); font-size:16.5px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .result-veh svg{ width:18px; height:18px; flex-shrink:0; }
+  .result-score-row{ display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
+  .result-score-row .n{ font-family:var(--font-display); font-size:38px; font-weight:700; color:var(--gold); letter-spacing:-.02em; }
+  .result-score-row .l{ color:rgba(255,255,255,.5); font-size:12.5px; }
+  .result-check{ color:rgba(255,255,255,.85); font-size:13.5px; padding:4px 0; display:flex; align-items:center; gap:8px; }
+  .result-check .c{ color:var(--gold); font-weight:700; }
+
   .oauth-btn{ position:relative; overflow:hidden; }
   .oauth-btn .btn-content{ display:flex; align-items:center; justify-content:center; gap:8px; transition:opacity .16s var(--ease-exit); }
   .oauth-btn.loading .btn-content, .oauth-btn.success .btn-content{ opacity:0; }
@@ -220,51 +295,49 @@
   .btn-primary .oauth-spinner{ border-color:rgba(236,228,214,0.3); border-top-color:var(--app-bg); }
   @keyframes oauthSpin{ to{ transform:rotate(360deg); } }
   #signin-overlay.leaving{ animation:screenFadeOut .32s var(--ease-exit) forwards; }
+
   .role-tab-row{ display:flex; gap:8px; margin:0 0 18px; }
   .role-tab{ flex:1; padding:11px 0; border-radius:14px; background:rgba(255,255,255,0.6); text-align:center; font-size:13px; font-weight:700; color:var(--t2); border:1.5px solid transparent; }
   .role-tab.active{ background:#1c1c1e; color:var(--app-bg); }
   textarea.field-textarea{ width:100%; border:0; background:rgba(0,0,0,0.04); border-radius:12px; padding:11px 12px; font-family:var(--font-ui); font-size:13.5px; color:var(--t1); outline:none; resize:none; min-height:70px; }
-  .empty-state{ text-align:center; padding:26px 20px; color:var(--t3); font-size:13px; }
-  .skeleton{ background:linear-gradient(90deg, rgba(0,0,0,0.04) 25%, rgba(0,0,0,0.08) 37%, rgba(0,0,0,0.04) 63%); background-size:400% 100%; animation:sk 1.4s ease infinite; border-radius:8px; }
-  @keyframes sk{ 0%{background-position:100% 50%} 100%{background-position:0 50%} }
 </style>
 </head>
 <body>
 <div class="phone">
 
-  <!-- ============ HOME ============ -->
+  <!-- ============ HOME — answers 3 things: score, what's next, what needs me ============ -->
   <div class="screen" id="screen-home">
     <div class="top-header">
       <div class="top-header-icons">
         <button class="th-icon-btn" aria-label="Settings" onclick="haptic('light'); openSettingsSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
         <button class="th-icon-btn" aria-label="Notifications" onclick="haptic('light'); openNotifications()">
           <svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
-          <span class="th-dot hidden" id="notif-dot"></span>
+          <span class="th-dot" id="notif-dot"></span>
         </button>
         <button class="th-icon-btn" aria-label="Profile" onclick="haptic('light'); openProfileSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></button>
       </div>
       <div class="top-header-greet">
-        <div class="th-hi" id="home-greeting-line">Hello,</div>
-        <div class="th-title" id="home-player-title">—</div>
+        <div class="th-hi" id="home-greeting-line">Good afternoon,</div>
+        <div class="th-title" id="home-player-title">Marco</div>
         <div class="th-vehicle-line">
           <span class="dot-green"></span>
-          <span class="name" id="home-academy-title">—</span>
-          <span class="status" id="home-status-txt"></span>
+          <span class="name" id="home-academy-title">Ibex FC Academy</span>
+          <span class="status" id="home-status-txt">· Coach Rafael</span>
         </div>
       </div>
     </div>
 
     <div class="gold-hero" id="home-bytesense-hero" style="margin-top:16px; cursor:pointer;" onclick="haptic('light'); showScreen('bytesense')">
       <div class="l">ByteSense</div>
-      <div class="n" id="home-hero-score">—</div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="home-hero-trend-txt"></span></div>
+      <div class="n" id="home-hero-score">742</div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="home-hero-trend-txt">↑ +18 this month</span></div>
     </div>
 
     <div class="sec-head" style="margin-top:22px;"><h3>Next</h3></div>
     <div class="grouped-card" id="home-next-session" style="margin-bottom:20px;"></div>
 
     <div class="sec-head" id="home-needs-head" style="display:none;"><h3>Needs you</h3></div>
-    <div class="grouped-card" id="home-needs-list" style="margin-bottom:20px; display:none;"></div>
+    <div class="grouped-card" id="home-needs-list" style="margin-bottom:20px;"></div>
 
     <div class="sec-head"><h3>Recent</h3><a onclick="haptic('light'); openAllActivity()">View all →</a></div>
     <div class="grouped-card" id="activity-home-list" style="margin-bottom:8px;"></div>
@@ -277,10 +350,10 @@
     <div class="sec-head"><h3>Attendance</h3></div>
     <div class="frost-card" style="display:flex; align-items:center; gap:16px;">
       <div style="flex:1;">
-        <div class="row-title" id="attendance-summary-title">—</div>
-        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:0%; background:var(--pitch);"></div></div>
+        <div class="row-title" id="attendance-summary-title">18 of 21 sessions attended</div>
+        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:86%; background:var(--pitch);"></div></div>
       </div>
-      <div style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">—</div>
+      <div class="num-hero" style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">86%</div>
     </div>
     <div class="sec-head"><h3>Session history</h3></div>
     <div class="grouped-card" id="training-history-list"></div>
@@ -291,26 +364,33 @@
     <div class="header"><div class="eyebrow">Player development</div><div class="screen-title">ByteSense score</div></div>
     <div class="gold-hero">
       <div class="l">Overall score</div>
-      <div class="n" id="bytesense-total">—</div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt"></span></div>
+      <div class="n" id="bytesense-total">742<span>/1000</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt">Rising Player</span></div>
     </div>
     <div class="sec-head" style="margin-top:0;"><h3>Score breakdown</h3></div>
     <div class="grouped-card" id="bytesense-breakdown" style="margin-bottom:18px;"></div>
     <div class="sec-head"><h3>Next level</h3></div>
-    <div class="frost-card"><div id="bytesense-next-copy" style="font-size:14px; line-height:1.5;"></div></div>
+    <div class="frost-card">
+      <div class="badge"><span>Progress</span></div>
+      <div style="font-size:14px; line-height:1.5;">You need <b id="bytesense-points-to-next">58 more points</b> to reach <b id="bytesense-next-level">Academy Player</b>. Consistent training attendance is your fastest path there.</div>
+    </div>
     <div class="sec-head"><h3>Notes from coach</h3></div>
     <div class="grouped-card" id="bytesense-coach-notes"></div>
   </div>
 
   <!-- ============ REWARDS ============ -->
   <div class="screen hidden" id="screen-rewards">
-    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Points</div></div>
+    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Ibex Points</div></div>
+
     <div class="gold-hero">
       <div class="l">Points balance</div>
-      <div class="n" id="rewards-balance">—<span>pts</span></div>
+      <div class="n">1,240<span>pts</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt">≈ Jersey discount</span></div>
     </div>
+
     <div class="sec-head" style="margin-top:0;"><h3>Ways to earn</h3></div>
     <div class="grouped-card" id="rewards-actions-list"></div>
+
     <div class="sec-head"><h3>Redeem</h3></div>
     <div class="redeem-grid" id="rewards-redeem-grid"></div>
     <div class="row-sub" style="text-align:center; margin:0 20px 20px;">Points redeem for vouchers and perks, not cash — keeping the rewards program simple.</div>
@@ -321,21 +401,23 @@
     <div class="header"><div class="eyebrow">Profile</div><div class="screen-title">Account</div></div>
     <div class="profile-hero">
       <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;" id="profile-fullname">—</div>
-      <div class="row-sub" id="profile-meta">—</div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco Villanueva</div>
+      <div class="row-sub" id="profile-meta">ArtiPlay ID AP-2049 · Ibex FC Academy</div>
     </div>
     <div class="sec-head"><h3>Player profile</h3></div>
     <div class="grouped-card">
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">—</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">12</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">Coach Rafael</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">Rising Player</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">Anna V. · 09xx-xxx-2049</div></div>
     </div>
+
     <div class="sec-head"><h3>Settings</h3></div>
     <div class="grouped-card">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Notifications</div><div class="toggle on" onclick="toggleSwitch(this)"><div class="knob"></div></div></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openMessages()"><div style="flex:1;"><div class="row-title">Messages</div><div class="row-sub">Coach &amp; academy front office</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
-      <div class="grouped-row" id="profile-coach-panel-row" style="cursor:pointer; display:none;" onclick="haptic('light'); openCoachPanel()"><div style="flex:1;"><div class="row-title">Coach / Admin panel</div><div class="row-sub">Roster, sessions, ByteSense grading</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openCoachPanel()"><div style="flex:1;"><div class="row-title">Coach / Admin panel</div><div class="row-sub">Roster, sessions, ByteSense grading</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); replayOnboarding()"><div style="flex:1;" class="row-title">Replay onboarding</div><span style="color:var(--t3); font-size:16px;">›</span></div>
     </div>
   </div>
 
@@ -355,6 +437,26 @@
     <div class="sheet-body" id="bytesense-detail-body"></div>
   </div>
 
+  <div class="sheet-overlay" id="overlay-vex-highlight" onclick="closeSheet('sheet-vex-highlight')"></div>
+  <div class="share-sheet" id="sheet-vex-highlight">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Vex Insight</div>
+    <div class="sheet-body">
+      <div class="check-row"><span class="c">✓</span> On a 4-session attendance streak</div>
+      <div style="height:1px; background:rgba(0,0,0,0.06); margin:10px 0;"></div>
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <div style="display:flex; align-items:flex-start; gap:10px;">
+          <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--t2); font-weight:600;">Next up ·</span> Tue Skills Session, 5:30 PM — RSVP before Monday</div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:10px;">
+          <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--orange); font-weight:600;">Watch ·</span> Growth score is your lowest category — ask Coach Rafael for a development note</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="sheet-overlay" id="overlay-achievements" onclick="closeSheet('sheet-achievements')"></div>
   <div class="share-sheet" id="sheet-achievements">
     <div class="sheet-handle"></div>
@@ -372,9 +474,7 @@
     <div class="sheet-title">Academy Store</div>
     <div class="sheet-body">
       <div class="row-sub" style="text-align:center; margin-bottom:14px;">Requests go to your parent for approval — no direct purchase.</div>
-      <div class="grouped-card" id="store-list" style="margin-bottom:16px;"></div>
-      <div class="sec-head" style="margin:0 0 10px;"><h3>Your requests</h3></div>
-      <div class="grouped-card" id="store-requests-list"></div>
+      <div class="grouped-card" id="store-list"></div>
     </div>
   </div>
 
@@ -395,7 +495,7 @@
   <div class="sheet-overlay" id="overlay-thread" onclick="closeSheet('sheet-thread')"></div>
   <div class="share-sheet" id="sheet-thread" style="height:78vh; max-height:78vh; display:flex; flex-direction:column;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title" id="thread-title">Coach</div>
+    <div class="sheet-title" id="thread-title">Coach Rafael</div>
     <div class="sheet-body" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
       <div class="chat-log" id="thread-log" style="flex:1; overflow-y:auto;"></div>
       <div class="au-search-dock">
@@ -419,27 +519,65 @@
   <div class="sheet-overlay" id="overlay-vex" onclick="closeSheet('sheet-vex')"></div>
   <div class="share-sheet" id="sheet-vex" style="height:80vh; max-height:80vh;">
     <div class="sheet-handle"></div>
+    <button class="gold-menu-btn" id="gold-menu-btn" aria-label="Menu" onclick="toggleGoldMenu(event)">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1c1c1e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+    </button>
     <div class="gold-header-icons">
       <button class="gold-header-icon-btn" aria-label="New chat" onclick="haptic('light'); startNewChat()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
       </button>
+      <button class="gold-header-icon-btn" aria-label="Suggested questions" onclick="haptic('light'); toggleAuPlusMenu(event)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2-2.4 3.5"/><path d="M12 17h.01"/></svg>
+      </button>
+    </div>
+    <div class="gold-menu-overlay" id="gold-menu-overlay" onclick="closeGoldMenu()"></div>
+    <div class="gold-menu" id="gold-menu">
+      <div class="gold-menu-header"><div class="gold-menu-title">Vex</div></div>
+      <div class="gold-menu-scroll">
+        <div class="gold-menu-row" onclick="goldMenuAction('help')">
+          <div class="gold-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2-2.4 3.5"/><path d="M12 17h.01"/></svg></div>
+          <div class="gold-menu-lbl">Help &amp; Support</div>
+        </div>
+        <div class="gold-menu-row" onclick="goldMenuAction('about')">
+          <div class="gold-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5h.01"/></svg></div>
+          <div class="gold-menu-lbl">About Vex</div>
+        </div>
+        <div class="gold-menu-divider"></div>
+        <div class="gold-menu-section-label">Recents</div>
+        <div id="gold-recents-list"></div>
+      </div>
     </div>
     <div class="sheet-title">Vex</div>
     <div class="sheet-body">
       <div class="chat-log" id="chat-log"></div>
       <div class="au-search-dock">
         <div class="au-plus-menu" id="au-plus-menu">
-          <div class="au-plus-menu-row" onclick="selectAuPlusAction('next')"><div class="au-plus-menu-ic">📅</div><div class="au-plus-menu-lbl">Next training</div></div>
-          <div class="au-plus-menu-row" onclick="selectAuPlusAction('score')"><div class="au-plus-menu-ic">⚡</div><div class="au-plus-menu-lbl">My score</div></div>
-          <div class="au-plus-menu-row" onclick="selectAuPlusAction('badges')"><div class="au-plus-menu-ic">🏅</div><div class="au-plus-menu-lbl">My badges</div></div>
-          <div class="au-plus-menu-row" onclick="selectAuPlusAction('attendance')"><div class="au-plus-menu-ic">⏱</div><div class="au-plus-menu-lbl">Attendance</div></div>
-          <div class="au-plus-menu-row" onclick="selectAuPlusAction('improve')"><div class="au-plus-menu-ic">📈</div><div class="au-plus-menu-lbl">How to improve</div></div>
+          <div class="au-plus-menu-row" onclick="selectAuPlusAction('next')">
+            <div class="au-plus-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+            <div class="au-plus-menu-lbl">Next training</div>
+          </div>
+          <div class="au-plus-menu-row" onclick="selectAuPlusAction('score')">
+            <div class="au-plus-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+            <div class="au-plus-menu-lbl">My score</div>
+          </div>
+          <div class="au-plus-menu-row" onclick="selectAuPlusAction('badges')">
+            <div class="au-plus-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg></div>
+            <div class="au-plus-menu-lbl">My badges</div>
+          </div>
+          <div class="au-plus-menu-row" onclick="selectAuPlusAction('attendance')">
+            <div class="au-plus-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div class="au-plus-menu-lbl">Attendance</div>
+          </div>
+          <div class="au-plus-menu-row" onclick="selectAuPlusAction('improve')">
+            <div class="au-plus-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></div>
+            <div class="au-plus-menu-lbl">How to improve</div>
+          </div>
         </div>
         <div class="au-input-pill">
           <button class="au-plus-btn" id="au-plus-btn" aria-label="More" onclick="toggleAuPlusMenu(event)">+</button>
-          <input type="text" class="au-input-field" id="au-input-field" placeholder="Ask Vex anything…" onkeydown="if(event.key==='Enter'){ handleAuAction(); }">
+          <input type="text" class="au-input-field" id="au-input-field" placeholder="Ask Vex anything…" oninput="handleAuInput()" onkeydown="if(event.key==='Enter'){ handleAuAction(); }">
           <div class="au-mic-btn" id="mic-btn" onclick="handleAuAction()">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4"/><path d="M9 6v12"/><path d="M14 3v18"/><path d="M19 8v8"/></svg>
           </div>
         </div>
       </div>
@@ -495,7 +633,7 @@
   <div class="sheet-overlay" id="overlay-coach-panel" onclick="closeSheet('sheet-coach-panel')"></div>
   <div class="share-sheet" id="sheet-coach-panel" style="height:85vh; max-height:85vh;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title" id="coach-panel-title">Coach panel</div>
+    <div class="sheet-title">Coach panel · Coach Rafael</div>
     <div class="sheet-body">
       <div class="role-tab-row" id="coach-tabs">
         <div class="role-tab active" data-tab="roster" onclick="selectCoachTab('roster')">Roster</div>
@@ -507,7 +645,7 @@
         <div class="grouped-card" id="admin-roster-list"></div>
       </div>
       <div id="coach-tab-sessions" style="display:none;">
-        <div class="row-sub" style="margin-bottom:10px;">Sessions scheduled for the squad.</div>
+        <div class="row-sub" style="margin-bottom:10px;">Sessions you've scheduled for the squad.</div>
         <div class="grouped-card" id="admin-sessions-list" style="margin-bottom:14px;"></div>
         <button class="btn-secondary" onclick="haptic('medium'); addAdminSession()">+ Add training session</button>
       </div>
@@ -539,7 +677,7 @@
       <div class="onboard-footer">
         <div id="signin-idpin-form">
           <div class="grouped-card" style="margin:0 0 12px;">
-            <div class="field-row"><div class="row-title" style="font-size:14px;">Account ID</div><input type="text" id="signin-account-id" placeholder="e.g. STD-000001"></div>
+            <div class="field-row"><div class="row-title" style="font-size:14px;">Account ID</div><input type="text" id="signin-account-id" placeholder="e.g. STD-K72M"></div>
             <div class="field-row"><div class="row-title" style="font-size:14px;">PIN</div><input type="password" id="signin-pin" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px; font-size:17px;"></div>
           </div>
           <div class="row-sub" id="signin-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
@@ -549,14 +687,29 @@
             <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
           </button>
           <button class="btn-ghost" onclick="haptic('light'); showToast('Ask your coach or academy admin for your Account ID')">Forgot your Account ID?</button>
+          <!-- === START: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
           <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">Don't have an Account ID? Generate Account ID</button>
+          <!-- === END: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
+        </div>
+        <div id="signin-trusted-form" style="display:none;">
+          <div class="onboard-sub" id="signin-trusted-greeting" style="text-align:center; margin-bottom:16px;">Welcome back</div>
+          <div class="grouped-card" style="margin:0 0 12px;">
+            <div class="field-row"><div class="row-title" style="font-size:14px;">PIN</div><input type="password" id="signin-trusted-pin" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px; font-size:17px;" onkeydown="if(event.key==='Enter'){ signInTrusted(document.getElementById('signin-trusted-btn')); }"></div>
+          </div>
+          <div class="row-sub" id="signin-trusted-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
+          <button class="btn-primary oauth-btn" id="signin-trusted-btn" onclick="signInTrusted(this)">
+            <span class="btn-content">Continue</span>
+            <span class="btn-status status-loading"><span class="oauth-spinner"></span>Verifying…</span>
+            <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
+          </button>
+          <button class="btn-ghost" onclick="haptic('light'); switchToFullSignIn()">Not you? Use a different account</button>
         </div>
         <div class="row-sub" style="text-align:center; margin-top:16px; padding:0 6px; line-height:1.5;">By continuing, you agree to the Terms of Service and Data Privacy Policy.</div>
       </div>
     </div>
   </div>
 
-  <!-- ============ ONBOARDING / SIGNUP ============ -->
+  <!-- ============ ONBOARDING / SIGNUP — invite PIN → profile → set PIN → (coach pick) → notifications ============ -->
   <div class="onboard-overlay hidden" id="onboard-overlay">
     <div class="onboard-topbar">
       <button class="onboard-back" id="ob-back-btn" style="visibility:hidden;" onclick="obBack()">‹</button>
@@ -564,6 +717,7 @@
       <span style="width:26px;"></span>
     </div>
 
+    <!-- === START: OB-VERIFY REPLACEMENT (Academy Invite PIN, not Coach ID) === -->
     <div class="onboard-step" id="ob-verify">
       <div class="onboard-center">
         <div class="onboard-mark"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="32" cy="32" r="22" stroke="#1F6B3C" stroke-width="3.5"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10M17 17l7 7M40 40l7 7M47 17l-7 7M24 40l-7 7" stroke="#1F6B3C" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="32" r="6" fill="#E8CC7A"/></svg></div>
@@ -621,6 +775,7 @@
         <button class="btn-secondary" onclick="haptic('light'); obGoTo('ob-notification-setup', true)">Skip for now</button>
       </div>
     </div>
+    <!-- === END: OB-VERIFY REPLACEMENT === -->
 
     <div class="onboard-step hidden" id="ob-notification-setup">
       <div class="onboard-headblock">
@@ -648,16 +803,234 @@
 
 <script>
 /* ============================================================
-   ARTIPLAY FRONTEND — PURE API CLIENT
+   ARTIPLAY — MODULE MAP
+   Single-file monolith by design (no build step), adapted from
+   the ArtiDrive shell. Boundaries below are logical, not physical.
    ------------------------------------------------------------
-   HARD RULE: this file contains no player names, scores, session
-   dates, messages, or reward catalogs. Every render function below
-   reads from STATE (populated by callApi('getFullState',...) or
-   callApi('getCoachState',...)) or COACH_STATE. If you need a new
-   piece of data on screen, add it to the corresponding GS endpoint
-   in Code.gs — do not hardcode it here.
+   MODULE: Utils          → haptic(), fmtPeso()
+   MODULE: Session/Auth   → hasSession(), hasOnboarded(), saveSession(),
+                             markOnboarded(), clearSession()
+   MODULE: Icons/Data     → ICONS, byteSenseData, trainingSessions,
+                             achievementsData, rewardsActions,
+                             rewardsRedeemables, storeData, messagesData,
+                             announcementsData, notifications, rosterData
+   MODULE: Screens        → showScreen()
+   MODULE: Sheets         → openSheet(), closeSheet()
+   MODULE: ByteSense      → renderByteSenseBreakdown(), updateByteSenseRing(),
+                             openByteSenseDetail(), computeByteSenseScore()
+   MODULE: Training       → renderTraining(), setRsvp(), renderAttendance()
+   MODULE: Achievements   → renderAchievements(), openAchievements()
+   MODULE: Rewards        → renderRewardsActions(), renderRewardsRedeem(),
+                             openRedeemDetail(), confirmRedeem()
+   MODULE: Store          → renderStore(), openStoreDetail(), requestFromParent()
+   MODULE: Messages       → renderMessages(), openThread(), sendThreadMessage()
+   MODULE: Announcements  → renderAnnouncements(), openAnnouncements()
+   MODULE: Vex (AI)       → askVex(), toggleAuPlusMenu(), selectAuPlusAction(),
+                             goldMenuAction(), chat rendering, mic/input handling
+   MODULE: Notifications  → renderNotifications(), openNotifications()
+   MODULE: Profile        → renderProfileSheet(), openProfileSheet()
+   MODULE: Settings       → openSettingsSheet(), renderSettingsSheet(), logoutUser()
+   MODULE: Coach Panel    → openCoachPanel(), selectCoachTab(), renderAdminRoster(),
+                             openScoreEdit(), saveScoreEdit(), renderAdminSessions(),
+                             addAdminSession(), postAdminAnnouncement()
+   MODULE: Onboarding     → obGoTo(), obBack(), obVerifyInvite(), obSubmitProfile(),
+                             obConfirmJoin(), obPickCoach(), applyPlayerDataToApp(),
+                             obCompleteOnboarding()
+   MODULE: Toast          → showToast()
+   ------------------------------------------------------------
+   Rule for future edits: when you add a new function, put it under
+   the module it belongs to instead of appending to the bottom.
    ============================================================ */
 
+/* ===== MODULE: Utils ===== */
+function haptic(type){
+  if(!navigator.vibrate) return;
+  try{
+    if(type==='light') navigator.vibrate(8);
+    else if(type==='medium') navigator.vibrate(18);
+    else if(type==='error') navigator.vibrate([12,8,12]);
+    else if(type==='success') navigator.vibrate([10,6,20]);
+  }catch(e){}
+}
+function fmtPeso(n){
+  const abs = Math.abs(n);
+  const str = abs % 1 === 0 ? abs.toLocaleString('en-PH') : abs.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return (n<0?'-':'') + '₱' + str;
+}
+
+/* ===== MODULE: Session/Auth ===== */
+const SESSION_KEY = 'artiplay_session';
+const ONBOARDED_KEY = 'artiplay_onboarded';
+const ROLE_KEY = 'artiplay_role';
+const ACCOUNT_KEY = 'artiplay_account';
+const ACTIVE_CHILD_KEY = 'artiplay_active_child';
+function hasSession(){ try{ return localStorage.getItem(SESSION_KEY) === '1'; }catch(e){ return false; } }
+function hasOnboarded(){ try{ return localStorage.getItem(ONBOARDED_KEY) === '1'; }catch(e){ return false; } }
+function saveSession(role, accountKey){ try{ localStorage.setItem(SESSION_KEY, '1'); localStorage.setItem(ROLE_KEY, role || 'player'); if(accountKey) localStorage.setItem(ACCOUNT_KEY, accountKey); }catch(e){} }
+function markOnboarded(){ try{ localStorage.setItem(ONBOARDED_KEY, '1'); }catch(e){} }
+function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ACCOUNT_KEY); localStorage.removeItem(ACTIVE_CHILD_KEY); }catch(e){} }
+function saveActiveChild(childId){ try{ localStorage.setItem(ACTIVE_CHILD_KEY, childId); }catch(e){} }
+function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY); }catch(e){ return null; } }
+/* Trusted device (spec §9) — a returning device skips re-entering the
+   Account ID and re-authenticates with PIN only. This localStorage flag is
+   a UI convenience for the prototype only; a real backend must still issue
+   and validate the session/device behind it (§11, §22). */
+const TRUSTED_DEVICE_KEY = 'artiplay_trusted_device';
+const TRUSTED_DEVICE_NAME_KEY = 'artiplay_trusted_device_name';
+function getTrustedDeviceName(){ try{ return localStorage.getItem(TRUSTED_DEVICE_NAME_KEY) || 'there'; }catch(e){ return 'there'; } }
+function clearDeviceTrust(){
+  try{
+    localStorage.removeItem(TRUSTED_DEVICE_KEY);
+    localStorage.removeItem(TRUSTED_DEVICE_NAME_KEY);
+  }catch(e){}
+}
+function markDeviceTrusted(accountKey, name){
+  try{
+    localStorage.setItem(TRUSTED_DEVICE_KEY, accountKey);
+    if(name) localStorage.setItem(TRUSTED_DEVICE_NAME_KEY, name);
+  }catch(e){}
+}
+function getTrustedDeviceKey(){ try{ return localStorage.getItem(TRUSTED_DEVICE_KEY); }catch(e){ return null; } }
+function getTrustedDeviceName(){ try{ return localStorage.getItem(TRUSTED_DEVICE_NAME_KEY) || 'there'; }catch(e){ return 'there'; } }
+function applyActiveChild(child, account){
+  saveActiveChild(child.id);
+  document.getElementById('home-player-title').textContent = child.name.split(' ')[0];
+  document.getElementById('home-academy-title').textContent = (account && account.academy) || 'Ibex FC Academy';
+  document.getElementById('home-status-txt').textContent = `· ${child.coach || 'Coach'}`;
+  const heroScore = document.getElementById('home-hero-score');
+  if(heroScore) heroScore.textContent = child.score;
+  document.getElementById('profile-age').textContent = child.age || '—';
+  document.getElementById('profile-coach').textContent = child.coach || '—';
+  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${child.id} · ${(account && account.academy) || 'Ibex FC Academy'}`;
+  if(account){
+    document.getElementById('profile-parent').textContent = `${account.name} · ${account.contact || 'On file'}`;
+    const greetEl = document.getElementById('home-greeting-line');
+    if(greetEl) greetEl.textContent = `${timeGreeting()}, ${account.name.split(' ')[0].toUpperCase()}`;
+  }
+}
+
+/* ===== MODULE: Icons/Data ===== */
+const ICONS = {
+  training: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
+  badge: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>',
+  store: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.83 8.4A8.5 8.5 0 0 1 4 19l-3 1 1-3a8.38 8.38 0 0 1-.8-4.5A8.5 8.5 0 1 1 21 11.5z"/></svg>',
+  news: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2-8-8-3z"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+};
+
+const byteSenseData = [
+  {key:'training', name:'Training', weight:55, score:82, note:'Consistent effort in every drill this month.'},
+  {key:'performance', name:'Performance', weight:20, score:74, note:'Strong on the ball, work on off-ball movement.'},
+  {key:'behavior', name:'Behavior', weight:15, score:88, note:'Great teammate — coachable and disciplined.'},
+  {key:'growth', name:'Growth', weight:10, score:61, note:'Improvement has slowed the last few weeks.'},
+];
+const LEVELS = [
+  {name:'Rookie', min:0}, {name:'Rising Player', min:600}, {name:'Academy Player', min:800},
+  {name:'Elite', min:900}, {name:'Pro Prospect', min:960},
+];
+
+function computeByteSenseScore(){
+  const pct = byteSenseData.reduce((sum,c)=> sum + (c.score * c.weight/100), 0);
+  return Math.round(pct * 10); // scale 0-100 -> 0-1000
+}
+function currentLevel(score){
+  let lvl = LEVELS[0];
+  for(const l of LEVELS){ if(score >= l.min) lvl = l; }
+  return lvl;
+}
+function nextLevel(score){
+  for(const l of LEVELS){ if(l.min > score) return l; }
+  return null;
+}
+
+const trainingSessions = [
+  {id:'s1', day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:'yes'},
+  {id:'s2', day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:''},
+  {id:'s3', day:'Sat', date:'Sep 19', time:'8:00 AM', venue:'Ibex Pitch B', rsvp:''},
+];
+const trainingHistory = [
+  {title:'Skills session', date:'Sep 8', status:'Present'},
+  {title:'Match simulation', date:'Sep 5', status:'Present'},
+  {title:'Fitness &amp; conditioning', date:'Sep 1', status:'Late'},
+  {title:'Skills session', date:'Aug 29', status:'Absent'},
+];
+
+const achievementsData = [
+  {ic:'🔥', name:'4-Session Streak', unlocked:true, desc:'Attended 4 training sessions in a row.'},
+  {ic:'⭐', name:'Level Up', unlocked:true, desc:'Reached Rising Player level.'},
+  {ic:'🎯', name:'Perfect Month', unlocked:false, desc:'Attend every session in a calendar month.'},
+  {ic:'🤝', name:'Team Player', unlocked:true, desc:'Behavior score of 85+ for two straight weeks.'},
+  {ic:'📈', name:'Growth Spurt', unlocked:false, desc:'Improve your Growth score by 15+ points.'},
+  {ic:'🏆', name:'MVP Session', unlocked:false, desc:'Coach-awarded recognition for a standout session.'},
+];
+
+const rewardsActions = [
+  {label:'Attend a training session', done:true},
+  {label:'Perfect week attendance', done:true},
+  {label:'Coach recognition', done:false},
+  {label:'Invite a teammate', done:false},
+  {label:'Complete player profile', done:true},
+  {label:'Weekly ByteSense check-in', done:true},
+];
+const REWARDS_CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+const REWARDS_CIRCLE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+const rewardsRedeemables = [
+  {icon:ICONS.store, label:'Jersey discount', cost:2000, desc:'₱300 off your next official Ibex FC jersey.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>', label:'Boots voucher', cost:3500, desc:'₱500 credit toward football boots at partner shops.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', label:'Extra training slot', cost:1200, desc:'One free 1-on-1 skills session with a coach.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>', label:'Custom badge frame', cost:800, desc:'Unlock a gold badge frame on your profile.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v15"/><path d="M4 12h8"/></svg>', label:'Gear bundle', cost:2600, desc:'Shin guards + socks bundle from the academy store.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.8 3.2 1.1-6.6-4.8-4.7 6.6-.9z"/></svg>', label:'ArtiPlay Premium', cost:4500, desc:'1 month of deeper ByteSense insights and priority Vex support.'},
+];
+
+const storeData = [
+  {icon:ICONS.store, name:'Ibex FC Home Jersey', price:1450, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Training Boots — Size 5', price:2600, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Shin Guards', price:450, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Academy Backpack', price:990, forLevel:'Rising Player+'},
+];
+
+const messagesData = [
+  {id:'m1', name:'Coach Rafael', last:'Great session today, keep it up!', time:'2h ago', unread:true},
+  {id:'m2', name:'Ibex FC Front Office', last:'Your boots request was approved.', time:'Yesterday', unread:false},
+];
+const threadSeed = {
+  m1: [ {who:'them', text:'Great session today, keep it up!'}, {who:'me', text:'Thanks Coach! See you Thursday.'} ],
+  m2: [ {who:'them', text:'Your boots request was approved.'}, {who:'me', text:'Thank you po!'} ],
+};
+
+const announcementsData = [
+  {title:'PMS this weekend', body:'Player Movement Session on Saturday, 8AM at Pitch B. Bring both jerseys.', time:'Today'},
+  {title:'Registration renewal', body:'Academy registration for next quarter opens Monday.', time:'2 days ago'},
+];
+
+const notifications = [
+  {ico:ICONS.training, title:'Training tomorrow — Tue Skills Session', time:'Today · Ibex FC Academy'},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', time:'Today · Ibex FC Academy'},
+  {ico:ICONS.badge, title:'New badge unlocked: 4-Session Streak', time:'Yesterday · Ibex FC Academy'},
+];
+
+const rosterData = [
+  {id:'p1', name:'Marco Villanueva', score:742, level:'Rising Player'},
+  {id:'p2', name:'Diego Santos', score:610, level:'Rising Player'},
+  {id:'p3', name:'Liam Cruz', score:895, level:'Academy Player'},
+  {id:'p4', name:'Ken Reyes', score:530, level:'Rookie'},
+];
+const adminSessions = [
+  {day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A'},
+  {day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A'},
+];
+
+/* ===== MODULE: Identity registry =====
+   One login → one record → role + tenant(s) resolved automatically.
+   Keys are lowercased login handles (ID or email). */
+/* ===== MODULE: Backend API (Apps Script Web App) =====
+   Replace API_BASE_URL with your deployment's /exec URL after:
+   Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
+   text/plain keeps every request a CORS "simple request" (no preflight) — see
+   the doPost() comment in the backend for why that matters. */
 const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw6QYlaYPDE-PSVZ4I8b1dt9DJgwAWBAtlMBtPchO-6gsGwcEVQmPG9c76JwlOTEpv1Yw/exec';
 async function callApi(action, payload){
   const res = await fetch(API_BASE_URL, {
@@ -669,53 +1042,46 @@ async function callApi(action, payload){
   return res.json();
 }
 
-/* ===== Utils ===== */
-function haptic(type){
-  if(!navigator.vibrate) return;
-  try{
-    if(type==='light') navigator.vibrate(8);
-    else if(type==='medium') navigator.vibrate(18);
-    else if(type==='error') navigator.vibrate([12,8,12]);
-    else if(type==='success') navigator.vibrate([10,6,20]);
-  }catch(e){}
+/* Session-only cache of the account record the backend returned at login.
+   NOT a credential store — no PIN ever lives here, only display data the
+   backend already vetted. Populated by signIn()/signInTrusted(); empty on
+   cold start. */
+const ACCOUNTS = {};
+function lookupAccount(raw){
+  const key = (raw||'').trim().toLowerCase();
+  return ACCOUNTS[key] || null;
 }
-function fmtPeso(n){
-  const abs = Math.abs(n||0);
-  const str = abs % 1 === 0 ? abs.toLocaleString('en-PH') : abs.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return (n<0?'-':'') + '₱' + str;
+
+/* ===== MODULE: Home =====
+   Answers 3 things: what's my score, what's next, what needs me. */
+const BYTESENSE_MONTH_DELTA = 18;
+function timeGreeting(){
+  const h = new Date().getHours();
+  if(h < 12) return 'Good morning';
+  if(h < 18) return 'Good afternoon';
+  return 'Good evening';
 }
-function fmtDate(d){ if(!d) return ''; try{ return new Date(d).toLocaleDateString('en-PH', {month:'short', day:'numeric'}); }catch(e){ return String(d); } }
-function fmtDateTime(d){ if(!d) return ''; try{ const dt=new Date(d); const days=Math.floor((Date.now()-dt.getTime())/86400000); if(days<=0) return 'Today'; if(days===1) return 'Yesterday'; return dt.toLocaleDateString('en-PH',{month:'short',day:'numeric'}); }catch(e){ return String(d); } }
-const ICONS = {
-  training: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
-  bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
-  badge: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>',
-  store: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
-  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.83 8.4A8.5 8.5 0 0 1 4 19l-3 1 1-3a8.38 8.38 0 0 1-.8-4.5A8.5 8.5 1 1 1 21 11.5z"/></svg>',
-  news: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2-8-8-3z"/></svg>',
-  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
-};
-const REWARDS_CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
-const REWARDS_CIRCLE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+const needsYouData = [
+  { icon:'store', title:'Jersey request', sub:'Boots request from Marco is awaiting your approval', cta:'Review', action:"haptic('light'); openStore();" }
+];
+function renderHomeNeeds(){
+  const head = document.getElementById('home-needs-head');
+  const list = document.getElementById('home-needs-list');
+  if(!needsYouData.length){ head.style.display = 'none'; list.style.display = 'none'; return; }
+  head.style.display = ''; list.style.display = '';
+  list.innerHTML = needsYouData.map(n=>`
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS[n.icon] || ICONS.bolt}</div>
+      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="row-sub">${n.sub}</div></div>
+      <button class="hist-chip active" onclick="${n.action}">${n.cta}</button>
+    </div>`).join('');
+}
+function renderHomeRecent(){
+  document.getElementById('activity-home-list').innerHTML = activityData.slice(0,3).map(a=>`
+    <div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('');
+}
 
-/* ===== Session ===== */
-const SESSION_KEY='artiplay_session', ROLE_KEY='artiplay_role', ID_KEY='artiplay_account', TENANT_KEY='artiplay_tenant', ONBOARDED_KEY='artiplay_onboarded';
-function saveSession(role, accountId, tenantId){ try{ localStorage.setItem(SESSION_KEY,'1'); localStorage.setItem(ROLE_KEY, role); if(accountId) localStorage.setItem(ID_KEY, accountId); if(tenantId) localStorage.setItem(TENANT_KEY, tenantId); }catch(e){} }
-function hasSession(){ try{ return localStorage.getItem(SESSION_KEY)==='1'; }catch(e){ return false; } }
-function getSavedRole(){ try{ return localStorage.getItem(ROLE_KEY); }catch(e){ return null; } }
-function getSavedId(){ try{ return localStorage.getItem(ID_KEY); }catch(e){ return null; } }
-function markOnboarded(){ try{ localStorage.setItem(ONBOARDED_KEY,'1'); }catch(e){} }
-function hasOnboardedLocally(){ try{ return localStorage.getItem(ONBOARDED_KEY)==='1'; }catch(e){ return false; } }
-function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ID_KEY); localStorage.removeItem(TENANT_KEY); localStorage.removeItem(ONBOARDED_KEY); }catch(e){} }
-
-/* ===== Global state — populated ONLY from the API ===== */
-let STATE = null;          // player full state (clientGetFullState)
-let COACH_STATE = null;    // staff/coach state (clientGetCoachState)
-let CURRENT_MEMBER_ID = null;
-let CURRENT_ACCOUNT = null; // { role, accountId, tenantId, name, staffRole }
-let obData = { tenantId:'', tenantName:'', role:'', name:'', age:'', parentName:'', parentContact:'', parentEmail:'', email:'', phone:'', accountId:'', memberId:'' };
-
-/* ===== Screens ===== */
+/* ===== MODULE: Screens ===== */
 function showScreen(name){
   const current = document.querySelector('.screen:not(.hidden)');
   const target = document.getElementById('screen-'+name);
@@ -733,6 +1099,8 @@ function showScreen(name){
     setTimeout(()=>target.classList.remove('entering'), 480);
   }
 }
+
+/* ===== MODULE: Sheets ===== */
 function openSheet(id){
   const overlayId = 'overlay-' + id.replace('sheet-','');
   document.getElementById(overlayId).classList.add('show');
@@ -741,6 +1109,7 @@ function openSheet(id){
 }
 function closeSheet(id){
   haptic('light');
+  if(id === 'sheet-vex') closeGoldMenu();
   const overlayId = 'overlay-' + id.replace('sheet-','');
   const sheet = document.getElementById(id);
   sheet.classList.remove('up'); sheet.classList.add('down');
@@ -748,144 +1117,29 @@ function closeSheet(id){
   setTimeout(()=>{ sheet.classList.remove('down'); }, 260);
 }
 function toggleSwitch(el){ haptic('medium'); el.classList.toggle('on'); }
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2800);
+
+/* ===== MODULE: ByteSense ===== */
+function updateByteSenseRing(score){
+  const circ = 170;
+  const pct = Math.min(100, score/10);
+  const offset = Math.max(0, circ - (circ * pct / 100));
+  const ring = document.getElementById('bytesense-ring-fill');
+  const scoreText = document.getElementById('bytesense-ring-score');
+  if(ring) ring.setAttribute('stroke-dashoffset', offset.toFixed(1));
+  if(scoreText) scoreText.textContent = Math.round(pct);
 }
-function emptyState(msg){ return `<div class="empty-state">${msg}</div>`; }
-function skeletonRows(n){ let h=''; for(let i=0;i<(n||3);i++) h += `<div class="grouped-row"><div class="skeleton" style="width:34px;height:34px;border-radius:9px;"></div><div style="flex:1;"><div class="skeleton" style="width:60%;height:13px;margin-bottom:6px;"></div><div class="skeleton" style="width:40%;height:10px;"></div></div></div>`; return h; }
-
-/* =====================================================================================
-   LOAD + RENDER — one call populates every screen. Called after login and after
-   any mutation, so the UI is always exactly what the sheet says.
-===================================================================================== */
-async function loadFullState(showSkeleton){
-  if(showSkeleton){
-    document.getElementById('home-next-session').innerHTML = skeletonRows(1);
-    document.getElementById('activity-home-list').innerHTML = skeletonRows(3);
-  }
-  let result;
-  try{ result = await callApi('getFullState', { memberId: CURRENT_MEMBER_ID }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error || 'Could not load your data'); return; }
-  STATE = result.data;
-  renderAll();
-}
-function renderAll(){
-  renderHome();
-  renderTraining();
-  renderByteSense();
-  renderRewards();
-}
-
-/* ===== Home ===== */
-function timeGreeting(){ const h=new Date().getHours(); if(h<12) return 'Good morning'; if(h<18) return 'Good afternoon'; return 'Good evening'; }
-function renderHome(){
-  if(!STATE) return;
-  const m = STATE.member;
-  document.getElementById('home-greeting-line').textContent = timeGreeting() + ',';
-  document.getElementById('home-player-title').textContent = (m.name||'Player').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = m.academy || '—';
-  document.getElementById('home-status-txt').textContent = m.coach ? `· ${m.coach}` : '';
-  document.getElementById('home-hero-score').textContent = STATE.score.total;
-  document.getElementById('home-hero-trend-txt').textContent = STATE.score.level;
-
-  const next = STATE.sessions.find(s => (s.rsvp !== undefined)) || STATE.sessions[0];
-  const nextEl = document.getElementById('home-next-session');
-  if(!STATE.sessions.length){
-    nextEl.innerHTML = emptyState('No upcoming sessions scheduled yet.');
-  } else {
-    const s = STATE.sessions[0];
-    nextEl.innerHTML = `<div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;"><div class="row-title">${s.day} ${fmtDate(s.date)} · ${s.time}</div><div class="row-sub">${s.venue}</div></div>
-      <button class="hist-chip${s.rsvp==='yes'?' active':''}" onclick="setRsvp('${s.id}','yes')">${s.rsvp==='yes'?'Going':'RSVP'}</button>
-    </div>`;
-  }
-
-  const needsHead = document.getElementById('home-needs-head');
-  const needsList = document.getElementById('home-needs-list');
-  const pending = (STATE.storeRequests||[]).filter(r=>r.status==='Pending');
-  if(pending.length){
-    needsHead.style.display=''; needsList.style.display='';
-    needsList.innerHTML = pending.map(r=>`
-      <div class="grouped-row"><div class="icon-tile">${ICONS.store}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${r.itemName}</div><div class="row-sub">Awaiting parent approval</div></div><span class="badge-status badge-orange">Pending</span></div>`).join('');
-  } else { needsHead.style.display='none'; needsList.style.display='none'; }
-
-  const recent = STATE.activity.slice(0,3);
-  document.getElementById('activity-home-list').innerHTML = recent.length ? recent.map(a=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${fmtDateTime(a.at)}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('')
-    : emptyState('Nothing yet — activity will show up here as you train.');
-
-  const notifDot = document.getElementById('notif-dot');
-  notifDot.classList.toggle('hidden', !(STATE.notifications && STATE.notifications.length));
-}
-function openAllActivity(){
-  const list = STATE ? STATE.activity : [];
-  document.getElementById('activity-full-list').innerHTML = list.length ? `<div class="grouped-card" style="margin:0;">` +
-    list.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${fmtDateTime(a.at)}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('') + `</div>`
-    : emptyState('No activity yet.');
-  openSheet('sheet-activity');
-}
-
-/* ===== Training ===== */
-const RSVP_LABEL = {yes:'Going', maybe:'Maybe', no:"Can't go", '':'RSVP'};
-function renderTraining(){
-  if(!STATE) return;
-  const list = document.getElementById('training-list');
-  list.innerHTML = STATE.sessions.length ? STATE.sessions.map(s=>`
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;"><div class="row-title">${s.day} ${fmtDate(s.date)} · ${s.time}</div><div class="row-sub">${s.venue}</div></div>
-      <div style="display:flex; gap:5px;">
-        <button class="hist-chip${s.rsvp==='yes'?' active':''}" onclick="setRsvp('${s.id}','yes')">Yes</button>
-        <button class="hist-chip${s.rsvp==='no'?' active':''}" onclick="setRsvp('${s.id}','no')">No</button>
-      </div>
-    </div>`).join('') : emptyState('No training sessions scheduled yet.');
-
-  document.getElementById('attendance-summary-title').textContent = `${STATE.attendance.attended} of ${STATE.attendance.total} sessions attended`;
-  document.getElementById('attendance-bar').style.width = STATE.attendance.pct + '%';
-  document.getElementById('attendance-pct').textContent = STATE.attendance.pct + '%';
-
-  const hist = document.getElementById('training-history-list');
-  hist.innerHTML = STATE.history.length ? STATE.history.map(h=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${fmtDate(h.date)}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('')
-    : emptyState('No session history yet.');
-}
-async function setRsvp(sessionId, status){
-  haptic('medium');
-  const s = STATE.sessions.find(x=>x.id===sessionId);
-  const newStatus = (s && s.rsvp===status) ? '' : status;
-  let result;
-  try{ result = await callApi('setRsvp', { memberId: CURRENT_MEMBER_ID, sessionId, status: newStatus }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not update RSVP'); return; }
-  showToast(newStatus==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
-  await loadFullState(false);
-}
-
-/* ===== ByteSense ===== */
-function renderByteSense(){
-  if(!STATE) return;
-  document.getElementById('bytesense-total').innerHTML = `${STATE.score.total}<span>/1000</span>`;
-  document.getElementById('bytesense-level-txt').textContent = STATE.score.level;
-  document.getElementById('bytesense-breakdown').innerHTML = STATE.score.breakdown.map((c,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="openByteSenseDetail(${i})">
+function renderByteSenseBreakdown(){
+  document.getElementById('bytesense-breakdown').innerHTML = byteSenseData.map((c,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openByteSenseDetail(${i})">
       <div class="icon-tile">${ICONS.bolt}</div>
       <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.weight}% of total</div></div>
       <div class="fact-v">${c.score}/100</div>
     </div>`).join('');
-  document.getElementById('bytesense-coach-notes').innerHTML = STATE.score.breakdown.filter(c=>c.note).length ?
-    STATE.score.breakdown.filter(c=>c.note).map(c=>`<div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note}</div></div></div>`).join('')
-    : emptyState('No coach notes yet.');
-  document.getElementById('bytesense-next-copy').innerHTML = STATE.score.nextLevel
-    ? `You need <b>${STATE.score.pointsToNext} more points</b> to reach <b>${STATE.score.nextLevel}</b>. Consistent training attendance is your fastest path there.`
-    : `You're at the top level.`;
+  document.getElementById('bytesense-coach-notes').innerHTML = byteSenseData.map(c=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note}</div></div></div>`).join('');
 }
 function openByteSenseDetail(i){
-  const c = STATE.score.breakdown[i];
+  const c = byteSenseData[i];
   document.getElementById('bytesense-detail-title').textContent = c.name;
   document.getElementById('bytesense-detail-body').innerHTML = `
     <div class="fact-grid">
@@ -893,191 +1147,221 @@ function openByteSenseDetail(i){
       <div><div class="fact-l">Weight</div><div class="fact-v">${c.weight}%</div></div>
     </div>
     <div style="height:1px; background:rgba(0,0,0,0.06); margin:16px 0;"></div>
-    <div style="font-size:14px; line-height:1.5;">${c.note || 'No note from your coach yet.'}</div>`;
+    <div style="font-size:14px; line-height:1.5;">${c.note}</div>`;
   openSheet('sheet-bytesense-detail');
 }
+function refreshByteSenseSummary(){
+  const total = computeByteSenseScore();
+  const lvl = currentLevel(total);
+  const next = nextLevel(total);
+  document.getElementById('bytesense-total').innerHTML = `${total}<span>/1000</span>`;
+  document.getElementById('bytesense-level-txt').textContent = lvl.name;
+  const heroScore = document.getElementById('home-hero-score');
+  const trendTxt = document.getElementById('home-hero-trend-txt');
+  if(heroScore) heroScore.textContent = total;
+  if(trendTxt) trendTxt.textContent = BYTESENSE_MONTH_DELTA >= 0 ? `↑ +${BYTESENSE_MONTH_DELTA} this month` : `↓ ${BYTESENSE_MONTH_DELTA} this month`;
+  updateByteSenseRing(total);
+  if(next){
+    document.getElementById('bytesense-points-to-next').textContent = `${next.min - total} more points`;
+    document.getElementById('bytesense-next-level').textContent = next.name;
+  } else {
+    document.getElementById('bytesense-points-to-next').textContent = 'You\'re at the top level';
+    document.getElementById('bytesense-next-level').textContent = 'Pro Prospect';
+  }
+}
 
-/* ===== Achievements ===== */
-function renderAchievements(){
-  const list = (STATE && STATE.achievements) || [];
-  document.getElementById('achievements-scroll').innerHTML = list.filter(a=>a.unlocked).map(a=>`
-    <div class="badge-card"><span class="b-ic">${a.icon}</span><span class="b-lbl">${a.name}</span></div>`).join('') || '';
-  document.getElementById('achievements-list').innerHTML = list.length ? list.map(a=>`
+/* ===== MODULE: Training ===== */
+const RSVP_LABEL = {yes:'Going', maybe:'Maybe', no:"Can't go", '':'RSVP'};
+function renderTraining(){
+  document.getElementById('training-list').innerHTML = trainingSessions.map(s=>`
     <div class="grouped-row">
-      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.icon}</div>
+      <div class="icon-tile">${ICONS.training}</div>
+      <div style="flex:1;">
+        <div class="row-title">${s.day} ${s.date} · ${s.time}</div>
+        <div class="row-sub">${s.venue}</div>
+      </div>
+      <div style="display:flex; gap:5px;">
+        <button class="hist-chip${s.rsvp==='yes'?' active':''}" onclick="setRsvp('${s.id}','yes')">Yes</button>
+        <button class="hist-chip${s.rsvp==='no'?' active':''}" onclick="setRsvp('${s.id}','no')">No</button>
+      </div>
+    </div>`).join('');
+  const next = trainingSessions[0];
+  document.getElementById('home-next-session').innerHTML = `
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS.training}</div>
+      <div style="flex:1;"><div class="row-title">${next.day} ${next.date} · ${next.time}</div><div class="row-sub">${next.venue}</div></div>
+      <button class="hist-chip${next.rsvp==='yes'?' active':''}" onclick="setRsvp('${next.id}','yes')">${RSVP_LABEL[next.rsvp]}</button>
+    </div>`;
+  document.getElementById('training-history-list').innerHTML = trainingHistory.map(h=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${h.date}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('');
+}
+function setRsvp(id, val){
+  haptic('medium');
+  const s = trainingSessions.find(x=>x.id===id);
+  if(s) s.rsvp = (s.rsvp===val) ? '' : val;
+  renderTraining();
+  showToast(val==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
+}
+
+/* ===== MODULE: Achievements ===== */
+function renderAchievements(){
+  document.getElementById('achievements-scroll').innerHTML = achievementsData.filter(a=>a.unlocked).map(a=>`
+    <div class="badge-card"><span class="b-ic">${a.ic}</span><span class="b-lbl">${a.name}</span></div>`).join('');
+  document.getElementById('achievements-list').innerHTML = achievementsData.map(a=>`
+    <div class="grouped-row">
+      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.ic}</div>
       <div style="flex:1; ${a.unlocked?'':'opacity:.5;'}"><div class="row-title" style="font-size:14px;">${a.name}</div><div class="row-sub">${a.desc}</div></div>
       <span class="badge-status ${a.unlocked?'badge-green':'badge-gray'}">${a.unlocked?'Earned':'Locked'}</span>
-    </div>`).join('') : emptyState('No achievements defined for your academy yet.');
+    </div>`).join('');
 }
 function openAchievements(){ renderAchievements(); openSheet('sheet-achievements'); }
+function openVexHighlight(){ openSheet('sheet-vex-highlight'); }
 
-/* ===== Rewards ===== */
-function renderRewards(){
-  if(!STATE) return;
-  document.getElementById('rewards-balance').innerHTML = `${(STATE.points||0).toLocaleString('en-PH')}<span>pts</span>`;
-  document.getElementById('rewards-actions-list').innerHTML = STATE.wayToEarn.map(a=>`
+/* ===== MODULE: Rewards ===== */
+function renderRewardsActions(){
+  document.getElementById('rewards-actions-list').innerHTML = rewardsActions.map(a=>`
     <div class="grouped-row">
       <div class="icon-tile" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : ''}">${a.done ? REWARDS_CHECK_ICON : REWARDS_CIRCLE_ICON}</div>
       <div style="flex:1;" class="row-title">${a.label}</div>
       <span class="badge-status" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : 'background:rgba(0,0,0,0.05); color:var(--t2);'}">${a.done ? 'Earned' : 'Available'}</span>
     </div>`).join('');
-  document.getElementById('rewards-redeem-grid').innerHTML = STATE.rewards.length ? STATE.rewards.map((r,i)=>`
-    <div class="redeem-tile" style="cursor:pointer;" onclick="openRedeemDetail(${i})">
+}
+function renderRewardsRedeem(){
+  document.getElementById('rewards-redeem-grid').innerHTML = rewardsRedeemables.map((r,i)=>`
+    <div class="redeem-tile" style="cursor:pointer;" onclick="haptic('light'); openRedeemDetail(${i})">
       <span class="r-ic">${r.icon}</span><span class="r-lbl">${r.label}</span>
-    </div>`).join('') : emptyState('No rewards catalog yet.');
+    </div>`).join('');
 }
 let currentRedeemIndex = null;
+const USER_POINTS_BALANCE = 1240;
 function openRedeemDetail(i){
   currentRedeemIndex = i;
-  const r = STATE.rewards[i];
-  const canAfford = STATE.points >= r.cost;
+  const r = rewardsRedeemables[i];
+  const canAfford = USER_POINTS_BALANCE >= r.cost;
   document.querySelector('#sheet-redeem .sheet-title').textContent = r.label;
   document.getElementById('redeem-detail-body').innerHTML = `
-    <div style="display:flex; justify-content:center; margin-bottom:16px;"><div class="icon-tile" style="width:56px; height:56px; border-radius:16px; background:rgba(0,0,0,0.05);"><span style="transform:scale(1.5);">${r.icon}</span></div></div>
+    <div style="display:flex; justify-content:center; margin-bottom:16px;">
+      <div class="icon-tile" style="width:56px; height:56px; border-radius:16px; background:rgba(0,0,0,0.05);"><span style="transform:scale(1.5);">${r.icon}</span></div>
+    </div>
     <div style="text-align:center; font-size:13.5px; color:var(--t2); line-height:1.5; margin-bottom:18px;">${r.desc}</div>
     <div class="grouped-card" style="margin:0 0 16px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Cost</div><div class="fact-v">${r.cost.toLocaleString('en-PH')} pts</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${STATE.points.toLocaleString('en-PH')} pts</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${USER_POINTS_BALANCE.toLocaleString('en-PH')} pts</div></div>
     </div>
     ${canAfford ? '' : `<div class="row-sub" style="text-align:center; color:var(--red); font-weight:600; margin-bottom:12px;">Not enough points yet — keep earning to unlock this.</div>`}
     <button class="btn-primary${canAfford ? '' : ' disabled'}" onclick="confirmRedeem()">Redeem for ${r.cost.toLocaleString('en-PH')} pts</button>`;
   openSheet('sheet-redeem');
 }
-async function confirmRedeem(){
+function confirmRedeem(){
   if(currentRedeemIndex === null) return;
-  const r = STATE.rewards[currentRedeemIndex];
-  let result;
-  try{ result = await callApi('redeemReward', { memberId: CURRENT_MEMBER_ID, rewardId: r.id }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not redeem'); return; }
+  const r = rewardsRedeemables[currentRedeemIndex];
   haptic('success');
   closeSheet('sheet-redeem');
   setTimeout(()=>showToast(`Redeemed ${r.label} — ${r.cost.toLocaleString('en-PH')} pts used`), 280);
-  await loadFullState(false);
 }
 
-/* ===== Store ===== */
+/* ===== MODULE: Store ===== */
 function renderStore(){
-  const items = STATE.storeItems;
-  document.getElementById('store-list').innerHTML = items.length ? items.map((s,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="openStoreDetail(${i})">
-      <div class="icon-tile"><span>${s.icon}</span></div>
+  document.getElementById('store-list').innerHTML = storeData.map((s,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openStoreDetail(${i})">
+      <div class="icon-tile">${s.icon}</div>
       <div style="flex:1;"><div class="row-title">${s.name}</div><div class="row-sub">${s.forLevel}</div></div>
       <div class="fact-v">${fmtPeso(s.price)}</div>
-    </div>`).join('') : emptyState('No store items yet.');
-  const reqs = STATE.storeRequests;
-  document.getElementById('store-requests-list').innerHTML = reqs.length ? reqs.map(r=>`
-    <div class="grouped-row"><div style="flex:1;"><div class="row-title" style="font-size:14px;">${r.itemName}</div><div class="row-sub">${fmtDateTime(r.at)}</div></div><span class="badge-status ${r.status==='Approved'?'badge-green':(r.status==='Rejected'?'badge-red':'badge-orange')}">${r.status}</span></div>`).join('')
-    : emptyState('No requests yet.');
+    </div>`).join('');
 }
 function openStore(){ renderStore(); openSheet('sheet-store'); }
 function openStoreDetail(i){
-  const s = STATE.storeItems[i];
+  const s = storeData[i];
   document.getElementById('store-detail-title').textContent = s.name;
   document.getElementById('store-detail-body').innerHTML = `
-    <div style="display:flex; justify-content:center; margin-bottom:16px;"><div class="icon-tile" style="width:56px; height:56px; border-radius:16px; background:rgba(0,0,0,0.05);"><span style="transform:scale(1.5);">${s.icon}</span></div></div>
+    <div style="display:flex; justify-content:center; margin-bottom:16px;">
+      <div class="icon-tile" style="width:56px; height:56px; border-radius:16px; background:rgba(0,0,0,0.05);"><span style="transform:scale(1.5);">${s.icon}</span></div>
+    </div>
     <div class="grouped-card" style="margin:0 0 16px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Price</div><div class="fact-v">${fmtPeso(s.price)}</div></div>
       <div class="grouped-row"><div style="flex:1;" class="row-title">Recommended for</div><div class="fact-v">${s.forLevel}</div></div>
     </div>
     <div class="row-sub" style="text-align:center; margin-bottom:14px;">This sends a request to your parent for approval — no direct purchase.</div>
-    <button class="btn-primary" onclick="requestFromParent('${s.id}')">Request from parent</button>`;
+    <button class="btn-primary" onclick="requestFromParent('${s.name.replace(/'/g,"")}')">Request from parent</button>`;
   openSheet('sheet-store-detail');
 }
-async function requestFromParent(itemId){
-  let result;
-  try{ result = await callApi('requestStoreItem', { memberId: CURRENT_MEMBER_ID, itemId }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not send request'); return; }
+function requestFromParent(name){
   haptic('success');
   closeSheet('sheet-store-detail');
-  setTimeout(()=>showToast('Request sent to your parent'), 280);
-  await loadFullState(false);
+  setTimeout(()=>showToast(`Request sent to your parent — ${name}`), 280);
 }
 
-/* ===== Messages ===== */
+/* ===== MODULE: Messages ===== */
 function renderMessages(){
-  const list = STATE.messages;
-  document.getElementById('messages-list').innerHTML = list.length ? list.map(m=>`
-    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="openThread('${m.id}')">
+  document.getElementById('messages-list').innerHTML = messagesData.map(m=>`
+    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openThread('${m.id}')">
       <div class="icon-tile">${ICONS.chat}</div>
       <div style="flex:1;"><div class="row-title" style="font-size:14px;">${m.name}</div><div class="row-sub">${m.last}</div></div>
-      <div style="text-align:right;"><div class="row-sub">${fmtDateTime(m.time)}</div>${m.unread?'<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
-    </div>`).join('') : emptyState('No conversations yet.');
+      <div style="text-align:right;"><div class="row-sub">${m.time}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
+    </div>`).join('');
 }
 function openMessages(){ renderMessages(); openSheet('sheet-messages'); }
 let activeThreadId = null;
-async function openThread(id){
+function openThread(id){
   activeThreadId = id;
-  const m = STATE.messages.find(x=>x.id===id);
-  document.getElementById('thread-title').textContent = m ? m.name : 'Coach';
+  const m = messagesData.find(x=>x.id===id);
+  m.unread = false;
+  document.getElementById('thread-title').textContent = m.name;
   const log = document.getElementById('thread-log');
-  log.innerHTML = skeletonRows(2);
+  log.innerHTML = (threadSeed[id]||[]).map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
   openSheet('sheet-thread');
-  let result;
-  try{ result = await callApi('getThread', { threadId: id, memberId: CURRENT_MEMBER_ID }); }
-  catch(e){ log.innerHTML = emptyState('Could not load messages.'); return; }
-  if(!result.success){ log.innerHTML = emptyState(result.error||'Could not load messages.'); return; }
-  log.innerHTML = result.data.length ? result.data.map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('') : emptyState('No messages yet — say hi!');
-  log.scrollTop = log.scrollHeight;
+  setTimeout(()=>log.scrollTop = log.scrollHeight, 200);
 }
-async function sendThreadMessage(){
+function sendThreadMessage(){
   const field = document.getElementById('thread-input-field');
   const val = field.value.trim();
   if(!val || !activeThreadId) return;
   haptic('light');
-  field.value = '';
+  threadSeed[activeThreadId] = threadSeed[activeThreadId] || [];
+  threadSeed[activeThreadId].push({who:'me', text:val});
   const log = document.getElementById('thread-log');
   log.innerHTML += `<div class="bubble user">${val}</div>`;
+  field.value = '';
   log.scrollTop = log.scrollHeight;
-  let result;
-  try{ result = await callApi('sendMessage', { threadId: activeThreadId, memberId: CURRENT_MEMBER_ID, body: val }); }
-  catch(e){ showToast('Message failed to send'); return; }
-  if(!result.success) showToast(result.error || 'Message failed to send');
-  await loadFullState(false);
 }
 
-/* ===== Announcements ===== */
+/* ===== MODULE: Announcements ===== */
 function renderAnnouncements(){
-  const list = STATE.announcements;
-  document.getElementById('announcements-list').innerHTML = list.length ? `<div class="grouped-card" style="margin:0;">` +
-    list.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${fmtDateTime(a.time)}</div></div></div>`).join('') + `</div>`
-    : emptyState('No academy news yet.');
+  document.getElementById('announcements-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
+    announcementsData.map(a=>`
+      <div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${a.time}</div></div></div>`).join('') + `</div>`;
 }
 function openAnnouncements(){ renderAnnouncements(); openSheet('sheet-announcements'); }
 
-/* ===== Vex (assistant — answers are templated from real STATE, not fabricated) ===== */
+/* ===== MODULE: Vex (AI) ===== */
+const vexReplies = {
+  'When is my next training?': 'Your next session is Tue Sep 15, 5:30 PM at Ibex Pitch A. You\'ve already RSVP\'d Yes.',
+  "What's my score?": `You're at ${'{{SCORE}}'}/1000 — ${'{{LEVEL}}'}. Training and Behavior are your strongest categories; Growth is the one to watch.`,
+  'What badges did I earn?': "You've earned 4-Session Streak, Level Up, and Team Player. Perfect Month is close — just keep your attendance up this week.",
+  'How is my attendance?': "You've attended 18 of 21 sessions this term — 86%. That's above your academy's average.",
+  'How can I improve?': "Coach Rafael's notes point to Growth as your lowest category. Ask for a 1-on-1 development session — you can redeem one from Rewards."
+};
 function askVex(q){
   haptic('light');
   const log = document.getElementById('chat-log');
   log.innerHTML += `<div class="bubble user">${q}</div>`;
   log.scrollIntoView({behavior:'smooth', block:'end'});
   setTimeout(()=>{
-    let reply = "Let me check that for you.";
-    if(STATE){
-      if(/next training/i.test(q)){
-        const s = STATE.sessions[0];
-        reply = s ? `Your next session is ${s.day} ${fmtDate(s.date)}, ${s.time} at ${s.venue}. ${s.rsvp==='yes' ? "You've already RSVP'd Yes." : 'You have not RSVP\'d yet.'}` : 'No upcoming sessions are scheduled yet — check back soon.';
-      } else if(/my score/i.test(q)){
-        const weakest = [...STATE.score.breakdown].sort((a,b)=>a.score-b.score)[0];
-        reply = `You're at ${STATE.score.total}/1000 — ${STATE.score.level}. ${weakest ? weakest.name + ' is your category to watch right now.' : ''}`;
-      } else if(/badges/i.test(q)){
-        const unlocked = STATE.achievements.filter(a=>a.unlocked);
-        reply = unlocked.length ? `You've earned: ${unlocked.map(a=>a.name).join(', ')}.` : "You haven't unlocked any badges yet — attendance streaks are the fastest way to start.";
-      } else if(/attendance/i.test(q)){
-        reply = `You've attended ${STATE.attendance.attended} of ${STATE.attendance.total} sessions — ${STATE.attendance.pct}%.`;
-      } else if(/improve/i.test(q)){
-        const weakest = [...STATE.score.breakdown].sort((a,b)=>a.score-b.score)[0];
-        reply = weakest ? `${weakest.name} is your lowest category (${weakest.score}/100). ${weakest.note || 'Ask your coach for a focused drill on it.'}` : 'Keep your attendance consistent — that drives most of your score.';
-      }
+    let reply = vexReplies[q] || "Let me check that for you.";
+    if(reply.includes('{{SCORE}}')){
+      const total = computeByteSenseScore();
+      reply = reply.replace('{{SCORE}}', total).replace('{{LEVEL}}', currentLevel(total).name);
     }
     log.innerHTML += `<div class="bubble ai">${reply}</div>`;
     haptic('success');
     log.scrollIntoView({behavior:'smooth', block:'end'});
-  }, 450);
+  }, 550);
 }
 let auPlusMenuOpen = false;
-const AU_PLUS_ACTIONS = { next: 'When is my next training?', score: "What's my score?", badges: 'What badges did I earn?', attendance: 'How is my attendance?', improve: 'How can I improve?' };
+const AU_PLUS_ACTIONS = {
+  next: 'When is my next training?', score: "What's my score?", badges: 'What badges did I earn?',
+  attendance: 'How is my attendance?', improve: 'How can I improve?'
+};
 function toggleAuPlusMenu(e){
   if(e) e.stopPropagation();
   haptic('light');
@@ -1091,48 +1375,101 @@ function closeAuPlusMenu(){
   document.getElementById('au-plus-menu').classList.remove('show');
   document.getElementById('au-plus-btn').classList.remove('open');
 }
-function selectAuPlusAction(key){ haptic('medium'); closeAuPlusMenu(); const q = AU_PLUS_ACTIONS[key]; if(q) askVex(q); }
+function selectAuPlusAction(key){
+  haptic('medium'); closeAuPlusMenu();
+  const q = AU_PLUS_ACTIONS[key];
+  if(q) askVex(q);
+}
 document.addEventListener('click', (e)=>{
   if(!auPlusMenuOpen) return;
-  const menu = document.getElementById('au-plus-menu'); const btn = document.getElementById('au-plus-btn');
+  const menu = document.getElementById('au-plus-menu');
+  const btn = document.getElementById('au-plus-btn');
   if(menu && !menu.contains(e.target) && e.target !== btn) closeAuPlusMenu();
 });
-function startNewChat(){ document.getElementById('chat-log').innerHTML = ''; showToast('New chat started'); }
+function startNewChat(){
+  document.getElementById('chat-log').innerHTML = '';
+  document.getElementById('au-input-field').value = '';
+  handleAuInput();
+  showToast('New chat started');
+}
+let goldMenuOpen = false;
+function toggleGoldMenu(e){
+  if(e) e.stopPropagation();
+  haptic('light');
+  goldMenuOpen = !goldMenuOpen;
+  document.getElementById('gold-menu').classList.toggle('show', goldMenuOpen);
+  document.getElementById('gold-menu-overlay').classList.toggle('show', goldMenuOpen);
+}
+function closeGoldMenu(){
+  if(!goldMenuOpen) return;
+  goldMenuOpen = false;
+  document.getElementById('gold-menu').classList.remove('show');
+  document.getElementById('gold-menu-overlay').classList.remove('show');
+}
+function goldMenuAction(key){
+  haptic('medium'); closeGoldMenu();
+  showToast(`${key==='help'?'Help & Support':'About Vex'} — coming soon`);
+}
+document.addEventListener('click', (e)=>{
+  if(!goldMenuOpen) return;
+  const menu = document.getElementById('gold-menu');
+  const btn = document.getElementById('gold-menu-btn');
+  if(menu && !menu.contains(e.target) && e.target !== btn && !btn.contains(e.target)) closeGoldMenu();
+});
+const AU_WAVE_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4"/><path d="M9 6v12"/><path d="M14 3v18"/><path d="M19 8v8"/></svg>';
+const AU_SEND_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>';
+function handleAuInput(){
+  const val = document.getElementById('au-input-field').value.trim();
+  document.getElementById('mic-btn').innerHTML = val.length ? AU_SEND_ICON : AU_WAVE_ICON;
+}
 function handleAuAction(){
   const field = document.getElementById('au-input-field');
   const val = field.value.trim();
-  if(val.length){ haptic('light'); askVex(val); field.value=''; }
+  if(val.length){ haptic('light'); askVex(val); field.value=''; handleAuInput(); }
 }
 
-/* ===== Notifications ===== */
+/* ===== MODULE: Notifications ===== */
 function renderNotifications(){
-  const list = STATE.notifications;
-  document.getElementById('notifications-list').innerHTML = list.length ? list.map(n=>`
-    <div class="notif-row"><div class="icon-tile">${ICONS[n.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${fmtDateTime(n.at)}</div></div></div>`).join('')
-    : emptyState('No new notifications.');
+  document.getElementById('notifications-list').innerHTML = notifications.map(n=>`
+    <div class="notif-row"><div class="icon-tile">${n.ico}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.time}</div></div></div>`).join('');
 }
-async function openNotifications(){
+function openNotifications(){
   renderNotifications();
   document.getElementById('notif-dot').classList.add('hidden');
   openSheet('sheet-notifications');
-  try{ await callApi('markNotificationsSeen', { memberId: CURRENT_MEMBER_ID }); }catch(e){}
+}
+const activityData = [
+  {ico:ICONS.badge, title:'Badge earned: Attendance Streak', sub:'Today', val:'+50 pts'},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'Today', val:'+8'},
+  {ico:ICONS.training, title:"RSVP'd Yes — Tue Skills Session", sub:'Yesterday', val:''},
+  {ico:ICONS.store, title:'Requested new boots from parent', sub:'2 days ago', val:''},
+  {ico:ICONS.chat, title:'Message from Coach Rafael', sub:'2 days ago', val:''},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'1 week ago', val:'+5'},
+];
+function openAllActivity(){
+  document.getElementById('activity-full-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
+    activityData.map(a=>`<div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('') + `</div>`;
+  openSheet('sheet-activity');
 }
 
-/* ===== Profile ===== */
-function renderProfileSheet(){
-  if(!STATE) return;
-  const m = STATE.member;
+/* ===== MODULE: Profile ===== */
+ function renderProfileSheet(){
+  const total = computeByteSenseScore();
+  let role = 'player';
+  try{ role = localStorage.getItem(ROLE_KEY) || 'player'; }catch(e){}
+  const coachRow = role === 'staff' ? `
+      <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openCoachPanel(),280)"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><div style="flex:1;" class="row-title">Coach panel</div><span style="color:var(--t3); font-size:16px;">›</span></div>` : '';
   document.getElementById('profile-sheet-body').innerHTML = `
     <div class="profile-hero" style="margin:0 0 18px;">
       <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">${(m.name||'Player').split(' ')[0]}</div>
-      <div class="profile-badge-premium">${STATE.score.level}</div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco</div>
+      <div class="profile-badge-premium">Rising Player</div>
     </div>
     <div class="profile-stat-grid">
-      <div class="profile-stat-tile"><div class="v">${STATE.score.total}</div><div class="l">ByteSense Score</div></div>
-      <div class="profile-stat-tile"><div class="v">${(STATE.points||0).toLocaleString('en-PH')}</div><div class="l">Points</div></div>
-      <div class="profile-stat-tile"><div class="v">${STATE.attendance.pct}%</div><div class="l">Attendance</div></div>
-      <div class="profile-stat-tile"><div class="v">${STATE.achievements.filter(a=>a.unlocked).length}</div><div class="l">Badges</div></div>
+      <div class="profile-stat-tile"><div class="v">${total}</div><div class="l">ByteSense Score</div></div>
+      <div class="profile-stat-tile"><div class="v">1,240</div><div class="l">Points</div></div>
+      <div class="profile-stat-tile"><div class="v">86%</div><div class="l">Attendance</div></div>
+      <div class="profile-stat-tile"><div class="v">${achievementsData.filter(a=>a.unlocked).length}</div><div class="l">Badges</div></div>
     </div>
     <div class="grouped-card">
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>showScreen('training'),280)"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;" class="row-title">Training</div><span style="color:var(--t3); font-size:16px;">›</span></div>
@@ -1140,59 +1477,79 @@ function renderProfileSheet(){
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openStore(),280)"><div class="icon-tile">${ICONS.store}</div><div style="flex:1;" class="row-title">Store</div><span style="color:var(--t3); font-size:16px;">›</span></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openMessages(),280)"><div class="icon-tile">${ICONS.chat}</div><div style="flex:1;" class="row-title">Messages</div><span style="color:var(--t3); font-size:16px;">›</span></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openAnnouncements(),280)"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;" class="row-title">Academy news</div><span style="color:var(--t3); font-size:16px;">›</span></div>
-      <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openSettingsSheet(),280)"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/></svg></div><div style="flex:1;" class="row-title">Settings</div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      ${coachRow}
+      <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openSettingsSheet(),280)"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div style="flex:1;" class="row-title">Settings</div><span style="color:var(--t3); font-size:16px;">›</span></div>
     </div>`;
 }
 function openProfileSheet(){ renderProfileSheet(); openSheet('sheet-profile'); }
 
-/* ===== Settings ===== */
+/* ===== MODULE: Settings ===== */
 function openSettingsSheet(){ renderSettingsSheet(); openSheet('sheet-settings'); }
+let deleteArmed = false;
 function renderSettingsSheet(){
-  const role = getSavedRole() || 'player';
+  deleteArmed = false;
+  let role = 'player';
+  let accountKey = '';
+  try{ role = localStorage.getItem(ROLE_KEY) || 'player'; accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
+  const account = ACCOUNTS[accountKey];
+  const displayName = account ? account.name : 'Marco Villanueva';
   const roleLabel = role==='staff' ? 'Coach/Staff' : (role==='parent' ? 'Parent' : 'Player');
-  const displayName = STATE ? STATE.member.name : (CURRENT_ACCOUNT ? CURRENT_ACCOUNT.name : '—');
+  const switchChildRow = (role==='parent' && account && account.children.length>1) ? `
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); closeSheet('sheet-settings'); setTimeout(()=>openChildSwitch(ACCOUNTS['${accountKey}'], false),280)"><div style="flex:1;" class="row-title">Switch child</div><span style="color:var(--t3); font-size:16px;">›</span></div>` : '';
   document.getElementById('settings-menu-body').innerHTML = `
     <div class="fact-l" style="margin:0 2px 8px;">Account</div>
     <div class="grouped-card" style="margin:0 0 18px;">
       <div class="grouped-row"><div style="flex:1;"><div class="row-title">${displayName}</div><div class="row-sub">Signed in as ${roleLabel}</div></div></div>
+      ${switchChildRow}
     </div>
     <div class="fact-l" style="margin:0 2px 8px;">Preferences</div>
     <div class="grouped-card" style="margin:0 0 18px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Notifications</div><div class="toggle on" onclick="toggleSwitch(this)"><div class="knob"></div></div></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); showToast('Data Privacy Policy — coming soon')"><div style="flex:1;" class="row-title">Data Privacy Policy</div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); showToast('Your data export request has been noted')"><div style="flex:1;"><div class="row-title">Download my data</div><div class="row-sub">RA 10173 data subject rights</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
     </div>
     <div class="fact-l" style="margin:0 2px 8px;">Account actions</div>
     <div class="grouped-card" style="margin:0 0 10px;">
       <div class="grouped-row" style="cursor:pointer;" onclick="logoutUser()"><div style="flex:1;" class="row-title">Log Out</div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" id="delete-account-row" onclick="deleteAccountConfirm()">
+        <div style="flex:1;"><div class="row-title" id="delete-account-title" style="color:var(--red);">Delete Account</div><div class="row-sub" id="delete-account-sub">Permanently erase your ArtiPlay data</div></div>
+      </div>
     </div>`;
 }
 function logoutUser(){
   haptic('medium');
   clearSession();
-  STATE = null; COACH_STATE = null; CURRENT_MEMBER_ID = null; CURRENT_ACCOUNT = null;
   closeSheet('sheet-settings');
   setTimeout(()=>{
+    renderSigninEntry();
     document.getElementById('signin-overlay').classList.remove('hidden');
     document.getElementById('onboard-overlay').classList.add('hidden');
-    document.getElementById('signin-account-id').value = '';
-    document.getElementById('signin-pin').value = '';
     showToast('Signed out');
   }, 280);
 }
-
-/* ===== Coach / Admin panel ===== */
-async function openCoachPanel(){
-  const body = document.getElementById('admin-roster-list');
-  body.innerHTML = skeletonRows(3);
-  openSheet('sheet-coach-panel');
-  let result;
-  try{ result = await callApi('getCoachState', { coachId: CURRENT_ACCOUNT.accountId, tenantId: CURRENT_ACCOUNT.tenantId }); }
-  catch(e){ body.innerHTML = emptyState('Could not reach the server.'); return; }
-  if(!result.success){ body.innerHTML = emptyState(result.error || 'Could not load roster.'); return; }
-  COACH_STATE = result.data;
-  document.getElementById('coach-panel-title').textContent = 'Coach panel · ' + COACH_STATE.staffName;
-  selectCoachTab('roster');
+function deleteAccountConfirm(){
+  const titleEl = document.getElementById('delete-account-title');
+  const subEl = document.getElementById('delete-account-sub');
+  if(!deleteArmed){
+    deleteArmed = true; haptic('error');
+    titleEl.textContent = 'Tap again to confirm delete';
+    subEl.textContent = 'This permanently removes your account and player data';
+    setTimeout(()=>{ if(deleteArmed){ deleteArmed=false; if(titleEl.isConnected){ titleEl.textContent='Delete Account'; subEl.textContent='Permanently erase your ArtiPlay data'; } } }, 4000);
+    return;
+  }
+  deleteArmed = false; haptic('error');
+  try{ localStorage.clear(); }catch(e){}
+  closeSheet('sheet-settings');
+  setTimeout(()=>{
+    renderSigninEntry();
+    document.getElementById('signin-overlay').classList.remove('hidden');
+    document.getElementById('onboard-overlay').classList.add('hidden');
+    showToast('Account deleted');
+  }, 280);
 }
+
+/* ===== MODULE: Coach Panel ===== */
+function openCoachPanel(){ selectCoachTab('roster'); openSheet('sheet-coach-panel'); }
 function selectCoachTab(tab){
   haptic('light');
   document.querySelectorAll('#coach-tabs .role-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
@@ -1203,168 +1560,84 @@ function selectCoachTab(tab){
   if(tab==='sessions') renderAdminSessions();
 }
 function renderAdminRoster(){
-  const roster = COACH_STATE.roster;
-  document.getElementById('admin-roster-list').innerHTML = roster.length ? roster.map((p,i)=>`
-    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="openScoreEdit(${i})">
+  document.getElementById('admin-roster-list').innerHTML = rosterData.map((p,i)=>`
+    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openScoreEdit(${i})">
       <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
       <div style="flex:1;"><div class="row-title" style="font-size:14px;">${p.name}</div><div class="row-sub">${p.level}</div></div>
       <div class="fact-v">${p.score}</div>
-    </div>`).join('') : emptyState('No players assigned yet.');
+    </div>`).join('');
 }
 function openScoreEdit(i){
-  const p = COACH_STATE.roster[i];
+  const p = rosterData[i];
   document.getElementById('score-edit-title').textContent = p.name;
   document.getElementById('score-edit-body').innerHTML = `
     <div class="grouped-card" style="margin:0 0 14px;">
-      <div class="field-row"><div class="row-title" style="font-size:14px;">Training</div><input type="text" id="se-training" inputmode="numeric"></div>
-      <div class="field-row"><div class="row-title" style="font-size:14px;">Performance</div><input type="text" id="se-performance" inputmode="numeric"></div>
-      <div class="field-row"><div class="row-title" style="font-size:14px;">Behavior</div><input type="text" id="se-behavior" inputmode="numeric"></div>
-      <div class="field-row"><div class="row-title" style="font-size:14px;">Growth</div><input type="text" id="se-growth" inputmode="numeric"></div>
+      <div class="field-row"><div class="row-title" style="font-size:14px;">ByteSense score</div><input type="text" id="score-edit-input" inputmode="numeric" value="${p.score}"></div>
     </div>
-    <button class="btn-primary" onclick="saveScoreEdit('${p.memberId}')">Save scores</button>`;
+    <button class="btn-primary" onclick="saveScoreEdit(${i})">Save score</button>`;
   openSheet('sheet-score-edit');
 }
-async function saveScoreEdit(memberId){
-  const val = id => { const raw = document.getElementById(id).value.replace(/[^0-9]/g,''); return raw===''? undefined : Math.max(0, Math.min(100, parseInt(raw,10))); };
-  const scores = { TrainingScore: val('se-training'), PerformanceScore: val('se-performance'), BehaviorScore: val('se-behavior'), GrowthScore: val('se-growth') };
-  Object.keys(scores).forEach(k=>{ if(scores[k]===undefined) delete scores[k]; });
-  let result;
-  try{ result = await callApi('saveScoreEdit', { coachId: CURRENT_ACCOUNT.accountId, memberId, scores }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not save'); return; }
+function saveScoreEdit(i){
+  const raw = document.getElementById('score-edit-input').value.replace(/[^0-9]/g,'');
+  const val = parseInt(raw||'0',10);
+  if(val<=0){ haptic('error'); return; }
+  rosterData[i].score = val;
+  rosterData[i].level = currentLevel(val).name;
   haptic('success');
   closeSheet('sheet-score-edit');
-  setTimeout(()=>showToast('ByteSense score updated'), 280);
-  const r = await callApi('getCoachState', { coachId: CURRENT_ACCOUNT.accountId, tenantId: CURRENT_ACCOUNT.tenantId }).catch(()=>null);
-  if(r && r.success){ COACH_STATE = r.data; renderAdminRoster(); }
+  renderAdminRoster();
+  setTimeout(()=>showToast(`${rosterData[i].name}'s ByteSense score updated to ${val}`), 280);
 }
 function renderAdminSessions(){
-  const sessions = COACH_STATE.sessions;
-  document.getElementById('admin-sessions-list').innerHTML = sessions.length ? sessions.map(s=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${fmtDate(s.date)} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('') : emptyState('No sessions scheduled yet.');
+  document.getElementById('admin-sessions-list').innerHTML = adminSessions.map(s=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${s.date} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('');
 }
-async function addAdminSession(){
-  const day = prompt('Day (e.g. Tue):'); if(day===null) return;
-  const date = prompt('Date (e.g. Sep 30):'); if(date===null) return;
-  const time = prompt('Time (e.g. 5:30 PM):'); if(time===null) return;
-  const venue = prompt('Venue:'); if(venue===null) return;
-  let result;
-  try{ result = await callApi('addAdminSession', { coachId: CURRENT_ACCOUNT.accountId, tenantId: CURRENT_ACCOUNT.tenantId, session:{day,date,time,venue} }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not add session'); return; }
+function addAdminSession(){
+  adminSessions.push({day:'New', date:'TBD', time:'TBD', venue:'Ibex Pitch A'});
+  renderAdminSessions();
   haptic('success');
-  showToast('Session added');
-  const r = await callApi('getCoachState', { coachId: CURRENT_ACCOUNT.accountId, tenantId: CURRENT_ACCOUNT.tenantId }).catch(()=>null);
-  if(r && r.success){ COACH_STATE = r.data; renderAdminSessions(); }
+  showToast('Session added — edit the details from the roster view');
 }
-async function postAdminAnnouncement(){
+function postAdminAnnouncement(){
   const title = document.getElementById('admin-post-title').value.trim();
   const body = document.getElementById('admin-post-body').value.trim();
   if(!title || !body){ haptic('error'); showToast('Add a title and message first'); return; }
-  let result;
-  try{ result = await callApi('postAnnouncement', { tenantId: CURRENT_ACCOUNT.tenantId, staffRole: CURRENT_ACCOUNT.staffRole, title, body, actorName: CURRENT_ACCOUNT.name }); }
-  catch(e){ showToast('Could not reach the server'); return; }
-  if(!result.success){ showToast(result.error||'Could not post'); return; }
+  announcementsData.unshift({title, body, time:'Just now'});
   document.getElementById('admin-post-title').value = '';
   document.getElementById('admin-post-body').value = '';
   haptic('success');
   showToast('Announcement posted to the academy');
 }
 
-/* =====================================================================================
-   AUTH — unified login, self-provisioning onboarding
-===================================================================================== */
-async function signIn(btnEl){
-  if(btnEl.classList.contains('loading') || btnEl.classList.contains('success')) return;
-  const idVal = document.getElementById('signin-account-id').value.trim();
-  const pinVal = document.getElementById('signin-pin').value.trim();
-  const errEl = document.getElementById('signin-error');
-  errEl.style.display = 'none';
-  if(!idVal || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your Account ID and PIN'; return; }
-  haptic('medium');
-  btnEl.classList.add('loading');
-  let result;
-  try{ result = await callApi('unifiedLogin', { identifier: idVal, pin: pinVal }); }
-  catch(e){ btnEl.classList.remove('loading'); haptic('error'); errEl.style.display='block'; errEl.textContent='Could not reach the server — check your connection'; return; }
-  if(!result.success){ btnEl.classList.remove('loading'); haptic('error'); errEl.style.display='block'; errEl.textContent=result.error || 'Account ID or PIN not recognized'; return; }
-  const account = result.data;
-  btnEl.classList.add('success');
-  haptic('success');
-  setTimeout(()=>{
-    const overlay = document.getElementById('signin-overlay');
-    overlay.classList.add('leaving');
-    setTimeout(()=>{
-      overlay.classList.add('hidden'); overlay.classList.remove('leaving');
-      btnEl.classList.remove('loading'); btnEl.classList.remove('success');
-      routeAfterSignIn(account);
-    }, 320);
-  }, 500);
-}
-function routeAfterSignIn(account){
-  CURRENT_ACCOUNT = account;
-  saveSession(account.role, account.accountId, account.tenantId);
-  if(account.role === 'player'){
-    CURRENT_MEMBER_ID = account.memberId;
-    if(account.onboarded){ markOnboarded(); enterPlayerApp(); }
-    else document.getElementById('onboard-overlay').classList.remove('hidden');
-    return;
-  }
-  if(account.role === 'staff'){
-    document.getElementById('onboard-overlay').classList.add('hidden');
-    document.getElementById('profile-coach-panel-row').style.display = '';
-    showScreen('home');
-    document.getElementById('home-player-title').textContent = account.name.split(' ')[0];
-    document.getElementById('home-academy-title').textContent = account.academy || '';
-    document.getElementById('home-status-txt').textContent = '· ' + (account.staffRole||'Staff');
-    document.getElementById('home-hero-score').textContent = '—';
-    showToast('Signed in as staff — open Profile → Coach panel');
-    return;
-  }
-  if(account.role === 'parent'){
-    if((account.children||[]).length > 1){ openChildSwitch(account); return; }
-    if((account.children||[]).length === 1){ CURRENT_MEMBER_ID = account.children[0].memberId; enterPlayerApp(); return; }
-    showToast('No children linked to this parent account yet.');
-  }
-}
-async function enterPlayerApp(){
-  document.getElementById('onboard-overlay').classList.add('hidden');
-  await loadFullState(true);
-  showScreen('home');
-  document.getElementById('profile-coach-panel-row').style.display = 'none';
-}
-function openChildSwitch(account){
-  document.getElementById('child-switch-title').textContent = `${account.name.split(' ')[0]}'s children`;
-  document.getElementById('switch-academy-list').innerHTML = account.children.map((c,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="selectChild(${i})">
-      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
-      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.level} · ${c.score}/1000</div></div>
-      <span style="color:var(--t3); font-size:16px;">›</span>
-    </div>`).join('');
-  window.__childAccount = account;
-  document.getElementById('signin-overlay').classList.add('hidden');
-  openSheet('sheet-child-switch');
-}
-function selectChild(i){
-  const account = window.__childAccount;
-  CURRENT_MEMBER_ID = account.children[i].memberId;
-  closeSheet('sheet-child-switch');
-  setTimeout(()=>enterPlayerApp(), 280);
+/* ===== MODULE: Toast ===== */
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
 }
 
-/* ===== Self-provisioning onboarding ===== */
+/* ===== MODULE: Onboarding ===== */
+/* === START: SELF-PROVISIONING LOGIC (replaces Coach-ID-gated signup) === */
+const obData = { tenantId:'', tenantName:'', role:'', name:'', age:'', parentName:'', parentContact:'', parentEmail:'', email:'', phone:'', club:'', pin:'', accountId:'', memberId:'' };
+
 const ROLE_FIELDS_ = {
   STUDENT: [{k:'name', label:'Full name'}, {k:'age', label:'Age'}, {k:'parentName', label:'Parent name'}, {k:'parentContact', label:'Parent contact'}, {k:'parentEmail', label:'Parent email'}],
   COACH:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
   STAFF:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
   PARENT:  [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}]
 };
+
 const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
 let obCurrentId = 'ob-verify';
 let obHistoryStack = [];
+
 function renderObDots(activeId){
   const idx = OB_STEPS.indexOf(activeId);
   document.getElementById('onboard-dots').innerHTML = OB_STEPS.map((s,i)=>{
-    let cls='onboard-dot'; if(i===idx) cls+=' active'; else if(i<idx) cls+=' done'; return `<span class="${cls}"></span>`;
+    let cls = 'onboard-dot';
+    if(i === idx) cls += ' active'; else if(i < idx) cls += ' done';
+    return `<span class="${cls}"></span>`;
   }).join('');
 }
 function obGoTo(id, pushHistory){
@@ -1387,16 +1660,20 @@ function obBack(){
   renderObDots(prev);
   document.getElementById('ob-back-btn').style.visibility = (prev==='ob-verify') ? 'hidden' : 'visible';
 }
+function obSkipToDashboard(){ obCompleteOnboarding(true); }
+
 function startSignupFlow(){
   document.getElementById('signin-overlay').classList.add('hidden');
   document.getElementById('onboard-overlay').classList.remove('hidden');
-  obHistoryStack = []; obCurrentId = 'ob-verify';
+  obHistoryStack = [];
+  obCurrentId = 'ob-verify';
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
   document.getElementById('ob-invite-input').value = '';
   document.getElementById('ob-verify-status').textContent = '';
   renderObDots('ob-verify');
 }
+
 async function obVerifyInvite(){
   const raw = document.getElementById('ob-invite-input').value.trim();
   const statusEl = document.getElementById('ob-verify-status');
@@ -1406,13 +1683,21 @@ async function obVerifyInvite(){
   try{ result = await callApi('validateInvitePin', { pin: raw }); }
   catch(e){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Could not reach the server.'; return; }
   if(!result.success){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent=result.error; return; }
-  obData.tenantId = result.data.tenantId; obData.tenantName = result.data.tenantName; obData.role = result.data.role;
-  haptic('success'); statusEl.style.color = '#1c8a3e'; statusEl.textContent = `Linked to ${obData.tenantName}`;
+
+  obData.tenantId = result.data.tenantId;
+  obData.tenantName = result.data.tenantName;
+  obData.role = result.data.role;
+  haptic('success');
+  statusEl.style.color = '#1c8a3e';
+  statusEl.textContent = `Linked to ${obData.tenantName}`;
+
   document.getElementById('ob-role-eyebrow').textContent = `Joining ${obData.tenantName} as ${obData.role.charAt(0)+obData.role.slice(1).toLowerCase()}`;
   document.getElementById('ob-profile-fields').innerHTML = (ROLE_FIELDS_[obData.role]||[]).map(f=>
     `<div class="field-row"><div class="row-title" style="font-size:14px;">${f.label}</div><input type="text" id="ob-field-${f.k}" placeholder="${f.label}"></div>`).join('');
+
   setTimeout(()=>obGoTo('ob-profile-form', true), 350);
 }
+
 function obSubmitProfile(btnEl){
   haptic('medium');
   const fields = ROLE_FIELDS_[obData.role] || [];
@@ -1420,17 +1705,27 @@ function obSubmitProfile(btnEl){
   if(!obData.name){ haptic('error'); showToast('Name is required'); return; }
   obGoTo('ob-set-pin', true);
 }
+
 async function obConfirmJoin(btnEl){
   const newPin = document.getElementById('ob-newpin-input').value.trim();
   if(!/^\d{4,6}$/.test(newPin)){ haptic('error'); showToast('PIN must be 4-6 digits'); return; }
-  haptic('medium'); btnEl.classList.add('loading');
+  haptic('medium');
+  btnEl.classList.add('loading');
   let result;
-  try{ result = await callApi('claimAccount', Object.assign({}, obData, { pin: newPin })); }
-  catch(e){ btnEl.classList.remove('loading'); haptic('error'); showToast('Could not reach the server'); return; }
+  try{
+    result = await callApi('claimAccount', Object.assign({}, obData, { pin: newPin }));
+  }catch(e){
+    btnEl.classList.remove('loading'); haptic('error'); showToast('Could not reach the server'); return;
+  }
   btnEl.classList.remove('loading');
   if(!result.success){ haptic('error'); showToast(result.error || 'Could not create your account'); return; }
-  obData.accountId = result.data.accountId; obData.memberId = result.data.memberId || '';
+
+  obData.accountId = result.data.accountId;
+  obData.memberId = result.data.memberId || '';
+  obData.pin = newPin;
+  ACCOUNTS[obData.accountId.toLowerCase()] = { role: obData.role.toLowerCase(), accountId: obData.accountId, memberId: obData.memberId, name: obData.name, academy: obData.tenantName };
   haptic('success');
+
   if(obData.role === 'STUDENT'){
     const coachRes = await callApi('getCoaches', { tenantId: obData.tenantId }).catch(()=>null);
     const coaches = (coachRes && coachRes.success) ? coachRes.data : [];
@@ -1448,62 +1743,254 @@ async function obPickCoach(coachId){
   await callApi('assignCoach', { memberId: obData.memberId, coachId }).catch(()=>{});
   obGoTo('ob-notification-setup', true);
 }
+function applyPlayerDataToApp(){
+  document.getElementById('home-player-title').textContent = (obData.name||'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = obData.tenantName || 'Ibex FC Academy';
+  document.getElementById('home-status-txt').textContent = `· ${obData.role === 'STUDENT' ? 'Student' : obData.role}`;
+  document.getElementById('profile-age').textContent = obData.age || '—';
+  document.getElementById('profile-coach').textContent = '—';
+  document.getElementById('profile-meta').textContent = `Account ID ${obData.accountId || '—'} · ${obData.tenantName || 'Ibex FC Academy'}`;
+  const greetEl = document.getElementById('home-greeting-line');
+  if(greetEl) greetEl.textContent = `${timeGreeting()},`;
+}
 function obConfirmNotifications(){
   haptic('medium');
   try{
     const masterOn = document.getElementById('notif-toggle-master').classList.contains('on');
-    if(masterOn && 'Notification' in window && Notification.requestPermission) Notification.requestPermission().catch(()=>{});
+    if(masterOn && 'Notification' in window && Notification.requestPermission){ Notification.requestPermission().catch(()=>{}); }
   }catch(e){}
   obCompleteOnboarding();
 }
-async function obCompleteOnboarding(){
+function obCompleteOnboarding(skipped){
   markOnboarded();
-  saveSession((obData.role || 'player').toLowerCase(), obData.accountId, obData.tenantId);
+  const accountKey = obData.accountId ? obData.accountId.toLowerCase() : undefined;
+  saveSession((obData.role || 'player').toLowerCase(), accountKey);
+  if(accountKey) markDeviceTrusted(accountKey, obData.name);
   if(obData.memberId){
-    CURRENT_MEMBER_ID = obData.memberId;
-    await callApi('markOnboarded', { memberId: obData.memberId }).catch(()=>{});
-    await enterPlayerApp();
-  } else {
+    callApi('markOnboarded', { memberId: obData.memberId }).catch(()=>{ /* non-blocking */ });
+  }
+  if(!skipped) applyPlayerDataToApp();
+  document.getElementById('onboard-overlay').classList.add('hidden');
+  showScreen('home');
+  const firstName = (obData.name || 'there').split(' ')[0];
+  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId} — keep it saved. Welcome, ${firstName}`);
+}
+function replayOnboarding(){
+  obHistoryStack = [];
+  document.getElementById('onboard-overlay').classList.remove('hidden');
+  OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
+  document.getElementById('ob-verify').classList.remove('hidden');
+  document.getElementById('ob-invite-input').value = '';
+  document.getElementById('ob-verify-status').textContent = '';
+  obCurrentId = 'ob-verify';
+  renderObDots('ob-verify');
+  document.getElementById('ob-back-btn').style.visibility = 'hidden';
+}
+renderObDots('ob-verify');
+/* === END: SELF-PROVISIONING LOGIC === */
+
+/* ===== MODULE: Identity & Routing (sign-in) =====
+   LOGIN → identify user → identify academy/tenant → identify role → open correct home.
+   No manual role picker — the account record decides. */
+async function signIn(btnEl){
+  if(btnEl.classList.contains('loading') || btnEl.classList.contains('success')) return;
+  const idVal = document.getElementById('signin-account-id').value.trim();
+  const pinVal = document.getElementById('signin-pin').value.trim();
+  const errEl = document.getElementById('signin-error');
+  errEl.style.display = 'none';
+  if(!idVal || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your Account ID and PIN'; return; }
+  haptic('medium');
+  btnEl.classList.add('loading');
+  let result;
+  try{
+    result = await callApi('unifiedLogin', { identifier: idVal, pin: pinVal });
+  }catch(e){
+    btnEl.classList.remove('loading');
+    haptic('error');
+    errEl.style.display = 'block';
+    errEl.textContent = 'Could not reach the server — check your connection';
+    return;
+  }
+  if(!result.success){
+    btnEl.classList.remove('loading');
+    haptic('error');
+    errEl.style.display = 'block';
+    errEl.textContent = result.error || 'Account ID or PIN not recognized';
+    return;
+  }
+  const account = result.data;
+  const accountKey = account.accountId.toLowerCase();
+  ACCOUNTS[accountKey] = account;
+  btnEl.classList.add('success');
+  haptic('success');
+  setTimeout(()=>{
+    const overlay = document.getElementById('signin-overlay');
+    overlay.classList.add('leaving');
+    setTimeout(()=>{
+      overlay.classList.add('hidden');
+      overlay.classList.remove('leaving');
+      btnEl.classList.remove('loading'); btnEl.classList.remove('success');
+      saveSession(account.role, accountKey);
+      markDeviceTrusted(accountKey, account.name);
+      routeAfterSignIn(account);
+    }, 320);
+  }, 550);
+}
+async function signInTrusted(btnEl){
+  if(btnEl.classList.contains('loading') || btnEl.classList.contains('success')) return;
+  const trustedKey = getTrustedDeviceKey();
+  const pinVal = document.getElementById('signin-trusted-pin').value.trim();
+  const errEl = document.getElementById('signin-trusted-error');
+  errEl.style.display = 'none';
+  if(!trustedKey || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your PIN'; return; }
+  haptic('medium');
+  btnEl.classList.add('loading');
+  let result;
+  try{
+    result = await callApi('unifiedLogin', { identifier: trustedKey, pin: pinVal });
+  }catch(e){
+    btnEl.classList.remove('loading');
+    haptic('error');
+    errEl.style.display = 'block';
+    errEl.textContent = 'Could not reach the server — check your connection';
+    return;
+  }
+  if(!result.success){
+    btnEl.classList.remove('loading');
+    haptic('error');
+    errEl.style.display = 'block';
+    errEl.textContent = result.error || 'PIN not recognized';
+    return;
+  }
+  const account = result.data;
+  ACCOUNTS[trustedKey] = account;
+  btnEl.classList.add('success');
+  haptic('success');
+  setTimeout(()=>{
+    const overlay = document.getElementById('signin-overlay');
+    overlay.classList.add('leaving');
+    setTimeout(()=>{
+      overlay.classList.add('hidden');
+      overlay.classList.remove('leaving');
+      btnEl.classList.remove('loading'); btnEl.classList.remove('success');
+      saveSession(account.role, trustedKey);
+      routeAfterSignIn(account);
+    }, 320);
+  }, 550);
+}
+function switchToFullSignIn(){
+  haptic('light');
+  clearDeviceTrust();
+  document.getElementById('signin-trusted-form').style.display = 'none';
+  document.getElementById('signin-idpin-form').style.display = '';
+  document.getElementById('signin-tagline').textContent = 'Your football academy, in your pocket.';
+}
+function routeAfterSignIn(account){
+  if(account.role === 'parent'){
+    if(account.children.length > 1){ openChildSwitch(account, true); return; }
+    applyActiveChild(account.children[0], account);
+    enterAppFor(account);
+    return;
+  }
+  if(account.role === 'staff'){
     document.getElementById('onboard-overlay').classList.add('hidden');
     showScreen('home');
+    showToast('Signed in as staff — open Profile → Coach panel');
+    return;
   }
-  const firstName = (obData.name || 'there').split(' ')[0];
-  showToast(obData.accountId ? `You're in! Account ID ${obData.accountId} — keep it saved. Welcome, ${firstName}` : 'Welcome to ArtiPlay');
+  if(hasOnboarded()){
+    document.getElementById('onboard-overlay').classList.add('hidden');
+    showScreen('home');
+    showToast(`Welcome back, ${account.name.split(' ')[0]}`);
+  } else {
+    document.getElementById('onboard-overlay').classList.remove('hidden');
+  }
+}
+function enterAppFor(account){
+  document.getElementById('onboard-overlay').classList.add('hidden');
+  showScreen('home');
+  showToast(`Welcome, ${account.name.split(' ')[0]}`);
 }
 
-/* ===== Resume session on reload ===== */
-(async function initSessionOnLoad(){
-  if(!hasSession()){ return; }
-  document.getElementById('signin-overlay').classList.add('hidden');
-  const role = getSavedRole();
-  const accountId = getSavedId();
-  if(role === 'player' && accountId){
-    // We only kept memberId implicitly via accountId->memberId mapping server-side isn't available without login,
-    // so we ask the user to re-enter PIN once per fresh page load is avoided by storing memberId directly.
-    const memberId = localStorage.getItem('artiplay_member');
-    if(memberId){
-      CURRENT_MEMBER_ID = memberId;
-      if(!hasOnboardedLocally()){ document.getElementById('onboard-overlay').classList.remove('hidden'); return; }
-      await enterPlayerApp();
-      return;
+/* ===== MODULE: Family / Multi-Child =====
+   Martin → Child A / Child B — one account, no duplicate logins. */
+let pendingAccountForChildSwitch = null;
+function openChildSwitch(account, isFirstSignIn){
+  pendingAccountForChildSwitch = isFirstSignIn ? account : null;
+  window.__childSwitchAccount = account;
+  document.getElementById('child-switch-title').textContent = `${account.name.split(' ')[0]}'s children`;
+  document.getElementById('switch-academy-list').innerHTML = account.children.map((c,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('medium'); selectChild(${i})">
+      <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.level} · ${c.score}/1000</div></div>
+      <span style="color:var(--t3); font-size:16px;">›</span>
+    </div>`).join('');
+  if(isFirstSignIn) document.getElementById('signin-overlay').classList.add('hidden');
+  openSheet('sheet-child-switch');
+}
+function selectChild(i){
+  const account = window.__childSwitchAccount;
+  const child = account.children[i];
+  applyActiveChild(child, account);
+  closeSheet('sheet-child-switch');
+  const wasFirstSignIn = !!pendingAccountForChildSwitch;
+  pendingAccountForChildSwitch = null;
+  setTimeout(()=>{
+    if(wasFirstSignIn){
+      if(hasOnboarded()){ showScreen('home'); showToast(`Now viewing ${child.name.split(' ')[0]}`); }
+      else document.getElementById('onboard-overlay').classList.remove('hidden');
+    } else {
+      showToast(`Now viewing ${child.name.split(' ')[0]}`);
     }
+  }, 280);
+}
+
+function renderSigninEntry(){
+  const trustedKey = getTrustedDeviceKey();
+  const idpinForm = document.getElementById('signin-idpin-form');
+  const trustedForm = document.getElementById('signin-trusted-form');
+  if(trustedKey){
+    idpinForm.style.display = 'none';
+    trustedForm.style.display = '';
+    document.getElementById('signin-trusted-greeting').textContent = `Welcome back, ${getTrustedDeviceName().split(' ')[0]}`;
+    document.getElementById('signin-trusted-pin').value = '';
+  } else {
+    idpinForm.style.display = '';
+    trustedForm.style.display = 'none';
   }
-  // No reliable local memberId (staff/parent, or first-ever load) — fall back to sign-in.
-  document.getElementById('signin-overlay').classList.remove('hidden');
-  clearSession();
+}
+/* Resume an existing session on reload */
+(function initSessionOnLoad(){
+  if(hasSession()){
+    document.getElementById('signin-overlay').classList.add('hidden');
+    try{
+      const role = localStorage.getItem(ROLE_KEY);
+      const accountKey = localStorage.getItem(ACCOUNT_KEY);
+      const account = ACCOUNTS[accountKey];
+      if(role === 'parent' && account){
+        const activeId = getActiveChildId();
+        const child = account.children.find(c=>c.id===activeId) || account.children[0];
+        if(child) applyActiveChild(child, account);
+      }
+    }catch(e){}
+    if(hasOnboarded()){
+      document.getElementById('onboard-overlay').classList.add('hidden');
+    } else {
+      document.getElementById('onboard-overlay').classList.remove('hidden');
+    }
+  } else {
+    renderSigninEntry();
+  }
 })();
-// Persist memberId whenever we have one, so reload can resume without re-login.
-const _origRouteAfterSignIn = routeAfterSignIn;
-routeAfterSignIn = function(account){
-  if(account.memberId) { try{ localStorage.setItem('artiplay_member', account.memberId); }catch(e){} }
-  return _origRouteAfterSignIn(account);
-};
-const _origSelectChild = selectChild;
-selectChild = function(i){
-  const account = window.__childAccount;
-  try{ localStorage.setItem('artiplay_member', account.children[i].memberId); }catch(e){}
-  return _origSelectChild(i);
-};
+
+/* ===== Initial render ===== */
+renderTraining();
+refreshByteSenseSummary();
+renderByteSenseBreakdown();
+renderRewardsActions();
+renderRewardsRedeem();
+renderHomeNeeds();
+renderHomeRecent();
 </script>
 </body>
 </html>
