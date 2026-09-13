@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +97,39 @@
   .badge-red{ background:rgba(255,69,58,0.14); color:#c22a20; }
   .badge-gray{ background:rgba(0,0,0,0.06); color:var(--t2); }
 
+  /* ===== COMPONENT: QuickActions — 3 equal tappable stat cards (reusable) ===== */
+  .qa3-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:0 20px 18px; }
+  .qa3-card{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:16px 10px; background:#fff; border-radius:20px; box-shadow:0 1px 3px rgba(0,0,0,0.05); border:0; text-align:center; min-width:0; transition:transform .12s, opacity .12s; font-family:var(--font-ui); }
+  .qa3-card:active{ transform:scale(.96); opacity:.85; }
+  .qa3-icon{ width:34px; height:34px; border-radius:10px; background:rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .qa3-icon svg{ width:19px; height:19px; }
+  .qa3-lbl{ font-size:11.5px; font-weight:600; color:var(--t1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:100%; text-align:center; }
+  .qa3-val{ font-family:var(--font-ui); font-size:14.5px; font-weight:700; color:var(--t1); letter-spacing:-.005em; text-align:center; }
+  @media (max-width:370px){ .qa3-grid{ gap:7px; } .qa3-card{ padding:13px 6px; } .qa3-val{ font-size:13.5px; } }
+
+  /* ===== COMPONENT: QuickActions — Upcoming Schedule card (replaces ByteSense hero) ===== */
+  .sched-card{ margin:0 20px 20px; padding:14px 16px; background:#fff; border-radius:20px; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  .sched-card.empty{ text-align:center; padding:22px 18px; }
+  .sched-top{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .sched-title{ font-size:14.5px; font-weight:700; color:var(--t1); }
+  .sched-meta{ display:flex; align-items:center; flex-wrap:wrap; gap:6px 14px; margin-bottom:13px; }
+  .sched-meta-item{ display:flex; align-items:center; gap:5px; font-size:12px; color:var(--t2); font-weight:500; }
+  .sched-meta-item svg{ width:13px; height:13px; flex-shrink:0; color:var(--t3); }
+  .sched-actions{ display:flex; gap:8px; }
+  .sched-btn{ flex:1; padding:8px 0; border-radius:12px; border:1.5px solid rgba(0,0,0,0.08); background:rgba(0,0,0,0.02); font-size:12px; font-weight:700; color:var(--t2); text-align:center; transition:transform .12s, background .12s, color .12s, border-color .12s; }
+  .sched-btn:active{ transform:scale(.96); }
+  .sched-btn.going.active{ background:rgba(52,199,89,0.14); border-color:rgba(52,199,89,0.3); color:#1c8a3e; }
+  .sched-btn.notgoing.active{ background:rgba(255,69,58,0.12); border-color:rgba(255,69,58,0.28); color:#c22a20; }
+
+  /* ===== COMPONENT: Rewards contextual nudge (Store surfaces here, not as a permanent tab) ===== */
+  .nudge-card{ margin:0 20px 16px; padding:14px 16px; background:#fff; border-radius:18px; box-shadow:0 1px 3px rgba(0,0,0,0.05); display:flex; align-items:center; gap:12px; cursor:pointer; transition:transform .12s, opacity .12s; }
+  .nudge-card:active{ transform:scale(.98); opacity:.85; }
+  .nudge-card .icon-tile{ background:rgba(31,107,60,0.1); color:var(--pitch); }
+  .nudge-card .nudge-text{ flex:1; min-width:0; }
+  .nudge-card .nudge-title{ font-size:13.5px; font-weight:700; color:var(--t1); }
+  .nudge-card .nudge-sub{ font-size:12px; color:var(--t2); margin-top:1px; }
+  .nudge-card .nudge-arrow{ color:var(--t3); font-size:16px; flex-shrink:0; }
+
   .gold-hero{ margin:0 20px 18px; padding:22px 20px; background:rgba(255,255,255,0.78); border-radius:22px; box-shadow:0 1px 2px rgba(0,0,0,0.05); }
   .gold-hero .l{ color:var(--t2); font-size:12.5px; }
   .gold-hero .n{ font-family:var(--font-display); font-size:44px; font-weight:700; color:var(--pitch); letter-spacing:-.02em; }
@@ -122,6 +156,8 @@
   .badge-card .b-ic{ font-size:28px; }
   .badge-card .b-lbl{ font-size:11px; font-weight:700; line-height:1.25; }
 
+  .pts-plus{ color:#1c8a3e; font-weight:700; }
+  .pts-minus{ color:#c22a20; font-weight:700; }
   .redeem-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:0 20px 12px; }
   .redeem-tile{ display:flex; flex-direction:column; align-items:center; gap:8px; padding:14px 4px; background:rgba(255,255,255,0.72); border-radius:16px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
   .redeem-tile .r-ic{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.05); color:#1c1c1e; }
@@ -215,7 +251,9 @@
   @keyframes toastIn{ to{ opacity:1; transform:translateX(-50%) translateY(0); } }
 
   .profile-hero{ margin:0 20px 18px; padding:24px; background:rgba(255,255,255,0.72); border-radius:20px; text-align:center; }
-  .avatar{ width:60px; height:60px; border-radius:50%; margin:0 auto 12px; background:linear-gradient(150deg,var(--pitch),var(--pitch-deep)); }
+  .avatar{ width:60px; height:60px; border-radius:50%; margin:0 auto 12px; background:linear-gradient(150deg,var(--pitch),var(--pitch-deep)); background-size:cover; background-position:center; cursor:pointer; }
+  .avatar-edit-badge{ position:absolute; bottom:-2px; right:-2px; width:22px; height:22px; border-radius:50%; background:#1c1c1e; border:2px solid #fff; display:flex; align-items:center; justify-content:center; color:#fff; }
+  .avatar-edit-badge svg{ width:11px; height:11px; }
   .profile-badge-premium{ display:inline-flex; align-items:center; gap:4px; margin-top:6px; padding:4px 12px; border-radius:20px; background:linear-gradient(150deg,var(--gold),var(--gold-deep)); color:#3a2e08; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
   .profile-stat-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:0 20px 18px; }
   .profile-stat-tile{ padding:16px 14px; background:rgba(255,255,255,0.72); border-radius:18px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
@@ -300,6 +338,13 @@
   .role-tab{ flex:1; padding:11px 0; border-radius:14px; background:rgba(255,255,255,0.6); text-align:center; font-size:13px; font-weight:700; color:var(--t2); border:1.5px solid transparent; }
   .role-tab.active{ background:#1c1c1e; color:var(--app-bg); }
   textarea.field-textarea{ width:100%; border:0; background:rgba(0,0,0,0.04); border-radius:12px; padding:11px 12px; font-family:var(--font-ui); font-size:13.5px; color:var(--t1); outline:none; resize:none; min-height:70px; }
+
+  /* ===== COMPONENT: Coach UI ===== */
+  .coach-search{ display:flex; align-items:center; gap:8px; background:#fff; border-radius:16px; padding:11px 14px; margin:0 20px 14px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
+  .coach-search input{ flex:1; border:0; outline:none; background:transparent; font-size:14.5px; font-family:var(--font-ui); color:var(--t1); }
+  .coach-search input::placeholder{ color:var(--t3); }
+  .insight-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; display:inline-block; }
+  .navbar.hidden{ display:none; }
 </style>
 </head>
 <body>
@@ -314,27 +359,39 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg>
           <span class="th-dot" id="notif-dot"></span>
         </button>
-        <button class="th-icon-btn" aria-label="Profile" onclick="haptic('light'); openProfileSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+        <button class="th-icon-btn" aria-label="Ask Vex" onclick="haptic('medium'); openSheet('sheet-vex')"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1" fill="#1c1c1e"/><circle cx="9" cy="13" r="1" fill="#1c1c1e"/><circle cx="15" cy="13" r="1" fill="#1c1c1e"/></svg></button>
       </div>
       <div class="top-header-greet">
         <div class="th-hi" id="home-greeting-line">Good afternoon,</div>
-        <div class="th-title" id="home-player-title">Marco</div>
+        <div class="th-title" id="home-player-title">Player</div>
         <div class="th-vehicle-line">
           <span class="dot-green"></span>
-          <span class="name" id="home-academy-title">Ibex FC Academy</span>
-          <span class="status" id="home-status-txt">· Coach Rafael</span>
+          <span class="name" id="home-academy-title">Academy</span>
+          <span class="status" id="home-status-txt">· Coach</span>
         </div>
       </div>
     </div>
 
-    <div class="gold-hero" id="home-bytesense-hero" style="margin-top:16px; cursor:pointer;" onclick="haptic('light'); showScreen('bytesense')">
-      <div class="l">ByteSense</div>
-      <div class="n" id="home-hero-score">742</div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="home-hero-trend-txt">↑ +18 this month</span></div>
+    <!-- ===== COMPONENT: QuickActions (home) — ByteSense / Attendance / Badges ===== -->
+    <div class="qa3-grid" id="quickactions-home">
+      <button class="qa3-card" aria-label="ByteSense" onclick="haptic('light'); showScreen('bytesense')">
+        <div class="qa3-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="#1c1c1e"/></svg></div>
+        <div class="qa3-lbl">ByteSense</div>
+        <div class="qa3-val" id="qa-bytesense-value">0</div>
+      </button>
+      <button class="qa3-card" aria-label="Attendance" onclick="haptic('light'); showScreen('training')">
+        <div class="qa3-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div class="qa3-lbl">Attendance</div>
+        <div class="qa3-val" id="qa-attendance-value">0%</div>
+      </button>
+      <button class="qa3-card" aria-label="Badges" onclick="haptic('light'); showScreen('bytesense')">
+        <div class="qa3-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 21l5-3 5 3-1.5-8.5"/></svg></div>
+        <div class="qa3-lbl">Badges</div>
+        <div class="qa3-val" id="qa-badges-value">0</div>
+      </button>
     </div>
 
-    <div class="sec-head" style="margin-top:22px;"><h3>Next</h3></div>
-    <div class="grouped-card" id="home-next-session" style="margin-bottom:20px;"></div>
+    <div class="sched-card" id="home-next-session" style="margin-top:16px;"></div>
 
     <div class="sec-head" id="home-needs-head" style="display:none;"><h3>Needs you</h3></div>
     <div class="grouped-card" id="home-needs-list" style="margin-bottom:20px;"></div>
@@ -350,10 +407,10 @@
     <div class="sec-head"><h3>Attendance</h3></div>
     <div class="frost-card" style="display:flex; align-items:center; gap:16px;">
       <div style="flex:1;">
-        <div class="row-title" id="attendance-summary-title">18 of 21 sessions attended</div>
-        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:86%; background:var(--pitch);"></div></div>
+        <div class="row-title" id="attendance-summary-title">0 of 0 sessions attended</div>
+        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:0%; background:var(--pitch);"></div></div>
       </div>
-      <div class="num-hero" style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">86%</div>
+      <div class="num-hero" style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">0%</div>
     </div>
     <div class="sec-head"><h3>Session history</h3></div>
     <div class="grouped-card" id="training-history-list"></div>
@@ -361,31 +418,46 @@
 
   <!-- ============ BYTESENSE ============ -->
   <div class="screen hidden" id="screen-bytesense">
-    <div class="header"><div class="eyebrow">Player development</div><div class="screen-title">ByteSense score</div></div>
+    <div class="header"><div class="eyebrow">Player development</div><div class="screen-title">Progress</div></div>
     <div class="gold-hero">
       <div class="l">Overall score</div>
-      <div class="n" id="bytesense-total">742<span>/1000</span></div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt">Rising Player</span></div>
+      <div class="n" id="bytesense-total">0<span>/1000</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt">—</span></div>
     </div>
     <div class="sec-head" style="margin-top:0;"><h3>Score breakdown</h3></div>
     <div class="grouped-card" id="bytesense-breakdown" style="margin-bottom:18px;"></div>
     <div class="sec-head"><h3>Next level</h3></div>
     <div class="frost-card">
       <div class="badge"><span>Progress</span></div>
-      <div style="font-size:14px; line-height:1.5;">You need <b id="bytesense-points-to-next">58 more points</b> to reach <b id="bytesense-next-level">Academy Player</b>. Consistent training attendance is your fastest path there.</div>
+      <div style="font-size:14px; line-height:1.5;">You need <b id="bytesense-points-to-next">— more points</b> to reach <b id="bytesense-next-level">—</b>. Consistent training attendance is your fastest path there.</div>
     </div>
     <div class="sec-head"><h3>Notes from coach</h3></div>
-    <div class="grouped-card" id="bytesense-coach-notes"></div>
+    <div class="grouped-card" id="bytesense-coach-notes" style="margin-bottom:18px;"></div>
+
+    <div class="sec-head"><h3>Attendance</h3></div>
+    <div class="frost-card" style="display:flex; align-items:center; gap:16px;">
+      <div style="flex:1;">
+        <div class="row-title" id="progress-attendance-title">0 of 0 sessions attended</div>
+        <div class="pbar-track"><div class="pbar-fill" id="progress-attendance-bar" style="width:0%; background:var(--pitch);"></div></div>
+      </div>
+      <div style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="progress-attendance-pct">0%</div>
+    </div>
+
+    <div class="sec-head"><h3>Achievements</h3></div>
+    <div class="badge-scroll" id="progress-achievements-scroll" style="margin:0 0 4px;"></div>
+    <div class="grouped-card" id="progress-achievements-list" style="margin-bottom:8px;"></div>
   </div>
 
   <!-- ============ REWARDS ============ -->
   <div class="screen hidden" id="screen-rewards">
-    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Ibex Points</div></div>
+    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Points</div></div>
+
+    <div class="nudge-card" id="rewards-nudge-card" style="display:none;"></div>
 
     <div class="gold-hero">
       <div class="l">Points balance</div>
-      <div class="n">1,240<span>pts</span></div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt">≈ Jersey discount</span></div>
+      <div class="n">0<span>pts</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt"></span></div>
     </div>
 
     <div class="sec-head" style="margin-top:0;"><h3>Ways to earn</h3></div>
@@ -394,22 +466,29 @@
     <div class="sec-head"><h3>Redeem</h3></div>
     <div class="redeem-grid" id="rewards-redeem-grid"></div>
     <div class="row-sub" style="text-align:center; margin:0 20px 20px;">Points redeem for vouchers and perks, not cash — keeping the rewards program simple.</div>
+
+    <div class="sec-head"><h3>History</h3></div>
+    <div class="grouped-card" id="rewards-history-list" style="margin-bottom:20px;"></div>
   </div>
 
   <!-- ============ PROFILE ============ -->
   <div class="screen hidden" id="screen-profile">
     <div class="header"><div class="eyebrow">Profile</div><div class="screen-title">Account</div></div>
     <div class="profile-hero">
-      <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco Villanueva</div>
-      <div class="row-sub" id="profile-meta">ArtiPlay ID AP-2049 · Ibex FC Academy</div>
+      <div style="position:relative; width:60px; margin:0 auto 12px;">
+        <div class="avatar" id="profile-avatar-main" style="margin:0;" onclick="haptic('light'); triggerAvatarUpload()"></div>
+        <div class="avatar-edit-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      </div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;" id="profile-fullname">—</div>
+      <div class="row-sub" id="profile-meta">—</div>
     </div>
+    <input type="file" id="avatar-upload-input" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
     <div class="sec-head"><h3>Player profile</h3></div>
     <div class="grouped-card">
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">12</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">Coach Rafael</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">Rising Player</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">Anna V. · 09xx-xxx-2049</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">—</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">—</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">—</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">—</div></div>
     </div>
 
     <div class="sec-head"><h3>Settings</h3></div>
@@ -421,12 +500,83 @@
     </div>
   </div>
 
-  <div class="navbar">
+  <!-- ============ COACH: HOME ============ -->
+  <div class="screen hidden" id="screen-coach-home">
+    <div class="top-header">
+      <div class="top-header-icons">
+        <button class="th-icon-btn" aria-label="Settings" onclick="haptic('light'); openSettingsSheet()"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+        <button class="th-icon-btn" aria-label="Notifications" onclick="haptic('light'); openNotifications()"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M3 6.5l9 6.5 9-6.5"/></svg><span class="th-dot hidden" id="coach-notif-dot"></span></button>
+      </div>
+      <div class="top-header-greet">
+        <div class="th-hi" id="coach-home-greeting">Good afternoon,</div>
+        <div class="th-title" id="coach-home-title">Coach</div>
+        <div class="th-vehicle-line"><span class="dot-green"></span><span class="name" id="coach-home-academy">Academy</span><span class="status" id="coach-home-role">· Coach</span></div>
+      </div>
+    </div>
+
+    <div class="sched-card" id="coach-today-card" style="margin-top:16px;"></div>
+
+    <div class="sec-head" id="coach-attention-head" style="display:none;"><h3>Attention</h3></div>
+    <div class="grouped-card" id="coach-attention-list" style="margin-bottom:20px;"></div>
+
+    <div class="sec-head"><h3>Recent</h3></div>
+    <div class="grouped-card" id="coach-recent-list" style="margin-bottom:8px;"></div>
+  </div>
+
+  <!-- ============ COACH: SCHEDULE ============ -->
+  <div class="screen hidden" id="screen-coach-schedule">
+    <div class="header"><div class="eyebrow">Schedule</div><div class="screen-title">My sessions</div></div>
+    <div class="grouped-card" id="coach-sessions-list" style="margin-bottom:18px;"></div>
+    <button class="btn-secondary" style="margin:0 20px 20px; width:calc(100% - 40px);" onclick="haptic('medium'); addAdminSession()">+ Add training session</button>
+  </div>
+
+  <!-- ============ COACH: PLAYERS ============ -->
+  <div class="screen hidden" id="screen-coach-players">
+    <div class="header"><div class="eyebrow">Roster</div><div class="screen-title">My players</div></div>
+    <div class="coach-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--t3); flex-shrink:0;"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" id="coach-player-search" placeholder="Search players…" oninput="renderCoachPlayers()"></div>
+    <div class="grouped-card" id="coach-players-list" style="margin:0 20px 20px;"></div>
+  </div>
+
+  <!-- ============ COACH: DEVELOPMENT ============ -->
+  <div class="screen hidden" id="screen-coach-development">
+    <div class="header"><div class="eyebrow">Team</div><div class="screen-title">Development</div></div>
+    <div class="profile-stat-grid" id="coach-dev-grid" style="margin:0 20px 20px;"></div>
+    <div class="sec-head" style="margin-top:0;"><h3>Vex Insight</h3></div>
+    <div class="grouped-card" id="coach-insights-list" style="margin-bottom:8px;"></div>
+  </div>
+
+  <!-- ============ COACH: PROFILE ============ -->
+  <div class="screen hidden" id="screen-coach-profile">
+    <div class="header"><div class="eyebrow">Profile</div><div class="screen-title">Account</div></div>
+    <div class="profile-hero">
+      <div class="avatar" style="margin:0 auto 12px;"></div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;" id="coach-profile-name">—</div>
+      <div class="row-sub" id="coach-profile-meta">—</div>
+    </div>
+    <div class="sec-head"><h3>Settings</h3></div>
+    <div class="grouped-card">
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Notifications</div><div class="toggle on" onclick="toggleSwitch(this)"><div class="knob"></div></div></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openMessages()"><div style="flex:1;"><div class="row-title">Messages</div><div class="row-sub">Players &amp; parents</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openCoachPanel()"><div style="flex:1;"><div class="row-title">Sessions &amp; Announcements</div><div class="row-sub">Add sessions, post academy news</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openSheet('sheet-help')"><div style="flex:1;" class="row-title">Help &amp; Support</div><span style="color:var(--t3); font-size:16px;">›</span></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="logoutUser()"><div style="flex:1;" class="row-title">Log Out</div><span style="color:var(--t3); font-size:16px;">›</span></div>
+    </div>
+  </div>
+
+  <div class="navbar" id="navbar-player">
     <button class="nav-btn active" data-s="home" onclick="haptic('light'); showScreen('home')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Home</button>
-    <button class="nav-btn" data-s="training" onclick="haptic('light'); showScreen('training')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Training</button>
-    <button class="nav-btn" data-s="vex" onclick="haptic('medium'); openSheet('sheet-vex')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1" fill="currentColor"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/></svg></span>Vex</button>
-    <button class="nav-btn" data-s="bytesense" onclick="haptic('light'); showScreen('bytesense')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Score</button>
+    <button class="nav-btn" data-s="training" onclick="haptic('light'); showScreen('training')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Schedule</button>
+    <button class="nav-btn" data-s="bytesense" onclick="haptic('light'); showScreen('bytesense')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Progress</button>
     <button class="nav-btn" data-s="rewards" onclick="haptic('light'); showScreen('rewards')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.8 3.2 1.1-6.6-4.8-4.7 6.6-.9z"/></svg></span>Rewards</button>
+    <button class="nav-btn" data-s="profile" onclick="haptic('light'); showScreen('profile')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>Profile</button>
+  </div>
+
+  <div class="navbar hidden" id="navbar-coach">
+    <button class="nav-btn active" data-s="coach-home" onclick="haptic('light'); showScreen('coach-home')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>Home</button>
+    <button class="nav-btn" data-s="coach-schedule" onclick="haptic('light'); showScreen('coach-schedule')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Schedule</button>
+    <button class="nav-btn" data-s="coach-players" onclick="haptic('light'); showScreen('coach-players')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/><circle cx="17" cy="8" r="2.7"/><path d="M15.5 14.8c2.7.4 4.5 2.2 4.5 5.2"/></svg></span>Players</button>
+    <button class="nav-btn" data-s="coach-development" onclick="haptic('light'); showScreen('coach-development')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Develop</button>
+    <button class="nav-btn" data-s="coach-profile" onclick="haptic('light'); showScreen('coach-profile')"><span class="ic"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></span>Profile</button>
   </div>
 
   <!-- ============ SHEETS ============ -->
@@ -442,16 +592,16 @@
     <div class="sheet-handle"></div>
     <div class="sheet-title">Vex Insight</div>
     <div class="sheet-body">
-      <div class="check-row"><span class="c">✓</span> On a 4-session attendance streak</div>
+      <div class="check-row"><span class="c">✓</span> On a training attendance streak</div>
       <div style="height:1px; background:rgba(0,0,0,0.06); margin:10px 0;"></div>
       <div style="display:flex; flex-direction:column; gap:9px;">
         <div style="display:flex; align-items:flex-start; gap:10px;">
           <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--t2); font-weight:600;">Next up ·</span> Tue Skills Session, 5:30 PM — RSVP before Monday</div>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--t2); font-weight:600;">Next up ·</span> Check your Training tab for the next session</div>
         </div>
         <div style="display:flex; align-items:flex-start; gap:10px;">
           <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
-          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--orange); font-weight:600;">Watch ·</span> Growth score is your lowest category — ask Coach Rafael for a development note</div>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--orange); font-weight:600;">Watch ·</span> Check your lowest ByteSense category and ask your coach for a development note</div>
         </div>
       </div>
     </div>
@@ -474,7 +624,9 @@
     <div class="sheet-title">Academy Store</div>
     <div class="sheet-body">
       <div class="row-sub" style="text-align:center; margin-bottom:14px;">Requests go to your parent for approval — no direct purchase.</div>
-      <div class="grouped-card" id="store-list"></div>
+      <div class="grouped-card" id="store-list" style="margin-bottom:8px;"></div>
+      <div class="sec-head" style="margin:20px 0 10px;"><h3>My requests</h3></div>
+      <div class="grouped-card" id="store-requests-list"></div>
     </div>
   </div>
 
@@ -495,7 +647,7 @@
   <div class="sheet-overlay" id="overlay-thread" onclick="closeSheet('sheet-thread')"></div>
   <div class="share-sheet" id="sheet-thread" style="height:78vh; max-height:78vh; display:flex; flex-direction:column;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title" id="thread-title">Coach Rafael</div>
+    <div class="sheet-title" id="thread-title">Coach</div>
     <div class="sheet-body" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
       <div class="chat-log" id="thread-log" style="flex:1; overflow-y:auto;"></div>
       <div class="au-search-dock">
@@ -612,6 +764,21 @@
     <div class="sheet-body" id="settings-menu-body"></div>
   </div>
 
+  <div class="sheet-overlay" id="overlay-help" onclick="closeSheet('sheet-help')"></div>
+  <div class="share-sheet" id="sheet-help">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Help &amp; Support</div>
+    <div class="sheet-body">
+      <div class="grouped-card" style="margin:0 0 16px;">
+        <div class="grouped-row"><div style="flex:1;"><div class="row-title" style="font-size:14px;">How do I RSVP to training?</div><div class="row-sub">Go to Training, tap Yes or No on the next session card.</div></div></div>
+        <div class="grouped-row"><div style="flex:1;"><div class="row-title" style="font-size:14px;">How is ByteSense calculated?</div><div class="row-sub">Your coach scores Training, Performance, Behavior, and Growth — weighted into your total.</div></div></div>
+        <div class="grouped-row"><div style="flex:1;"><div class="row-title" style="font-size:14px;">How do I redeem points?</div><div class="row-sub">Open Rewards, tap a reward, then Redeem if you have enough points.</div></div></div>
+        <div class="grouped-row"><div style="flex:1;"><div class="row-title" style="font-size:14px;">I forgot my Account ID</div><div class="row-sub">Ask your coach or academy admin — they can look it up for you.</div></div></div>
+      </div>
+      <div class="row-sub" style="text-align:center;">Still need help? Message your coach from the Messages tab.</div>
+    </div>
+  </div>
+
   <div class="sheet-overlay" id="overlay-child-switch" onclick="closeSheet('sheet-child-switch')"></div>
   <div class="share-sheet" id="sheet-child-switch">
     <div class="sheet-handle"></div>
@@ -633,7 +800,7 @@
   <div class="sheet-overlay" id="overlay-coach-panel" onclick="closeSheet('sheet-coach-panel')"></div>
   <div class="share-sheet" id="sheet-coach-panel" style="height:85vh; max-height:85vh;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title">Coach panel · Coach Rafael</div>
+    <div class="sheet-title" id="coach-panel-title">Coach panel</div>
     <div class="sheet-body">
       <div class="role-tab-row" id="coach-tabs">
         <div class="role-tab active" data-tab="roster" onclick="selectCoachTab('roster')">Roster</div>
@@ -670,9 +837,14 @@
   <div class="onboard-overlay" id="signin-overlay" style="z-index:950;">
     <div class="onboard-step" style="cursor:default;">
       <div class="onboard-center">
-        <div class="onboard-mark"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="32" cy="32" r="22" stroke="#1F6B3C" stroke-width="3.5"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10M17 17l7 7M40 40l7 7M47 17l-7 7M24 40l-7 7" stroke="#1F6B3C" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="32" r="6" fill="#E8CC7A"/></svg></div>
+            <div class="onboard-mark" style="width:78px; height:78px; cursor:pointer;" onclick="handleLogoTap()">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <polygon points="32,8 51,19.5 51,42.5 32,54 13,42.5 13,19.5" stroke="#1c1c1e" stroke-width="2.2"/>
+            <path d="M32 8v46M13 19.5l38 23M51 19.5l-38 23" stroke="#1c1c1e" stroke-width="1"/>
+          </svg>
+        </div>
         <div class="onboard-title">ArtiPlay</div>
-        <div class="onboard-sub" id="signin-tagline">Your football academy, in your pocket.</div>
+        <div class="onboard-sub" id="signin-tagline">The future of sports.</div>
       </div>
       <div class="onboard-footer">
         <div id="signin-idpin-form">
@@ -687,7 +859,9 @@
             <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
           </button>
           <button class="btn-ghost" onclick="haptic('light'); showToast('Ask your coach or academy admin for your Account ID')">Forgot your Account ID?</button>
-          <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">New player? Join with an invite code</button>
+          <!-- === START: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
+          <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">Sign up instead</button>
+          <!-- === END: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
         </div>
         <div id="signin-trusted-form" style="display:none;">
           <div class="onboard-sub" id="signin-trusted-greeting" style="text-align:center; margin-bottom:16px;">Welcome back</div>
@@ -707,7 +881,7 @@
     </div>
   </div>
 
-  <!-- ============ ONBOARDING / SIGNUP — 3 steps, ~60–90s ============ -->
+  <!-- ============ ONBOARDING / SIGNUP — invite PIN → profile → set PIN → (coach pick) → notifications ============ -->
   <div class="onboard-overlay hidden" id="onboard-overlay">
     <div class="onboard-topbar">
       <button class="onboard-back" id="ob-back-btn" style="visibility:hidden;" onclick="obBack()">‹</button>
@@ -715,13 +889,12 @@
       <span style="width:26px;"></span>
     </div>
 
+    <!-- === START: OB-VERIFY REPLACEMENT (Academy Invite PIN, not Coach ID) === -->
     <div class="onboard-step" id="ob-verify">
       <div class="onboard-center">
-        <div class="onboard-mark"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="32" cy="32" r="22" stroke="#1F6B3C" stroke-width="3.5"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10M17 17l7 7M40 40l7 7M47 17l-7 7M24 40l-7 7" stroke="#1F6B3C" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="32" r="6" fill="#E8CC7A"/></svg></div>
-        <div class="onboard-title">Welcome to<br>ArtiPlay</div>
-        <div class="onboard-tag" style="margin-bottom:22px;">Enter the invite code your coach sent you — it links you to the right academy automatically.</div>
+        <div class="onboard-tag" style="margin-bottom:22px;">Enter the Academy Invite PIN your Academy gave you.</div>
         <div class="grouped-card" style="margin:0; width:100%;">
-          <div class="field-row"><div class="row-title" style="font-size:14px;">Invite code</div><input type="text" id="ob-invite-input" placeholder="e.g. CH-1042"></div>
+          <div class="field-row"><div class="row-title" style="font-size:14px;">Academy Invite PIN</div><input type="text" id="ob-invite-input" inputmode="numeric" maxlength="6" placeholder="e.g. 739201"></div>
         </div>
         <div class="row-sub" id="ob-verify-status" style="min-height:16px; margin-top:10px;"></div>
       </div>
@@ -730,20 +903,49 @@
       </div>
     </div>
 
-    <div class="onboard-step hidden" id="ob-confirm">
-      <div class="onboard-center">
-        <div class="onboard-mark"><svg viewBox="0 0 64 64" width="34" height="34" fill="none"><circle cx="32" cy="32" r="18" stroke="var(--pitch)" stroke-width="4"/><path d="M22 33l7 7 13-15" stroke="var(--pitch)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="onboard-title" id="ob-confirm-title">You're joining Ibex FC</div>
-        <div class="onboard-tag" id="ob-confirm-sub">as Marco's parent.</div>
+    <div class="onboard-step hidden" id="ob-profile-form">
+      <div class="onboard-headblock">
+        <div class="eyebrow" id="ob-role-eyebrow">Joining as Student</div>
+        <div class="onboard-title" id="ob-profile-title">Tell us about you</div>
       </div>
+      <div class="grouped-card" style="margin:0 0 12px;" id="ob-profile-fields"></div>
       <div class="onboard-footer">
-        <button class="btn-primary oauth-btn" id="ob-confirm-btn" onclick="obConfirmJoin(this)">
-          <span class="btn-content">Confirm &amp; continue</span>
-          <span class="btn-status status-loading"><span class="oauth-spinner"></span>Setting things up…</span>
+        <button class="btn-primary oauth-btn" id="ob-profile-btn" onclick="obSubmitProfile(this)">
+          <span class="btn-content">Continue</span>
+          <span class="btn-status status-loading"><span class="oauth-spinner"></span>Creating account…</span>
         </button>
-        <button class="btn-ghost" onclick="haptic('light'); obBack()">Wrong code? Go back</button>
       </div>
     </div>
+
+    <div class="onboard-step hidden" id="ob-set-pin">
+      <div class="onboard-center">
+        <div class="onboard-mark" style="width:60px; height:60px;"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--pitch)" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="onboard-title">Set your PIN</div>
+        <div class="onboard-tag" style="margin-bottom:18px;">This is what you'll use to sign in from now on.</div>
+        <div class="grouped-card" style="margin:0; width:100%;">
+          <div class="field-row"><div class="row-title" style="font-size:14px;">New PIN</div><input type="password" id="ob-newpin-input" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px;"></div>
+        </div>
+      </div>
+      <div class="onboard-footer">
+        <button class="btn-primary oauth-btn" id="ob-pin-btn" onclick="obConfirmJoin(this)">
+          <span class="btn-content">Continue &amp; create account</span>
+          <span class="btn-status status-loading"><span class="oauth-spinner"></span>Setting things up…</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="onboard-step hidden" id="ob-coach-pick">
+      <div class="onboard-headblock">
+        <div class="eyebrow">Optional</div>
+        <div class="onboard-title">Choose your Coach</div>
+        <div class="row-sub">You can skip this — a coach or admin can assign you later.</div>
+      </div>
+      <div class="grouped-card" id="ob-coach-list" style="margin:0 0 14px;"></div>
+      <div class="onboard-footer">
+        <button class="btn-secondary" onclick="haptic('light'); obGoTo('ob-notification-setup', true)">Skip for now</button>
+      </div>
+    </div>
+    <!-- === END: OB-VERIFY REPLACEMENT === -->
 
     <div class="onboard-step hidden" id="ob-notification-setup">
       <div class="onboard-headblock">
@@ -766,43 +968,58 @@
     </div>
   </div>
 
+  <div class="sheet-overlay" id="overlay-super-admin-unlock" onclick="closeSheet('sheet-super-admin-unlock')"></div>
+  <div class="share-sheet" id="sheet-super-admin-unlock">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Admin unlock</div>
+    <div class="sheet-body">
+      <div class="grouped-card" style="margin:0 0 12px;">
+        <div class="field-row"><div class="row-title" style="font-size:14px;">Super Admin PIN</div><input type="password" id="super-admin-pin-input" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px; font-size:17px;" onkeydown="if(event.key==='Enter'){ submitSuperAdminPin(); }"></div>
+      </div>
+      <div class="row-sub" id="super-admin-pin-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
+      <button class="btn-primary" id="super-admin-pin-btn" onclick="submitSuperAdminPin()">Unlock</button>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 </div>
 
 <script>
 /* ============================================================
    ARTIPLAY — MODULE MAP
-   Single-file monolith by design (no build step), adapted from
-   the ArtiDrive shell. Boundaries below are logical, not physical.
+   Single-file monolith by design (no build step).
+   Every screen/sheet reads only from CURRENT_STATE (player) or
+   CURRENT_COACH_STATE (staff) — both come from the backend via
+   callApi(). There is no local/static seed data left in this file;
+   all display values are server-driven.
    ------------------------------------------------------------
    MODULE: Utils          → haptic(), fmtPeso()
    MODULE: Session/Auth   → hasSession(), hasOnboarded(), saveSession(),
                              markOnboarded(), clearSession()
-   MODULE: Icons/Data     → ICONS, byteSenseData, trainingSessions,
-                             achievementsData, rewardsActions,
-                             rewardsRedeemables, storeData, messagesData,
-                             announcementsData, notifications, rosterData
+   MODULE: Icons          → ICONS
    MODULE: Screens        → showScreen()
    MODULE: Sheets         → openSheet(), closeSheet()
-   MODULE: ByteSense      → renderByteSenseBreakdown(), updateByteSenseRing(),
-                             openByteSenseDetail(), computeByteSenseScore()
-   MODULE: Training       → renderTraining(), setRsvp(), renderAttendance()
-   MODULE: Achievements   → renderAchievements(), openAchievements()
-   MODULE: Rewards        → renderRewardsActions(), renderRewardsRedeem(),
-                             openRedeemDetail(), confirmRedeem()
-   MODULE: Store          → renderStore(), openStoreDetail(), requestFromParent()
-   MODULE: Messages       → renderMessages(), openThread(), sendThreadMessage()
-   MODULE: Announcements  → renderAnnouncements(), openAnnouncements()
+   MODULE: Live State     → loadPlayerState(), loadCoachState(), applyStateToUI()
+   MODULE: ByteSense      → openByteSenseDetail()
+   MODULE: Training       → setRsvp()
+   MODULE: Achievements   → openAchievements()
+   MODULE: Rewards        → openRedeemDetail(), confirmRedeem()
+   MODULE: Store          → openStoreDetail(), requestFromParent()
+   MODULE: Messages       → openMessages(), openThread(), sendThreadMessage()
+   MODULE: Announcements  → openAnnouncements()
    MODULE: Vex (AI)       → askVex(), toggleAuPlusMenu(), selectAuPlusAction(),
                              goldMenuAction(), chat rendering, mic/input handling
-   MODULE: Notifications  → renderNotifications(), openNotifications()
+                             (local canned-reply assistant, not backend-driven)
+   MODULE: Notifications  → openNotifications()
+   MODULE: Profile Photo  → triggerAvatarUpload(), handleAvatarUpload(), applyAvatarToDom()
+                             (client-side only, stored per-device as base64)
    MODULE: Profile        → renderProfileSheet(), openProfileSheet()
    MODULE: Settings       → openSettingsSheet(), renderSettingsSheet(), logoutUser()
    MODULE: Coach Panel    → openCoachPanel(), selectCoachTab(), renderAdminRoster(),
                              openScoreEdit(), saveScoreEdit(), renderAdminSessions(),
                              addAdminSession(), postAdminAnnouncement()
-   MODULE: Onboarding     → obGoTo(), obBack(), obVerifyInvite(),
-                             obConfirmJoin(), applyPlayerDataToApp(),
+   MODULE: Onboarding     → obGoTo(), obBack(), obVerifyInvite(), obSubmitProfile(),
+                             obConfirmJoin(), obPickCoach(), applyPlayerDataToApp(),
                              obCompleteOnboarding()
    MODULE: Toast          → showToast()
    ------------------------------------------------------------
@@ -834,9 +1051,19 @@ const ACCOUNT_KEY = 'artiplay_account';
 const ACTIVE_CHILD_KEY = 'artiplay_active_child';
 function hasSession(){ try{ return localStorage.getItem(SESSION_KEY) === '1'; }catch(e){ return false; } }
 function hasOnboarded(){ try{ return localStorage.getItem(ONBOARDED_KEY) === '1'; }catch(e){ return false; } }
-function saveSession(role, accountKey){ try{ localStorage.setItem(SESSION_KEY, '1'); localStorage.setItem(ROLE_KEY, role || 'player'); if(accountKey) localStorage.setItem(ACCOUNT_KEY, accountKey); }catch(e){} }
+const MEMBER_ID_KEY = 'artiplay_memberid';
+const TENANT_ID_KEY = 'artiplay_tenantid';
+function saveSession(role, accountKey, memberId, tenantId){
+  try{
+    localStorage.setItem(SESSION_KEY, '1');
+    localStorage.setItem(ROLE_KEY, role || 'player');
+    if(accountKey) localStorage.setItem(ACCOUNT_KEY, accountKey);
+    if(memberId) localStorage.setItem(MEMBER_ID_KEY, memberId);
+    if(tenantId) localStorage.setItem(TENANT_ID_KEY, tenantId);
+  }catch(e){}
+}
 function markOnboarded(){ try{ localStorage.setItem(ONBOARDED_KEY, '1'); }catch(e){} }
-function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ACCOUNT_KEY); localStorage.removeItem(ACTIVE_CHILD_KEY); }catch(e){} }
+function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ACCOUNT_KEY); localStorage.removeItem(ACTIVE_CHILD_KEY); localStorage.removeItem(MEMBER_ID_KEY); localStorage.removeItem(TENANT_ID_KEY); }catch(e){} }
 function saveActiveChild(childId){ try{ localStorage.setItem(ACTIVE_CHILD_KEY, childId); }catch(e){} }
 function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY); }catch(e){ return null; } }
 /* Trusted device (spec §9) — a returning device skips re-entering the
@@ -845,6 +1072,12 @@ function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY);
    and validate the session/device behind it (§11, §22). */
 const TRUSTED_DEVICE_KEY = 'artiplay_trusted_device';
 const TRUSTED_DEVICE_NAME_KEY = 'artiplay_trusted_device_name';
+function clearDeviceTrust(){
+  try{
+    localStorage.removeItem(TRUSTED_DEVICE_KEY);
+    localStorage.removeItem(TRUSTED_DEVICE_NAME_KEY);
+  }catch(e){}
+}
 function markDeviceTrusted(accountKey, name){
   try{
     localStorage.setItem(TRUSTED_DEVICE_KEY, accountKey);
@@ -856,13 +1089,13 @@ function getTrustedDeviceName(){ try{ return localStorage.getItem(TRUSTED_DEVICE
 function applyActiveChild(child, account){
   saveActiveChild(child.id);
   document.getElementById('home-player-title').textContent = child.name.split(' ')[0];
-  document.getElementById('home-academy-title').textContent = (account && account.academy) || 'Ibex FC Academy';
+  document.getElementById('home-academy-title').textContent = (account && account.academy) || '—';
   document.getElementById('home-status-txt').textContent = `· ${child.coach || 'Coach'}`;
   const heroScore = document.getElementById('home-hero-score');
   if(heroScore) heroScore.textContent = child.score;
   document.getElementById('profile-age').textContent = child.age || '—';
   document.getElementById('profile-coach').textContent = child.coach || '—';
-  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${child.id} · ${(account && account.academy) || 'Ibex FC Academy'}`;
+  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${child.id} · ${(account && account.academy) || '—'}`;
   if(account){
     document.getElementById('profile-parent').textContent = `${account.name} · ${account.contact || 'On file'}`;
     const greetEl = document.getElementById('home-greeting-line');
@@ -870,7 +1103,7 @@ function applyActiveChild(child, account){
   }
 }
 
-/* ===== MODULE: Icons/Data ===== */
+/* ===== MODULE: Icons ===== */
 const ICONS = {
   training: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
   bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
@@ -881,118 +1114,16 @@ const ICONS = {
   clock: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 
-const byteSenseData = [
-  {key:'training', name:'Training', weight:55, score:82, note:'Consistent effort in every drill this month.'},
-  {key:'performance', name:'Performance', weight:20, score:74, note:'Strong on the ball, work on off-ball movement.'},
-  {key:'behavior', name:'Behavior', weight:15, score:88, note:'Great teammate — coachable and disciplined.'},
-  {key:'growth', name:'Growth', weight:10, score:61, note:'Improvement has slowed the last few weeks.'},
-];
-const LEVELS = [
-  {name:'Rookie', min:0}, {name:'Rising Player', min:600}, {name:'Academy Player', min:800},
-  {name:'Elite', min:900}, {name:'Pro Prospect', min:960},
-];
-
-function computeByteSenseScore(){
-  const pct = byteSenseData.reduce((sum,c)=> sum + (c.score * c.weight/100), 0);
-  return Math.round(pct * 10); // scale 0-100 -> 0-1000
-}
-function currentLevel(score){
-  let lvl = LEVELS[0];
-  for(const l of LEVELS){ if(score >= l.min) lvl = l; }
-  return lvl;
-}
-function nextLevel(score){
-  for(const l of LEVELS){ if(l.min > score) return l; }
-  return null;
-}
-
-const trainingSessions = [
-  {id:'s1', day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:'yes'},
-  {id:'s2', day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:''},
-  {id:'s3', day:'Sat', date:'Sep 19', time:'8:00 AM', venue:'Ibex Pitch B', rsvp:''},
-];
-const trainingHistory = [
-  {title:'Skills session', date:'Sep 8', status:'Present'},
-  {title:'Match simulation', date:'Sep 5', status:'Present'},
-  {title:'Fitness &amp; conditioning', date:'Sep 1', status:'Late'},
-  {title:'Skills session', date:'Aug 29', status:'Absent'},
-];
-
-const achievementsData = [
-  {ic:'🔥', name:'4-Session Streak', unlocked:true, desc:'Attended 4 training sessions in a row.'},
-  {ic:'⭐', name:'Level Up', unlocked:true, desc:'Reached Rising Player level.'},
-  {ic:'🎯', name:'Perfect Month', unlocked:false, desc:'Attend every session in a calendar month.'},
-  {ic:'🤝', name:'Team Player', unlocked:true, desc:'Behavior score of 85+ for two straight weeks.'},
-  {ic:'📈', name:'Growth Spurt', unlocked:false, desc:'Improve your Growth score by 15+ points.'},
-  {ic:'🏆', name:'MVP Session', unlocked:false, desc:'Coach-awarded recognition for a standout session.'},
-];
-
-const rewardsActions = [
-  {label:'Attend a training session', done:true},
-  {label:'Perfect week attendance', done:true},
-  {label:'Coach recognition', done:false},
-  {label:'Invite a teammate', done:false},
-  {label:'Complete player profile', done:true},
-  {label:'Weekly ByteSense check-in', done:true},
-];
+/* Icons kept for rewards "ways to earn" rows — rendered by applyStateToUI() from live data */
 const REWARDS_CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
 const REWARDS_CIRCLE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
-const rewardsRedeemables = [
-  {icon:ICONS.store, label:'Jersey discount', cost:2000, desc:'₱300 off your next official Ibex FC jersey.'},
-  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>', label:'Boots voucher', cost:3500, desc:'₱500 credit toward football boots at partner shops.'},
-  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', label:'Extra training slot', cost:1200, desc:'One free 1-on-1 skills session with a coach.'},
-  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>', label:'Custom badge frame', cost:800, desc:'Unlock a gold badge frame on your profile.'},
-  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v15"/><path d="M4 12h8"/></svg>', label:'Gear bundle', cost:2600, desc:'Shin guards + socks bundle from the academy store.'},
-  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.8 3.2 1.1-6.6-4.8-4.7 6.6-.9z"/></svg>', label:'ArtiPlay Premium', cost:4500, desc:'1 month of deeper ByteSense insights and priority Vex support.'},
-];
 
-const storeData = [
-  {icon:ICONS.store, name:'Ibex FC Home Jersey', price:1450, forLevel:'All levels'},
-  {icon:ICONS.store, name:'Training Boots — Size 5', price:2600, forLevel:'All levels'},
-  {icon:ICONS.store, name:'Shin Guards', price:450, forLevel:'All levels'},
-  {icon:ICONS.store, name:'Academy Backpack', price:990, forLevel:'Rising Player+'},
-];
-
-const messagesData = [
-  {id:'m1', name:'Coach Rafael', last:'Great session today, keep it up!', time:'2h ago', unread:true},
-  {id:'m2', name:'Ibex FC Front Office', last:'Your boots request was approved.', time:'Yesterday', unread:false},
-];
-const threadSeed = {
-  m1: [ {who:'them', text:'Great session today, keep it up!'}, {who:'me', text:'Thanks Coach! See you Thursday.'} ],
-  m2: [ {who:'them', text:'Your boots request was approved.'}, {who:'me', text:'Thank you po!'} ],
-};
-
-const announcementsData = [
-  {title:'PMS this weekend', body:'Player Movement Session on Saturday, 8AM at Pitch B. Bring both jerseys.', time:'Today'},
-  {title:'Registration renewal', body:'Academy registration for next quarter opens Monday.', time:'2 days ago'},
-];
-
-const notifications = [
-  {ico:ICONS.training, title:'Training tomorrow — Tue Skills Session', time:'Today · Ibex FC Academy'},
-  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', time:'Today · Ibex FC Academy'},
-  {ico:ICONS.badge, title:'New badge unlocked: 4-Session Streak', time:'Yesterday · Ibex FC Academy'},
-];
-
-const rosterData = [
-  {id:'p1', name:'Marco Villanueva', score:742, level:'Rising Player'},
-  {id:'p2', name:'Diego Santos', score:610, level:'Rising Player'},
-  {id:'p3', name:'Liam Cruz', score:895, level:'Academy Player'},
-  {id:'p4', name:'Ken Reyes', score:530, level:'Rookie'},
-];
-const adminSessions = [
-  {day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A'},
-  {day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A'},
-];
-
-/* ===== MODULE: Identity registry =====
-   One login → one record → role + tenant(s) resolved automatically.
-   Keys are lowercased login handles (ID or email). */
 /* ===== MODULE: Backend API (Apps Script Web App) =====
-   Replace API_BASE_URL with your deployment's /exec URL after:
+   API_BASE_URL points at your deployment's /exec URL:
    Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
    text/plain keeps every request a CORS "simple request" (no preflight) — see
    the doPost() comment in the backend for why that matters. */
-const API_BASE_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw6QYlaYPDE-PSVZ4I8b1dt9DJgwAWBAtlMBtPchO-6gsGwcEVQmPG9c76JwlOTEpv1Yw/exec';
 async function callApi(action, payload){
   const res = await fetch(API_BASE_URL, {
     method: 'POST',
@@ -1013,33 +1144,315 @@ function lookupAccount(raw){
   return ACCOUNTS[key] || null;
 }
 
-/* ===== MODULE: Home =====
-   Answers 3 things: what's my score, what's next, what needs me. */
-const BYTESENSE_MONTH_DELTA = 18;
+/* ===== MODULE: Live State — ONE identity, ONE set of data, always from server ===== */
+let CURRENT_STATE = null;       // clientGetFullState() payload for whoever is logged in as player
+let CURRENT_COACH_STATE = null; // clientGetCoachState() payload for whoever is logged in as staff
+
+async function loadPlayerState(memberId){
+  if(!memberId) return false;
+  let res;
+  try{ res = await callApi('getFullState', { memberId }); }
+  catch(e){ console.error('getFullState network error:', e); showToast('Could not load your data — check your connection'); return false; }
+  if(!res.success){ console.error('getFullState failed:', res.error); showToast(res.error || 'Could not load your data'); return false; }
+  console.log('getFullState payload:', res.data); // TEMP DEBUG — check DevTools console
+  CURRENT_STATE = res.data;
+  try{ applyStateToUI(); }
+  catch(e){ console.error('applyStateToUI crashed:', e); showToast('Loaded data, but UI failed to render — check console'); return false; }
+  return true;
+}
+
+async function loadCoachState(coachId, tenantId){
+  if(!coachId) return false;
+  let res;
+  try{ res = await callApi('getCoachState', { coachId, tenantId }); }
+  catch(e){ showToast('Could not load staff data'); return false; }
+  if(!res.success){ showToast(res.error || 'Could not load staff data'); return false; }
+  CURRENT_COACH_STATE = res.data;
+  setRoleUI('staff');
+  renderCoachHome();
+  renderCoachSchedule();
+  renderCoachPlayers();
+  renderCoachDevelopment();
+  renderCoachProfile();
+  const titleEl = document.getElementById('coach-panel-title');
+  if(titleEl) titleEl.textContent = 'Coach panel · ' + CURRENT_COACH_STATE.staffName;
+  if(document.getElementById('coach-tab-roster').style.display !== 'none') renderAdminRoster();
+  if(document.getElementById('coach-tab-sessions').style.display !== 'none') renderAdminSessions();
+  return true;
+}
+
+function applyStateToUI(){
+  if(!CURRENT_STATE) return;
+  const s = CURRENT_STATE;
+  if(!s.member){ console.error('applyStateToUI: s.member is missing from payload', s); return; }
+
+  document.getElementById('home-player-title').textContent = (s.member.name || 'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = s.member.academy || 'Academy';
+  applyAvatarToDom();
+  document.getElementById('home-status-txt').textContent = `· ${s.member.coach || 'No coach assigned'}`;
+  const greetEl = document.getElementById('home-greeting-line');
+  if(greetEl) greetEl.textContent = `${timeGreeting()},`;
+
+  const qaBS = document.getElementById('qa-bytesense-value'); if(qaBS) qaBS.textContent = s.score.total;
+  const qaAT = document.getElementById('qa-attendance-value'); if(qaAT) qaAT.textContent = s.attendance.pct + '%';
+  const qaBD = document.getElementById('qa-badges-value'); if(qaBD) qaBD.textContent = s.achievements.filter(a=>a.unlocked).length;
+  document.getElementById('bytesense-total').innerHTML = `${s.score.total}<span>/1000</span>`;
+  document.getElementById('bytesense-level-txt').textContent = s.score.level;
+  document.getElementById('bytesense-points-to-next').textContent = s.score.nextLevel ? `${s.score.pointsToNext} more points` : "You're at the top level";
+  document.getElementById('bytesense-next-level').textContent = s.score.nextLevel || s.score.level;
+  document.getElementById('bytesense-breakdown').innerHTML = s.score.breakdown.map((c,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openByteSenseDetail(${i})">
+      <div class="icon-tile">${ICONS.bolt}</div>
+      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.weight}% of total</div></div>
+      <div class="fact-v">${c.score}/100</div>
+    </div>`).join('');
+  document.getElementById('bytesense-coach-notes').innerHTML = s.score.breakdown.map(c=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note || 'No notes yet.'}</div></div></div>`).join('');
+
+  document.getElementById('training-list').innerHTML = s.sessions.map(sess=>`
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS.training}</div>
+      <div style="flex:1;"><div class="row-title">${sess.day} ${sess.date} · ${sess.time}</div><div class="row-sub">${sess.venue}</div></div>
+      <div style="display:flex; gap:5px;">
+        <button class="hist-chip${sess.rsvp==='yes'?' active':''}" onclick="setRsvp('${sess.id}','yes')">Yes</button>
+        <button class="hist-chip${sess.rsvp==='no'?' active':''}" onclick="setRsvp('${sess.id}','no')">No</button>
+      </div>
+    </div>`).join('') || '<div class="grouped-row"><div class="row-sub">No sessions scheduled yet.</div></div>';
+  const next = s.sessions[0];
+  const schedEl = document.getElementById('home-next-session');
+  if(schedEl){
+    if(next){
+      schedEl.className = 'sched-card';
+      schedEl.innerHTML = `
+        <div class="sched-top">
+          <div class="icon-tile">${ICONS.training}</div>
+          <div class="sched-title">${next.day} · ${next.date}</div>
+        </div>
+        <div class="sched-meta">
+          <div class="sched-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${next.time}</div>
+          <div class="sched-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>${next.venue}</div>
+        </div>
+        <div class="sched-actions">
+          <button class="sched-btn going${next.rsvp==='yes'?' active':''}" onclick="setRsvp('${next.id}','yes')">Going</button>
+          <button class="sched-btn notgoing${next.rsvp==='no'?' active':''}" onclick="setRsvp('${next.id}','no')">Not going</button>
+        </div>`;
+    } else {
+      schedEl.className = 'sched-card empty';
+      schedEl.innerHTML = '<div class="row-sub">No upcoming sessions.</div>';
+    }
+  }
+  document.getElementById('training-history-list').innerHTML = s.history.map(h=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${h.date}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('');
+  document.getElementById('attendance-summary-title').textContent = `${s.attendance.attended} of ${s.attendance.total} sessions attended`;
+  document.getElementById('attendance-bar').style.width = s.attendance.pct + '%';
+  document.getElementById('attendance-pct').textContent = s.attendance.pct + '%';
+  const progAttTitle = document.getElementById('progress-attendance-title'); if(progAttTitle) progAttTitle.textContent = `${s.attendance.attended} of ${s.attendance.total} sessions attended`;
+  const progAttBar = document.getElementById('progress-attendance-bar'); if(progAttBar) progAttBar.style.width = s.attendance.pct + '%';
+  const progAttPct = document.getElementById('progress-attendance-pct'); if(progAttPct) progAttPct.textContent = s.attendance.pct + '%';
+
+  const achievementsScrollHtml = s.achievements.filter(a=>a.unlocked).map(a=>`
+    <div class="badge-card"><span class="b-ic">${a.icon}</span><span class="b-lbl">${a.name}</span></div>`).join('');
+  const achievementsListHtml = s.achievements.map(a=>`
+    <div class="grouped-row">
+      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.icon}</div>
+      <div style="flex:1; ${a.unlocked?'':'opacity:.5;'}"><div class="row-title" style="font-size:14px;">${a.name}</div><div class="row-sub">${a.desc}</div></div>
+      <span class="badge-status ${a.unlocked?'badge-green':'badge-gray'}">${a.unlocked?'Earned':'Locked'}</span>
+    </div>`).join('');
+  document.getElementById('achievements-scroll').innerHTML = achievementsScrollHtml;
+  document.getElementById('achievements-list').innerHTML = achievementsListHtml;
+  const progAchScroll = document.getElementById('progress-achievements-scroll'); if(progAchScroll) progAchScroll.innerHTML = achievementsScrollHtml;
+  const progAchList = document.getElementById('progress-achievements-list'); if(progAchList) progAchList.innerHTML = achievementsListHtml;
+
+  const rewardsHero = document.querySelector('#screen-rewards .gold-hero .n');
+  if(rewardsHero) rewardsHero.innerHTML = `${s.points.toLocaleString('en-PH')}<span>pts</span>`;
+  document.getElementById('rewards-actions-list').innerHTML = s.wayToEarn.map(a=>`
+    <div class="grouped-row">
+      <div class="icon-tile" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : ''}">${a.done ? REWARDS_CHECK_ICON : REWARDS_CIRCLE_ICON}</div>
+      <div style="flex:1;" class="row-title">${a.label}</div>
+      <span class="badge-status" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : 'background:rgba(0,0,0,0.05); color:var(--t2);'}">${a.done ? 'Earned' : 'Available'}</span>
+    </div>`).join('');
+  const nudgeEl = document.getElementById('rewards-nudge-card');
+  if(nudgeEl){
+    const affordable = s.rewards.filter(r=>r.cost > s.points).sort((a,b)=>a.cost-b.cost);
+    if(affordable.length){
+      const target = affordable[0];
+      const need = target.cost - s.points;
+      const idx = s.rewards.findIndex(r=>r.id===target.id);
+      nudgeEl.style.display = 'flex';
+      nudgeEl.innerHTML = `<div class="icon-tile">${REWARDS_CIRCLE_ICON}</div><div class="nudge-text"><div class="nudge-title">${need.toLocaleString('en-PH')} more points</div><div class="nudge-sub">Unlocks ${target.label}</div></div><span class="nudge-arrow">›</span>`;
+      nudgeEl.onclick = function(){ haptic('light'); openRedeemDetail(idx); };
+    } else if(s.storeItems && s.storeItems.length){
+      nudgeEl.style.display = 'flex';
+      nudgeEl.innerHTML = `<div class="icon-tile">${ICONS.store}</div><div class="nudge-text"><div class="nudge-title">New academy gear available</div><div class="nudge-sub">Check the Academy Store</div></div><span class="nudge-arrow">›</span>`;
+      nudgeEl.onclick = function(){ haptic('light'); openStore(); };
+    } else {
+      nudgeEl.style.display = 'none';
+      nudgeEl.onclick = null;
+    }
+  }
+  document.getElementById('rewards-redeem-grid').innerHTML = s.rewards.map((r,i)=>`
+    <div class="redeem-tile" style="cursor:pointer;" onclick="haptic('light'); openRedeemDetail(${i})">
+      <span class="r-ic">${r.icon}</span><span class="r-lbl">${r.label}</span>
+    </div>`).join('');
+  const ptsHist = s.pointsHistory || [];
+  document.getElementById('rewards-history-list').innerHTML = ptsHist.length ? ptsHist.map(h=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.reason||'Points update'}</div><div class="row-sub">${h.at||''}</div></div><div class="fact-v ${h.delta>=0?'pts-plus':'pts-minus'}">${h.delta>=0?'+':''}${h.delta}</div></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No point activity yet.</div></div>';
+
+   document.getElementById('store-list').innerHTML = s.storeItems.map((it,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openStoreDetail(${i})">
+      <div class="icon-tile">${it.icon}</div>
+      <div style="flex:1;"><div class="row-title">${it.name}</div><div class="row-sub">${it.forLevel}</div></div>
+      <div class="fact-v">${fmtPeso(it.price)}</div>
+    </div>`).join('');
+  const reqList = s.storeRequests || [];
+  document.getElementById('store-requests-list').innerHTML = reqList.length ? reqList.map(r=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.store}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${r.itemName}</div><div class="row-sub">${fmtPeso(r.price)} · ${r.at||''}</div></div><span class="badge-status ${r.status==='Approved'?'badge-green':(r.status==='Rejected'?'badge-red':'badge-orange')}">${r.status}</span></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No requests yet.</div></div>';
+
+  document.getElementById('messages-list').innerHTML = s.messages.map(m=>`
+    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openThread('${m.id}')">
+      <div class="icon-tile">${ICONS.chat}</div>
+      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${m.name}</div><div class="row-sub">${m.last}</div></div>
+      <div style="text-align:right;"><div class="row-sub">${m.time || ''}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
+    </div>`).join('');
+
+  document.getElementById('announcements-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
+    s.announcements.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${a.time}</div></div></div>`).join('') + `</div>`;
+
+  document.getElementById('activity-home-list').innerHTML = s.activity.slice(0,3).map(a=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub||''}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('');
+  document.getElementById('notif-dot').classList.toggle('hidden', s.notifications.length===0);
+
+  const nameEl = document.getElementById('profile-fullname');
+  if(nameEl) nameEl.textContent = s.member.name;
+  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${s.member.accountId} · ${s.member.academy}`;
+  document.getElementById('profile-age').textContent = s.member.age || '—';
+  document.getElementById('profile-coach').textContent = s.member.coach || '—';
+  document.getElementById('profile-level').textContent = s.score.level;
+  document.getElementById('profile-parent').textContent = `${s.member.parentName || 'On file'} · ${s.member.parentContact || ''}`;
+}
+
+/* ===== MODULE: Coach UI ===== */
+function setRoleUI(role){
+  const isCoach = role === 'staff';
+  const npEl = document.getElementById('navbar-player'); if(npEl) npEl.classList.toggle('hidden', isCoach);
+  const ncEl = document.getElementById('navbar-coach'); if(ncEl) ncEl.classList.toggle('hidden', !isCoach);
+}
+function renderCoachHome(){
+  const s = CURRENT_COACH_STATE; if(!s) return;
+  document.getElementById('coach-home-title').textContent = (s.staffName||'Coach').split(' ')[0];
+  document.getElementById('coach-home-academy').textContent = s.academy || 'Academy';
+  document.getElementById('coach-home-role').textContent = `· ${s.staffRole || 'Coach'}`;
+  document.getElementById('coach-home-greeting').textContent = timeGreeting() + ',';
+  const todayEl = document.getElementById('coach-today-card');
+  if(s.today){
+    todayEl.className = 'sched-card';
+    todayEl.innerHTML = `
+      <div class="sched-top"><div class="icon-tile">${ICONS.training}</div><div class="sched-title">${s.today.day} · ${s.today.date}</div></div>
+      <div class="sched-meta">
+        <div class="sched-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${s.today.time}</div>
+        <div class="sched-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>${s.today.venue}</div>
+        <div class="sched-meta-item">${s.today.rsvpYes}/${s.today.totalPlayers} RSVP'd</div>
+      </div>
+      <div class="sched-actions"><button class="sched-btn going active" onclick="haptic('light'); showScreen('coach-players')">View Roster</button></div>`;
+  } else {
+    todayEl.className = 'sched-card empty';
+    todayEl.innerHTML = '<div class="row-sub">No sessions scheduled.</div>';
+  }
+  const attHead = document.getElementById('coach-attention-head');
+  const attList = document.getElementById('coach-attention-list');
+  if(s.attention && s.attention.length){
+    attHead.style.display = '';
+    attList.innerHTML = s.attention.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.sub||''}</div></div></div>`).join('');
+  } else { attHead.style.display = 'none'; attList.innerHTML = ''; }
+  const recent = [].concat.apply([], (s.roster||[]).map(r=>r.recentActivity.map(a=>Object.assign({},a,{playerName:r.name})))).sort((a,b)=>new Date(b.at)-new Date(a.at)).slice(0,6);
+  document.getElementById('coach-recent-list').innerHTML = recent.length ? recent.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.playerName} — ${a.title}</div><div class="row-sub">${a.sub||''}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('') : '<div class="grouped-row"><div class="row-sub">No recent activity.</div></div>';
+  const dot = document.getElementById('coach-notif-dot'); if(dot) dot.classList.toggle('hidden', !(s.attention&&s.attention.length));
+}
+function renderCoachSchedule(){
+  const s = CURRENT_COACH_STATE; if(!s) return;
+  document.getElementById('coach-sessions-list').innerHTML = (s.sessions||[]).length ? s.sessions.map(sess=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title">${sess.day} ${sess.date} · ${sess.time}</div><div class="row-sub">${sess.venue} · ${sess.rsvpYes}/${sess.totalPlayers} RSVP'd</div></div></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No sessions scheduled yet.</div></div>';
+}
+let coachPlayersCache = [];
+function renderCoachPlayers(){
+  const s = CURRENT_COACH_STATE; if(!s) return;
+  coachPlayersCache = s.roster || [];
+  const searchEl = document.getElementById('coach-player-search');
+  const q = searchEl ? (searchEl.value||'').trim().toLowerCase() : '';
+  const filtered = q ? coachPlayersCache.filter(p=>p.name.toLowerCase().includes(q)) : coachPlayersCache;
+  document.getElementById('coach-players-list').innerHTML = filtered.length ? filtered.map((p)=>{
+    const idx = coachPlayersCache.indexOf(p);
+    return `<div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openCoachPlayerDetail(${idx})"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${p.name}</div><div class="row-sub">${p.level} · ${p.attendancePct}% attendance</div></div><div class="fact-v">${p.score}</div></div>`;
+  }).join('') : '<div class="grouped-row"><div class="row-sub">No players found.</div></div>';
+}
+function openCoachPlayerDetail(i){
+  const p = coachPlayersCache[i]; if(!p) return;
+  document.getElementById('score-edit-title').textContent = p.name;
+  document.getElementById('score-edit-body').innerHTML = `
+    <div class="profile-stat-grid" style="margin:0 0 16px;">
+      <div class="profile-stat-tile"><div class="v">${p.score}</div><div class="l">ByteSense</div></div>
+      <div class="profile-stat-tile"><div class="v">${p.attendancePct}%</div><div class="l">Attendance</div></div>
+    </div>
+    <div class="grouped-card" style="margin:0 0 16px;">
+      <div class="field-row"><div class="row-title" style="font-size:14px;">Training</div><input type="text" id="ce-training" inputmode="numeric" value="${p.training}"></div>
+      <div class="field-row"><div class="row-title" style="font-size:14px;">Performance</div><input type="text" id="ce-performance" inputmode="numeric" value="${p.performance}"></div>
+      <div class="field-row"><div class="row-title" style="font-size:14px;">Behavior</div><input type="text" id="ce-behavior" inputmode="numeric" value="${p.behavior}"></div>
+      <div class="field-row"><div class="row-title" style="font-size:14px;">Growth</div><input type="text" id="ce-growth" inputmode="numeric" value="${p.growth}"></div>
+    </div>
+    <textarea class="field-textarea" id="ce-note" placeholder="Add a coach note…" style="margin-bottom:14px;">${p.trainingNote||''}</textarea>
+    <button class="btn-primary" onclick="saveCoachPlayerEdit(${i})">Save</button>
+    <div class="sec-head" style="margin:22px 0 10px;"><h3>Recent activity</h3></div>
+    <div class="grouped-card">${(p.recentActivity||[]).length ? p.recentActivity.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.sub||''}</div></div></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No activity yet.</div></div>'}</div>`;
+  openSheet('sheet-score-edit');
+}
+async function saveCoachPlayerEdit(i){
+  const p = coachPlayersCache[i]; if(!p) return;
+  const scores = {
+    TrainingScore: parseInt((document.getElementById('ce-training').value||'0').replace(/[^0-9]/g,''),10)||0,
+    PerformanceScore: parseInt((document.getElementById('ce-performance').value||'0').replace(/[^0-9]/g,''),10)||0,
+    BehaviorScore: parseInt((document.getElementById('ce-behavior').value||'0').replace(/[^0-9]/g,''),10)||0,
+    GrowthScore: parseInt((document.getElementById('ce-growth').value||'0').replace(/[^0-9]/g,''),10)||0,
+    TrainingNote: document.getElementById('ce-note').value.trim()
+  };
+  let accountKey = ''; try{ accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
+  const coachId = accountKey.toUpperCase();
+  const tenantId = (function(){ try{ return localStorage.getItem(TENANT_ID_KEY); }catch(e){ return ''; } })();
+  haptic('medium'); showToast(`Saving ${p.name}'s ByteSense…`);
+  let result;
+  try{ result = await callApi('saveScoreEdit', { coachId, memberId: p.memberId, scores }); }
+  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save'); return; }
+  haptic('success'); closeSheet('sheet-score-edit');
+  await loadCoachState(coachId, tenantId);
+  renderCoachPlayers();
+  setTimeout(()=>showToast(`${p.name}'s ByteSense updated`), 280);
+}
+function renderCoachDevelopment(){
+  const s = CURRENT_COACH_STATE; if(!s) return;
+  const d = s.development || {};
+  document.getElementById('coach-dev-grid').innerHTML = `
+    <div class="profile-stat-tile"><div class="v">${d.avgByteSense||0}</div><div class="l">Team ByteSense</div></div>
+    <div class="profile-stat-tile"><div class="v">${d.avgAttendance||0}%</div><div class="l">Attendance</div></div>
+    <div class="profile-stat-tile"><div class="v">${d.avgPerformance||0}</div><div class="l">Performance</div></div>
+    <div class="profile-stat-tile"><div class="v">${d.avgBehavior||0}</div><div class="l">Behavior</div></div>`;
+  const insights = s.insights || [];
+  document.getElementById('coach-insights-list').innerHTML = insights.length ? insights.map(x=>{
+    const color = x.level==='red' ? 'var(--red)' : (x.level==='yellow' ? 'var(--orange)' : 'var(--green)');
+    return `<div class="grouped-row"><span class="insight-dot" style="background:${color};"></span><div style="flex:1; margin-left:6px;"><div class="row-title" style="font-size:14px;">${x.name}</div><div class="row-sub">${x.reason}</div></div></div>`;
+  }).join('') : '<div class="grouped-row"><div class="row-sub">All players trending well.</div></div>';
+}
+function renderCoachProfile(){
+  const s = CURRENT_COACH_STATE; if(!s) return;
+  document.getElementById('coach-profile-name').textContent = s.staffName || '—';
+  document.getElementById('coach-profile-meta').textContent = `${s.staffRole || 'Coach'} · ${s.academy || '—'}`;
+}
+
+/* ===== MODULE: Home ===== */
 function timeGreeting(){
   const h = new Date().getHours();
   if(h < 12) return 'Good morning';
   if(h < 18) return 'Good afternoon';
   return 'Good evening';
-}
-const needsYouData = [
-  { icon:'store', title:'Jersey request', sub:'Boots request from Marco is awaiting your approval', cta:'Review', action:"haptic('light'); openStore();" }
-];
-function renderHomeNeeds(){
-  const head = document.getElementById('home-needs-head');
-  const list = document.getElementById('home-needs-list');
-  if(!needsYouData.length){ head.style.display = 'none'; list.style.display = 'none'; return; }
-  head.style.display = ''; list.style.display = '';
-  list.innerHTML = needsYouData.map(n=>`
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS[n.icon] || ICONS.bolt}</div>
-      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="row-sub">${n.sub}</div></div>
-      <button class="hist-chip active" onclick="${n.action}">${n.cta}</button>
-    </div>`).join('');
-}
-function renderHomeRecent(){
-  document.getElementById('activity-home-list').innerHTML = activityData.slice(0,3).map(a=>`
-    <div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('');
 }
 
 /* ===== MODULE: Screens ===== */
@@ -1080,27 +1493,9 @@ function closeSheet(id){
 function toggleSwitch(el){ haptic('medium'); el.classList.toggle('on'); }
 
 /* ===== MODULE: ByteSense ===== */
-function updateByteSenseRing(score){
-  const circ = 170;
-  const pct = Math.min(100, score/10);
-  const offset = Math.max(0, circ - (circ * pct / 100));
-  const ring = document.getElementById('bytesense-ring-fill');
-  const scoreText = document.getElementById('bytesense-ring-score');
-  if(ring) ring.setAttribute('stroke-dashoffset', offset.toFixed(1));
-  if(scoreText) scoreText.textContent = Math.round(pct);
-}
-function renderByteSenseBreakdown(){
-  document.getElementById('bytesense-breakdown').innerHTML = byteSenseData.map((c,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openByteSenseDetail(${i})">
-      <div class="icon-tile">${ICONS.bolt}</div>
-      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.weight}% of total</div></div>
-      <div class="fact-v">${c.score}/100</div>
-    </div>`).join('');
-  document.getElementById('bytesense-coach-notes').innerHTML = byteSenseData.map(c=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note}</div></div></div>`).join('');
-}
 function openByteSenseDetail(i){
-  const c = byteSenseData[i];
+  if(!CURRENT_STATE) return;
+  const c = CURRENT_STATE.score.breakdown[i];
   document.getElementById('bytesense-detail-title').textContent = c.name;
   document.getElementById('bytesense-detail-body').innerHTML = `
     <div class="fact-grid">
@@ -1108,97 +1503,36 @@ function openByteSenseDetail(i){
       <div><div class="fact-l">Weight</div><div class="fact-v">${c.weight}%</div></div>
     </div>
     <div style="height:1px; background:rgba(0,0,0,0.06); margin:16px 0;"></div>
-    <div style="font-size:14px; line-height:1.5;">${c.note}</div>`;
+    <div style="font-size:14px; line-height:1.5;">${c.note || 'No notes yet.'}</div>`;
   openSheet('sheet-bytesense-detail');
-}
-function refreshByteSenseSummary(){
-  const total = computeByteSenseScore();
-  const lvl = currentLevel(total);
-  const next = nextLevel(total);
-  document.getElementById('bytesense-total').innerHTML = `${total}<span>/1000</span>`;
-  document.getElementById('bytesense-level-txt').textContent = lvl.name;
-  const heroScore = document.getElementById('home-hero-score');
-  const trendTxt = document.getElementById('home-hero-trend-txt');
-  if(heroScore) heroScore.textContent = total;
-  if(trendTxt) trendTxt.textContent = BYTESENSE_MONTH_DELTA >= 0 ? `↑ +${BYTESENSE_MONTH_DELTA} this month` : `↓ ${BYTESENSE_MONTH_DELTA} this month`;
-  updateByteSenseRing(total);
-  if(next){
-    document.getElementById('bytesense-points-to-next').textContent = `${next.min - total} more points`;
-    document.getElementById('bytesense-next-level').textContent = next.name;
-  } else {
-    document.getElementById('bytesense-points-to-next').textContent = 'You\'re at the top level';
-    document.getElementById('bytesense-next-level').textContent = 'Pro Prospect';
-  }
 }
 
 /* ===== MODULE: Training ===== */
 const RSVP_LABEL = {yes:'Going', maybe:'Maybe', no:"Can't go", '':'RSVP'};
-function renderTraining(){
-  document.getElementById('training-list').innerHTML = trainingSessions.map(s=>`
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;">
-        <div class="row-title">${s.day} ${s.date} · ${s.time}</div>
-        <div class="row-sub">${s.venue}</div>
-      </div>
-      <div style="display:flex; gap:5px;">
-        <button class="hist-chip${s.rsvp==='yes'?' active':''}" onclick="setRsvp('${s.id}','yes')">Yes</button>
-        <button class="hist-chip${s.rsvp==='no'?' active':''}" onclick="setRsvp('${s.id}','no')">No</button>
-      </div>
-    </div>`).join('');
-  const next = trainingSessions[0];
-  document.getElementById('home-next-session').innerHTML = `
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;"><div class="row-title">${next.day} ${next.date} · ${next.time}</div><div class="row-sub">${next.venue}</div></div>
-      <button class="hist-chip${next.rsvp==='yes'?' active':''}" onclick="setRsvp('${next.id}','yes')">${RSVP_LABEL[next.rsvp]}</button>
-    </div>`;
-  document.getElementById('training-history-list').innerHTML = trainingHistory.map(h=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${h.date}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('');
-}
-function setRsvp(id, val){
+async function setRsvp(id, val){
   haptic('medium');
-  const s = trainingSessions.find(x=>x.id===id);
-  if(s) s.rsvp = (s.rsvp===val) ? '' : val;
-  renderTraining();
-  showToast(val==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
+  if(!CURRENT_STATE || !CURRENT_STATE.member){ showToast('Still loading your data — try again in a moment'); return; }
+  const memberId = CURRENT_STATE.member.memberId;
+  const sess = CURRENT_STATE.sessions.find(x=>x.id===id);
+  const newStatus = (sess && sess.rsvp===val) ? '' : val;
+  let result;
+  try{ result = await callApi('setRsvp', { memberId, sessionId: id, status: newStatus }); }
+  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save RSVP'); return; }
+  await loadPlayerState(memberId);
+  showToast(newStatus==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
 }
 
 /* ===== MODULE: Achievements ===== */
-function renderAchievements(){
-  document.getElementById('achievements-scroll').innerHTML = achievementsData.filter(a=>a.unlocked).map(a=>`
-    <div class="badge-card"><span class="b-ic">${a.ic}</span><span class="b-lbl">${a.name}</span></div>`).join('');
-  document.getElementById('achievements-list').innerHTML = achievementsData.map(a=>`
-    <div class="grouped-row">
-      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.ic}</div>
-      <div style="flex:1; ${a.unlocked?'':'opacity:.5;'}"><div class="row-title" style="font-size:14px;">${a.name}</div><div class="row-sub">${a.desc}</div></div>
-      <span class="badge-status ${a.unlocked?'badge-green':'badge-gray'}">${a.unlocked?'Earned':'Locked'}</span>
-    </div>`).join('');
-}
-function openAchievements(){ renderAchievements(); openSheet('sheet-achievements'); }
+function openAchievements(){ openSheet('sheet-achievements'); }
 function openVexHighlight(){ openSheet('sheet-vex-highlight'); }
 
 /* ===== MODULE: Rewards ===== */
-function renderRewardsActions(){
-  document.getElementById('rewards-actions-list').innerHTML = rewardsActions.map(a=>`
-    <div class="grouped-row">
-      <div class="icon-tile" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : ''}">${a.done ? REWARDS_CHECK_ICON : REWARDS_CIRCLE_ICON}</div>
-      <div style="flex:1;" class="row-title">${a.label}</div>
-      <span class="badge-status" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : 'background:rgba(0,0,0,0.05); color:var(--t2);'}">${a.done ? 'Earned' : 'Available'}</span>
-    </div>`).join('');
-}
-function renderRewardsRedeem(){
-  document.getElementById('rewards-redeem-grid').innerHTML = rewardsRedeemables.map((r,i)=>`
-    <div class="redeem-tile" style="cursor:pointer;" onclick="haptic('light'); openRedeemDetail(${i})">
-      <span class="r-ic">${r.icon}</span><span class="r-lbl">${r.label}</span>
-    </div>`).join('');
-}
 let currentRedeemIndex = null;
-const USER_POINTS_BALANCE = 1240;
 function openRedeemDetail(i){
   currentRedeemIndex = i;
-  const r = rewardsRedeemables[i];
-  const canAfford = USER_POINTS_BALANCE >= r.cost;
+  const r = CURRENT_STATE.rewards[i];
+  const canAfford = CURRENT_STATE.points >= r.cost;
   document.querySelector('#sheet-redeem .sheet-title').textContent = r.label;
   document.getElementById('redeem-detail-body').innerHTML = `
     <div style="display:flex; justify-content:center; margin-bottom:16px;">
@@ -1207,32 +1541,31 @@ function openRedeemDetail(i){
     <div style="text-align:center; font-size:13.5px; color:var(--t2); line-height:1.5; margin-bottom:18px;">${r.desc}</div>
     <div class="grouped-card" style="margin:0 0 16px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Cost</div><div class="fact-v">${r.cost.toLocaleString('en-PH')} pts</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${USER_POINTS_BALANCE.toLocaleString('en-PH')} pts</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${CURRENT_STATE.points.toLocaleString('en-PH')} pts</div></div>
     </div>
     ${canAfford ? '' : `<div class="row-sub" style="text-align:center; color:var(--red); font-weight:600; margin-bottom:12px;">Not enough points yet — keep earning to unlock this.</div>`}
     <button class="btn-primary${canAfford ? '' : ' disabled'}" onclick="confirmRedeem()">Redeem for ${r.cost.toLocaleString('en-PH')} pts</button>`;
   openSheet('sheet-redeem');
 }
-function confirmRedeem(){
-  if(currentRedeemIndex === null) return;
-  const r = rewardsRedeemables[currentRedeemIndex];
+async function confirmRedeem(){
+  if(currentRedeemIndex === null || !CURRENT_STATE) return;
+  const r = CURRENT_STATE.rewards[currentRedeemIndex];
+  const memberId = CURRENT_STATE.member.memberId;
+  haptic('medium');
+  let result;
+  try{ result = await callApi('redeemReward', { memberId, rewardId: r.id }); }
+  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not redeem'); return; }
   haptic('success');
   closeSheet('sheet-redeem');
+  await loadPlayerState(memberId);
   setTimeout(()=>showToast(`Redeemed ${r.label} — ${r.cost.toLocaleString('en-PH')} pts used`), 280);
 }
 
 /* ===== MODULE: Store ===== */
-function renderStore(){
-  document.getElementById('store-list').innerHTML = storeData.map((s,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openStoreDetail(${i})">
-      <div class="icon-tile">${s.icon}</div>
-      <div style="flex:1;"><div class="row-title">${s.name}</div><div class="row-sub">${s.forLevel}</div></div>
-      <div class="fact-v">${fmtPeso(s.price)}</div>
-    </div>`).join('');
-}
-function openStore(){ renderStore(); openSheet('sheet-store'); }
+function openStore(){ openSheet('sheet-store'); }
 function openStoreDetail(i){
-  const s = storeData[i];
+  const s = CURRENT_STATE.storeItems[i];
   document.getElementById('store-detail-title').textContent = s.name;
   document.getElementById('store-detail-body').innerHTML = `
     <div style="display:flex; justify-content:center; margin-bottom:16px;">
@@ -1243,43 +1576,72 @@ function openStoreDetail(i){
       <div class="grouped-row"><div style="flex:1;" class="row-title">Recommended for</div><div class="fact-v">${s.forLevel}</div></div>
     </div>
     <div class="row-sub" style="text-align:center; margin-bottom:14px;">This sends a request to your parent for approval — no direct purchase.</div>
-    <button class="btn-primary" onclick="requestFromParent('${s.name.replace(/'/g,"")}')">Request from parent</button>`;
+    <button class="btn-primary" onclick="requestFromParent('${s.id}')">Request from parent</button>`;
   openSheet('sheet-store-detail');
 }
-function requestFromParent(name){
+async function requestFromParent(itemId){
+  if(!CURRENT_STATE) return;
+  const memberId = CURRENT_STATE.member.memberId;
+  const item = CURRENT_STATE.storeItems.find(x=>x.id===itemId);
+  haptic('medium');
+  let result;
+  try{ result = await callApi('requestStoreItem', { memberId, itemId }); }
+  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not send request'); return; }
   haptic('success');
   closeSheet('sheet-store-detail');
-  setTimeout(()=>showToast(`Request sent to your parent — ${name}`), 280);
+  await loadPlayerState(memberId);
+  setTimeout(()=>showToast(`Request sent to your parent — ${item ? item.name : ''}`), 280);
 }
 
 /* ===== MODULE: Messages ===== */
-function renderMessages(){
-  document.getElementById('messages-list').innerHTML = messagesData.map(m=>`
+function openMessages(){
+  const list = CURRENT_STATE ? (CURRENT_STATE.messages||[]) : (CURRENT_COACH_STATE ? (CURRENT_COACH_STATE.messages||[]) : []);
+  document.getElementById('messages-list').innerHTML = list.length ? list.map(m=>`
     <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openThread('${m.id}')">
       <div class="icon-tile">${ICONS.chat}</div>
       <div style="flex:1;"><div class="row-title" style="font-size:14px;">${m.name}</div><div class="row-sub">${m.last}</div></div>
-      <div style="text-align:right;"><div class="row-sub">${m.time}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
-    </div>`).join('');
+      <div style="text-align:right;"><div class="row-sub">${m.time || ''}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
+    </div>`).join('') : '<div class="row-sub" style="text-align:center; padding:20px 0;">No messages yet.</div>';
+  openSheet('sheet-messages');
 }
-function openMessages(){ renderMessages(); openSheet('sheet-messages'); }
 let activeThreadId = null;
-function openThread(id){
+async function openThread(id){
   activeThreadId = id;
-  const m = messagesData.find(x=>x.id===id);
-  m.unread = false;
-  document.getElementById('thread-title').textContent = m.name;
+  const state = CURRENT_STATE || CURRENT_COACH_STATE;
+  const m = (state && state.messages || []).find(x=>x.id===id);
+  document.getElementById('thread-title').textContent = m ? m.name : 'Chat';
+  let selfId = '';
+  if(CURRENT_STATE) selfId = CURRENT_STATE.member.memberId;
+  else { try{ selfId = (localStorage.getItem(ACCOUNT_KEY)||'').toUpperCase(); }catch(e){} }
   const log = document.getElementById('thread-log');
-  log.innerHTML = (threadSeed[id]||[]).map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
+  log.innerHTML = '';
   openSheet('sheet-thread');
-  setTimeout(()=>log.scrollTop = log.scrollHeight, 200);
+  let result;
+  try{ result = await callApi('getThread', { threadId: id, memberId: selfId }); }
+  catch(e){ showToast('Could not load messages'); return; }
+  if(result.success){
+    log.innerHTML = result.data.map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
+    setTimeout(()=>log.scrollTop = log.scrollHeight, 100);
+  }
 }
-function sendThreadMessage(){
+async function sendThreadMessage(){
   const field = document.getElementById('thread-input-field');
   const val = field.value.trim();
   if(!val || !activeThreadId) return;
   haptic('light');
-  threadSeed[activeThreadId] = threadSeed[activeThreadId] || [];
-  threadSeed[activeThreadId].push({who:'me', text:val});
+  let result;
+  if(CURRENT_STATE){
+    const memberId = CURRENT_STATE.member.memberId;
+    try{ result = await callApi('sendMessage', { threadId: activeThreadId, memberId, body: val }); }
+    catch(e){ showToast('Could not send message'); return; }
+  } else if(CURRENT_COACH_STATE){
+    let accountKey=''; try{ accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
+    const coachId = accountKey.toUpperCase();
+    try{ result = await callApi('sendCoachMessage', { threadId: activeThreadId, coachId, body: val }); }
+    catch(e){ showToast('Could not send message'); return; }
+  } else return;
+  if(!result.success){ showToast(result.error || 'Could not send message'); return; }
   const log = document.getElementById('thread-log');
   log.innerHTML += `<div class="bubble user">${val}</div>`;
   field.value = '';
@@ -1287,20 +1649,18 @@ function sendThreadMessage(){
 }
 
 /* ===== MODULE: Announcements ===== */
-function renderAnnouncements(){
-  document.getElementById('announcements-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
-    announcementsData.map(a=>`
-      <div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${a.time}</div></div></div>`).join('') + `</div>`;
-}
-function openAnnouncements(){ renderAnnouncements(); openSheet('sheet-announcements'); }
+function openAnnouncements(){ openSheet('sheet-announcements'); }
 
-/* ===== MODULE: Vex (AI) ===== */
+/* ===== MODULE: Vex (AI) =====
+   Local canned-reply assistant — not wired to the backend. Kept as a
+   lightweight in-app helper; the replies below are static strings, not
+   player data, so they are intentionally not backend-driven. */
 const vexReplies = {
-  'When is my next training?': 'Your next session is Tue Sep 15, 5:30 PM at Ibex Pitch A. You\'ve already RSVP\'d Yes.',
-  "What's my score?": `You're at ${'{{SCORE}}'}/1000 — ${'{{LEVEL}}'}. Training and Behavior are your strongest categories; Growth is the one to watch.`,
-  'What badges did I earn?': "You've earned 4-Session Streak, Level Up, and Team Player. Perfect Month is close — just keep your attendance up this week.",
-  'How is my attendance?': "You've attended 18 of 21 sessions this term — 86%. That's above your academy's average.",
-  'How can I improve?': "Coach Rafael's notes point to Growth as your lowest category. Ask for a 1-on-1 development session — you can redeem one from Rewards."
+  'When is my next training?': "Check your Training tab for the next scheduled session and its RSVP status.",
+  "What's my score?": `You're at ${'{{SCORE}}'}/1000 — ${'{{LEVEL}}'}. Check your ByteSense breakdown to see your strongest and weakest categories.`,
+  'What badges did I earn?': "Open Badges from your Profile to see which achievements you've unlocked so far.",
+  'How is my attendance?': "Check the Training tab for your attendance percentage and session history.",
+  'How can I improve?': "Check your ByteSense breakdown for your lowest category, and ask your coach for a development note."
 };
 function askVex(q){
   haptic('light');
@@ -1310,8 +1670,9 @@ function askVex(q){
   setTimeout(()=>{
     let reply = vexReplies[q] || "Let me check that for you.";
     if(reply.includes('{{SCORE}}')){
-      const total = computeByteSenseScore();
-      reply = reply.replace('{{SCORE}}', total).replace('{{LEVEL}}', currentLevel(total).name);
+      const total = CURRENT_STATE ? CURRENT_STATE.score.total : 0;
+      const level = CURRENT_STATE ? CURRENT_STATE.score.level : '—';
+      reply = reply.replace('{{SCORE}}', total).replace('{{LEVEL}}', level);
     }
     log.innerHTML += `<div class="bubble ai">${reply}</div>`;
     haptic('success');
@@ -1390,47 +1751,87 @@ function handleAuAction(){
 }
 
 /* ===== MODULE: Notifications ===== */
-function renderNotifications(){
-  document.getElementById('notifications-list').innerHTML = notifications.map(n=>`
-    <div class="notif-row"><div class="icon-tile">${n.ico}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.time}</div></div></div>`).join('');
-}
 function openNotifications(){
-  renderNotifications();
-  document.getElementById('notif-dot').classList.add('hidden');
+  if(CURRENT_STATE){
+    const list = CURRENT_STATE.notifications || [];
+    document.getElementById('notifications-list').innerHTML = list.length ? list.map(n=>`
+      <div class="notif-row"><div class="icon-tile">${ICONS[n.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.sub||''} · ${n.at||''}</div></div></div>`).join('') : '<div class="row-sub" style="text-align:center; padding:20px 0;">No new notifications.</div>';
+    document.getElementById('notif-dot').classList.add('hidden');
+    openSheet('sheet-notifications');
+    if(CURRENT_STATE.member) callApi('markNotificationsSeen', { memberId: CURRENT_STATE.member.memberId }).catch(()=>{});
+    return;
+  }
+  const list = (CURRENT_COACH_STATE && CURRENT_COACH_STATE.attention) || [];
+  document.getElementById('notifications-list').innerHTML = list.length ? list.map(n=>`
+    <div class="notif-row"><div class="icon-tile">${ICONS[n.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.sub||''}</div></div></div>`).join('') : '<div class="row-sub" style="text-align:center; padding:20px 0;">No new notifications.</div>';
+  const cDot = document.getElementById('coach-notif-dot'); if(cDot) cDot.classList.add('hidden');
   openSheet('sheet-notifications');
 }
-const activityData = [
-  {ico:ICONS.badge, title:'Badge earned: Attendance Streak', sub:'Today', val:'+50 pts'},
-  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'Today', val:'+8'},
-  {ico:ICONS.training, title:"RSVP'd Yes — Tue Skills Session", sub:'Yesterday', val:''},
-  {ico:ICONS.store, title:'Requested new boots from parent', sub:'2 days ago', val:''},
-  {ico:ICONS.chat, title:'Message from Coach Rafael', sub:'2 days ago', val:''},
-  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'1 week ago', val:'+5'},
-];
 function openAllActivity(){
+  const list = (CURRENT_STATE && CURRENT_STATE.activity) || [];
   document.getElementById('activity-full-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
-    activityData.map(a=>`<div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('') + `</div>`;
+    (list.length ? list.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub||''}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('') : '<div class="grouped-row"><div class="row-sub">No activity yet.</div></div>') + `</div>`;
   openSheet('sheet-activity');
 }
 
+/* ===== MODULE: Profile Photo (client-side only — stored per-device as base64) ===== */
+function getAvatarKey(){
+  let memberId = '';
+  try{ memberId = localStorage.getItem(MEMBER_ID_KEY) || ''; }catch(e){}
+  return 'artiplay_avatar_' + memberId;
+}
+function triggerAvatarUpload(){ document.getElementById('avatar-upload-input').click(); }
+function handleAvatarUpload(evt){
+  const file = evt.target.files && evt.target.files[0];
+  if(!file) return;
+  if(file.size > 1.5*1024*1024){ haptic('error'); showToast('Photo is too large — pick one under 1.5MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(){
+    try{ localStorage.setItem(getAvatarKey(), reader.result); }
+    catch(e){ showToast('Could not save photo on this device'); return; }
+    applyAvatarToDom();
+    haptic('success');
+    showToast('Profile photo updated');
+  };
+  reader.readAsDataURL(file);
+}
+function applyAvatarToDom(){
+  let data = '';
+  try{ data = localStorage.getItem(getAvatarKey()) || ''; }catch(e){}
+  if(!data) return;
+  ['profile-avatar-main','profile-avatar-sheet'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.style.backgroundImage = `url(${data})`;
+  });
+}
+
 /* ===== MODULE: Profile ===== */
- function renderProfileSheet(){
-  const total = computeByteSenseScore();
+function renderProfileSheet(){
+  const s = CURRENT_STATE;
+  const total = (s && s.score) ? s.score.total : 0;
+  const level = s ? s.score.level : '—';
+  const points = s ? s.points : 0;
+  const pct = s ? s.attendance.pct : 0;
+  const badgeCount = s ? s.achievements.filter(a=>a.unlocked).length : 0;
+  const firstName = s && s.member ? s.member.name.split(' ')[0] : '—';
   let role = 'player';
   try{ role = localStorage.getItem(ROLE_KEY) || 'player'; }catch(e){}
   const coachRow = role === 'staff' ? `
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openCoachPanel(),280)"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div><div style="flex:1;" class="row-title">Coach panel</div><span style="color:var(--t3); font-size:16px;">›</span></div>` : '';
   document.getElementById('profile-sheet-body').innerHTML = `
     <div class="profile-hero" style="margin:0 0 18px;">
-      <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco</div>
-      <div class="profile-badge-premium">Rising Player</div>
+      <div style="position:relative; width:60px; margin:0 auto 12px;">
+        <div class="avatar" id="profile-avatar-sheet" style="margin:0;" onclick="haptic('light'); triggerAvatarUpload()"></div>
+        <div class="avatar-edit-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+      </div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">${firstName}</div>
+      <div class="profile-badge-premium">${level}</div>
     </div>
     <div class="profile-stat-grid">
       <div class="profile-stat-tile"><div class="v">${total}</div><div class="l">ByteSense Score</div></div>
-      <div class="profile-stat-tile"><div class="v">1,240</div><div class="l">Points</div></div>
-      <div class="profile-stat-tile"><div class="v">86%</div><div class="l">Attendance</div></div>
-      <div class="profile-stat-tile"><div class="v">${achievementsData.filter(a=>a.unlocked).length}</div><div class="l">Badges</div></div>
+      <div class="profile-stat-tile"><div class="v">${points.toLocaleString('en-PH')}</div><div class="l">Points</div></div>
+      <div class="profile-stat-tile"><div class="v">${pct}%</div><div class="l">Attendance</div></div>
+      <div class="profile-stat-tile"><div class="v">${badgeCount}</div><div class="l">Badges</div></div>
     </div>
     <div class="grouped-card">
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>showScreen('training'),280)"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;" class="row-title">Training</div><span style="color:var(--t3); font-size:16px;">›</span></div>
@@ -1441,6 +1842,7 @@ function openAllActivity(){
       ${coachRow}
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>openSettingsSheet(),280)"><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><div style="flex:1;" class="row-title">Settings</div><span style="color:var(--t3); font-size:16px;">›</span></div>
     </div>`;
+  applyAvatarToDom();
 }
 function openProfileSheet(){ renderProfileSheet(); openSheet('sheet-profile'); }
 
@@ -1453,7 +1855,7 @@ function renderSettingsSheet(){
   let accountKey = '';
   try{ role = localStorage.getItem(ROLE_KEY) || 'player'; accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
   const account = ACCOUNTS[accountKey];
-  const displayName = account ? account.name : 'Marco Villanueva';
+  const displayName = account ? account.name : (CURRENT_STATE && CURRENT_STATE.member ? CURRENT_STATE.member.name : (CURRENT_COACH_STATE ? CURRENT_COACH_STATE.staffName : '—'));
   const roleLabel = role==='staff' ? 'Coach/Staff' : (role==='parent' ? 'Parent' : 'Player');
   const switchChildRow = (role==='parent' && account && account.children.length>1) ? `
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); closeSheet('sheet-settings'); setTimeout(()=>openChildSwitch(ACCOUNTS['${accountKey}'], false),280)"><div style="flex:1;" class="row-title">Switch child</div><span style="color:var(--t3); font-size:16px;">›</span></div>` : '';
@@ -1466,6 +1868,7 @@ function renderSettingsSheet(){
     <div class="fact-l" style="margin:0 2px 8px;">Preferences</div>
     <div class="grouped-card" style="margin:0 0 18px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Notifications</div><div class="toggle on" onclick="toggleSwitch(this)"><div class="knob"></div></div></div>
+      <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); closeSheet('sheet-settings'); setTimeout(()=>openSheet('sheet-help'),280)"><div style="flex:1;" class="row-title">Help &amp; Support</div><span style="color:var(--t3); font-size:16px;">›</span></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); showToast('Data Privacy Policy — coming soon')"><div style="flex:1;" class="row-title">Data Privacy Policy</div><span style="color:var(--t3); font-size:16px;">›</span></div>
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); showToast('Your data export request has been noted')"><div style="flex:1;"><div class="row-title">Download my data</div><div class="row-sub">RA 10173 data subject rights</div></div><span style="color:var(--t3); font-size:16px;">›</span></div>
     </div>
@@ -1482,6 +1885,7 @@ function logoutUser(){
   clearSession();
   closeSheet('sheet-settings');
   setTimeout(()=>{
+    setRoleUI('player');
     renderSigninEntry();
     document.getElementById('signin-overlay').classList.remove('hidden');
     document.getElementById('onboard-overlay').classList.add('hidden');
@@ -1510,7 +1914,12 @@ function deleteAccountConfirm(){
 }
 
 /* ===== MODULE: Coach Panel ===== */
-function openCoachPanel(){ selectCoachTab('roster'); openSheet('sheet-coach-panel'); }
+function openCoachPanel(){
+  selectCoachTab('roster');
+  const titleEl = document.getElementById('coach-panel-title');
+  if(titleEl) titleEl.textContent = 'Coach panel' + (CURRENT_COACH_STATE ? ' · ' + CURRENT_COACH_STATE.staffName : '');
+  openSheet('sheet-coach-panel');
+}
 function selectCoachTab(tab){
   haptic('light');
   document.querySelectorAll('#coach-tabs .role-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
@@ -1521,15 +1930,16 @@ function selectCoachTab(tab){
   if(tab==='sessions') renderAdminSessions();
 }
 function renderAdminRoster(){
-  document.getElementById('admin-roster-list').innerHTML = rosterData.map((p,i)=>`
+  const roster = (CURRENT_COACH_STATE && CURRENT_COACH_STATE.roster) || [];
+  document.getElementById('admin-roster-list').innerHTML = roster.length ? roster.map((p,i)=>`
     <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openScoreEdit(${i})">
       <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
       <div style="flex:1;"><div class="row-title" style="font-size:14px;">${p.name}</div><div class="row-sub">${p.level}</div></div>
       <div class="fact-v">${p.score}</div>
-    </div>`).join('');
+    </div>`).join('') : '<div class="grouped-row"><div class="row-sub">No players assigned yet.</div></div>';
 }
 function openScoreEdit(i){
-  const p = rosterData[i];
+  const p = CURRENT_COACH_STATE.roster[i];
   document.getElementById('score-edit-title').textContent = p.name;
   document.getElementById('score-edit-body').innerHTML = `
     <div class="grouped-card" style="margin:0 0 14px;">
@@ -1538,36 +1948,139 @@ function openScoreEdit(i){
     <button class="btn-primary" onclick="saveScoreEdit(${i})">Save score</button>`;
   openSheet('sheet-score-edit');
 }
-function saveScoreEdit(i){
+async function saveScoreEdit(i){
   const raw = document.getElementById('score-edit-input').value.replace(/[^0-9]/g,'');
   const val = parseInt(raw||'0',10);
   if(val<=0){ haptic('error'); return; }
-  rosterData[i].score = val;
-  rosterData[i].level = currentLevel(val).name;
+  const p = CURRENT_COACH_STATE.roster[i];
+  let accountKey = '';
+  try{ accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
+  const coachId = accountKey.toUpperCase();
+  const tenantId = (function(){ try{ return localStorage.getItem(TENANT_ID_KEY); }catch(e){ return ''; } })();
+  haptic('medium');
+  showToast(`Saving ${p.name}'s ByteSense score…`);
+  let result;
+  try{
+    result = await callApi('saveScoreEdit', { coachId, memberId: p.memberId, scores: { TrainingScore: val } });
+  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save score'); return; }
   haptic('success');
   closeSheet('sheet-score-edit');
-  renderAdminRoster();
-  setTimeout(()=>showToast(`${rosterData[i].name}'s ByteSense score updated to ${val}`), 280);
+  await loadCoachState(coachId, tenantId);
+  setTimeout(()=>showToast(`${p.name}'s ByteSense score updated`), 280);
 }
 function renderAdminSessions(){
-  document.getElementById('admin-sessions-list').innerHTML = adminSessions.map(s=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${s.date} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('');
+  const sessions = (CURRENT_COACH_STATE && CURRENT_COACH_STATE.sessions) || [];
+  document.getElementById('admin-sessions-list').innerHTML = sessions.length ? sessions.map(s=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${s.date} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No sessions scheduled yet.</div></div>';
 }
-function addAdminSession(){
-  adminSessions.push({day:'New', date:'TBD', time:'TBD', venue:'Ibex Pitch A'});
-  renderAdminSessions();
+async function addAdminSession(){
+  let accountKey = '', tenantId = '';
+  try{
+    accountKey = localStorage.getItem(ACCOUNT_KEY) || '';
+    tenantId = localStorage.getItem(TENANT_ID_KEY) || '';
+  }catch(e){}
+  const coachId = accountKey.toUpperCase();
+  haptic('medium');
+  let result;
+  try{
+    result = await callApi('addAdminSession', { coachId, tenantId, session: { day:'New', date:'TBD', time:'TBD', venue:'TBD', slots:'' } });
+  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not add session'); return; }
   haptic('success');
+  await loadCoachState(coachId, tenantId);
+  renderAdminSessions();
   showToast('Session added — edit the details from the roster view');
 }
-function postAdminAnnouncement(){
+async function postAdminAnnouncement(){
   const title = document.getElementById('admin-post-title').value.trim();
   const body = document.getElementById('admin-post-body').value.trim();
   if(!title || !body){ haptic('error'); showToast('Add a title and message first'); return; }
-  announcementsData.unshift({title, body, time:'Just now'});
+  let accountKey = '', tenantId = '', staffRole = 'COACH', actorName = '';
+  try{
+    accountKey = localStorage.getItem(ACCOUNT_KEY) || '';
+    tenantId = localStorage.getItem(TENANT_ID_KEY) || '';
+  }catch(e){}
+  const account = ACCOUNTS[accountKey];
+  if(account){ staffRole = account.staffRole || 'COACH'; actorName = account.name || ''; }
+  haptic('medium');
+  let result;
+  try{
+    result = await callApi('postAnnouncement', { staffRole, tenantId, title, body, actorName });
+  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not post announcement'); return; }
+  haptic('success');
   document.getElementById('admin-post-title').value = '';
   document.getElementById('admin-post-body').value = '';
-  haptic('success');
   showToast('Announcement posted to the academy');
+}
+
+/* ===== MODULE: Super Admin Unlock (hidden dev/admin entrance) =====
+   5 quick taps on the logo reveals a PIN sheet — it grants nothing by
+   itself. The backend (clientSuperAdminUnlock) verifies the PIN against a
+   real SUPER_ADMIN staff record before any session is created. */
+let logoTapCount = 0;
+let logoTapTimer = null;
+const SUPER_ADMIN_FLAG_KEY = 'artiplay_superadmin';
+function handleLogoTap(){
+  logoTapCount++;
+  clearTimeout(logoTapTimer);
+  logoTapTimer = setTimeout(()=>{ logoTapCount = 0; }, 1200);
+  if(logoTapCount >= 5){
+    logoTapCount = 0;
+    haptic('medium');
+    document.getElementById('super-admin-pin-input').value = '';
+    document.getElementById('super-admin-pin-error').style.display = 'none';
+    openSheet('sheet-super-admin-unlock');
+  }
+}
+async function submitSuperAdminPin(){
+  const btn = document.getElementById('super-admin-pin-btn');
+  const pinVal = document.getElementById('super-admin-pin-input').value.trim();
+  const errEl = document.getElementById('super-admin-pin-error');
+  errEl.style.display = 'none';
+  if(!pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter the PIN'; return; }
+  haptic('medium');
+  let result;
+  try{ result = await callApi('superAdminUnlock', { pin: pinVal }); }
+  catch(e){ haptic('error'); errEl.style.display='block'; errEl.textContent='Could not reach the server'; return; }
+  if(!result.success){
+    haptic('error');
+    errEl.style.display = 'block';
+    errEl.textContent = result.error || 'Incorrect PIN';
+    return;
+  }
+  const account = result.data;
+  const accountKey = account.accountId.toLowerCase();
+  ACCOUNTS[accountKey] = account;
+  haptic('success');
+  closeSheet('sheet-super-admin-unlock');
+  try{ localStorage.setItem(SUPER_ADMIN_FLAG_KEY, '1'); }catch(e){}
+  saveSession('staff', accountKey, '', account.tenantId);
+  setTimeout(()=>{
+    document.getElementById('signin-overlay').classList.add('hidden');
+    loadCoachState(account.accountId, account.tenantId);
+    showScreen('home');
+    showSuperAdminBadge();
+    showToast(account.usingDefaultPin ? '⚠️ Super Admin mode — still using the DEFAULT PIN, change it now' : 'Super Admin mode');
+  }, 280);
+}
+function isSuperAdminMode(){ try{ return localStorage.getItem(SUPER_ADMIN_FLAG_KEY) === '1'; }catch(e){ return false; } }
+function showSuperAdminBadge(){
+  if(document.getElementById('super-admin-badge')) return;
+  const badge = document.createElement('div');
+  badge.id = 'super-admin-badge';
+  badge.style.cssText = 'position:absolute; top:max(14px, env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:800; background:#1c1c1e; color:#fff; font-size:10.5px; font-weight:700; letter-spacing:.06em; padding:5px 14px; border-radius:20px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);';
+  badge.innerHTML = 'SUPER ADMIN <span style="opacity:.6; font-weight:600;">· Exit</span>';
+  badge.onclick = exitSuperAdminMode;
+  document.querySelector('.phone').appendChild(badge);
+}
+function exitSuperAdminMode(){
+  haptic('medium');
+  try{ localStorage.removeItem(SUPER_ADMIN_FLAG_KEY); }catch(e){}
+  const badge = document.getElementById('super-admin-badge');
+  if(badge) badge.remove();
+  logoutUser();
 }
 
 /* ===== MODULE: Toast ===== */
@@ -1579,15 +2092,19 @@ function showToast(msg){
 }
 
 /* ===== MODULE: Onboarding ===== */
-const obData = { inviteCode:'', role:'player', playerName:'', playerAge:'', academyName:'', coachName:'', pin:'', accountId:'' };
-const INVITES = {
-  'ch-1042':   { role:'player', playerName:'Marco Villanueva', playerAge:'12', academy:'Ibex FC Academy', coachName:'Coach Rafael' },
-  'ch-1042-p': { role:'parent', playerName:'Marco Villanueva', academy:'Ibex FC Academy', coachName:'Coach Rafael' }
+const obData = { tenantId:'', tenantName:'', role:'', name:'', age:'', parentName:'', parentContact:'', parentEmail:'', email:'', phone:'', club:'', pin:'', accountId:'', memberId:'' };
+
+const ROLE_FIELDS_ = {
+  STUDENT: [{k:'name', label:'Full name'}, {k:'age', label:'Age'}, {k:'parentName', label:'Parent name'}, {k:'parentContact', label:'Parent contact'}, {k:'parentEmail', label:'Parent email'}],
+  COACH:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
+  STAFF:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
+  PARENT:  [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}]
 };
 
-const OB_STEPS = ['ob-verify','ob-confirm','ob-notification-setup'];
-let obCurrentId = 'ob-welcome';
+  const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
+let obCurrentId = 'ob-verify';
 let obHistoryStack = [];
+let obFromSignIn = false; // true lang kapag pumasok galing sa "Sign up instead" sa sign-in screen
 
 function renderObDots(activeId){
   const idx = OB_STEPS.indexOf(activeId);
@@ -1609,13 +2126,23 @@ function obGoTo(id, pushHistory){
 }
 function obBack(){
   haptic('light');
-  if(!obHistoryStack.length) return;
+  if(!obHistoryStack.length){
+    if(obCurrentId === 'ob-verify' && obFromSignIn){ exitSignupToSignIn(); }
+    return;
+  }
   const prev = obHistoryStack.pop();
   document.getElementById(obCurrentId).classList.add('hidden');
   document.getElementById(prev).classList.remove('hidden');
   obCurrentId = prev;
   renderObDots(prev);
-  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-welcome') ? 'hidden' : 'visible';
+  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-verify' && !obFromSignIn) ? 'hidden' : 'visible';
+}
+function exitSignupToSignIn(){
+  haptic('light');
+  document.getElementById('onboard-overlay').classList.add('hidden');
+  obFromSignIn = false;
+  renderSigninEntry();
+  document.getElementById('signin-overlay').classList.remove('hidden');
 }
 function obSkipToDashboard(){ obCompleteOnboarding(true); }
 
@@ -1624,95 +2151,91 @@ function startSignupFlow(){
   document.getElementById('onboard-overlay').classList.remove('hidden');
   obHistoryStack = [];
   obCurrentId = 'ob-verify';
+  obFromSignIn = true;
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
   document.getElementById('ob-invite-input').value = '';
   document.getElementById('ob-verify-status').textContent = '';
   renderObDots('ob-verify');
+  document.getElementById('ob-back-btn').style.visibility = 'visible';
 }
 
 async function obVerifyInvite(){
   const raw = document.getElementById('ob-invite-input').value.trim();
   const statusEl = document.getElementById('ob-verify-status');
-  if(!raw){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Enter the invite code your coach gave you'; return; }
-  statusEl.style.color = 'var(--t2)';
-  statusEl.textContent = 'Checking…';
+  if(!raw){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Enter your Academy Invite PIN'; return; }
+  statusEl.style.color = 'var(--t2)'; statusEl.textContent = 'Checking…';
   let result;
-  try{
-    result = await callApi('validateCoachId', { coachId: raw });
-  }catch(e){
-    haptic('error');
-    statusEl.style.color = 'var(--red)';
-    statusEl.textContent = 'Could not reach the server — check your connection.';
-    return;
-  }
-  if(!result.success){
-    haptic('error');
-    statusEl.style.color = 'var(--red)';
-    statusEl.textContent = result.error || 'Invite code not found — check with your coach and try again.';
-    return;
-  }
-  const coach = result.data;
-  obData.role = 'player';
-  obData.coachId = coach.coachId;
-  obData.academyName = coach.academyName;
-  obData.coachName = coach.name;
-  statusEl.style.color = '#1c8a3e';
-  statusEl.textContent = `Linked to ${coach.name} · ${coach.academyName}`;
+  try{ result = await callApi('validateInvitePin', { pin: raw }); }
+  catch(e){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Could not reach the server.'; return; }
+  if(!result.success){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent=result.error; return; }
+
+  obData.tenantId = result.data.tenantId;
+  obData.tenantName = result.data.tenantName;
+  obData.role = result.data.role;
   haptic('success');
-  document.getElementById('ob-confirm-title').textContent = `You're joining ${coach.academyName}`;
-  document.getElementById('ob-confirm-sub').textContent = `coached by ${coach.name}.`;
-  setTimeout(()=>obGoTo('ob-confirm', true), 350);
+  statusEl.style.color = '#1c8a3e';
+  statusEl.textContent = `Linked to ${obData.tenantName}`;
+
+  document.getElementById('ob-role-eyebrow').textContent = `Joining ${obData.tenantName} as ${obData.role.charAt(0)+obData.role.slice(1).toLowerCase()}`;
+  document.getElementById('ob-profile-fields').innerHTML = (ROLE_FIELDS_[obData.role]||[]).map(f=>
+    `<div class="field-row"><div class="row-title" style="font-size:14px;">${f.label}</div><input type="text" id="ob-field-${f.k}" placeholder="${f.label}"></div>`).join('');
+
+  setTimeout(()=>obGoTo('ob-profile-form', true), 350);
 }
-function genAccountId(prefix){
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/1/I
-  let suffix = '';
-  for(let i=0;i<4;i++) suffix += chars[Math.floor(Math.random()*chars.length)];
-  return `${prefix}-${suffix}`;
+
+function obSubmitProfile(btnEl){
+  haptic('medium');
+  const fields = ROLE_FIELDS_[obData.role] || [];
+  for(const f of fields) obData[f.k] = document.getElementById('ob-field-'+f.k).value.trim();
+  if(!obData.name){ haptic('error'); showToast('Name is required'); return; }
+  obGoTo('ob-set-pin', true);
 }
+
 async function obConfirmJoin(btnEl){
+  const newPin = document.getElementById('ob-newpin-input').value.trim();
+  if(!/^\d{4,6}$/.test(newPin)){ haptic('error'); showToast('PIN must be 4-6 digits'); return; }
   haptic('medium');
   btnEl.classList.add('loading');
-  /* Background setup — nothing for the user to configure. clientPlayerSignup
-     on the backend generates the real Account ID, hashes the PIN, seeds
-     starter ByteSense/attendance rows, and emails the parent — all server-side. */
-  obData.pin = String(Math.floor(1000 + Math.random()*9000)); // 4 digits — matches clientPlayerSignup's check
   let result;
   try{
-    result = await callApi('playerSignup', {
-      name: obData.playerName || 'New Player',
-      age: obData.playerAge || '',
-      coach: obData.coachId,
-      pin: obData.pin
-    });
+    result = await callApi('claimAccount', Object.assign({}, obData, { pin: newPin }));
   }catch(e){
-    btnEl.classList.remove('loading');
-    haptic('error');
-    showToast('Could not reach the server — check your connection');
-    return;
+    btnEl.classList.remove('loading'); haptic('error'); showToast('Could not reach the server'); return;
   }
   btnEl.classList.remove('loading');
-  if(!result.success){
-    haptic('error');
-    showToast(result.error || 'Could not create your account — try again');
-    return;
-  }
-  obData.accountId = result.data.artiPlayId;
-  obData.memberId = result.data.memberId;
-  ACCOUNTS[obData.accountId.toLowerCase()] = {
-    role:'player', accountId: obData.accountId, memberId: obData.memberId,
-    name: obData.playerName, academy: obData.academyName, coach: obData.coachName
-  };
+  if(!result.success){ haptic('error'); showToast(result.error || 'Could not create your account'); return; }
+
+  obData.accountId = result.data.accountId;
+  obData.memberId = result.data.memberId || '';
+  obData.pin = newPin;
+  ACCOUNTS[obData.accountId.toLowerCase()] = { role: obData.role.toLowerCase(), accountId: obData.accountId, memberId: obData.memberId, name: obData.name, academy: obData.tenantName };
   haptic('success');
+
+  if(obData.role === 'STUDENT'){
+    const coachRes = await callApi('getCoaches', { tenantId: obData.tenantId }).catch(()=>null);
+    const coaches = (coachRes && coachRes.success) ? coachRes.data : [];
+    if(coaches.length){
+      document.getElementById('ob-coach-list').innerHTML = coaches.map(c=>
+        `<div class="grouped-row" style="cursor:pointer;" onclick="obPickCoach('${c.coachId}')"><div style="flex:1;" class="row-title">${c.name}</div><span style="color:var(--t3);">›</span></div>`).join('');
+      obGoTo('ob-coach-pick', true);
+      return;
+    }
+  }
+  obGoTo('ob-notification-setup', true);
+}
+async function obPickCoach(coachId){
+  haptic('medium');
+  await callApi('assignCoach', { memberId: obData.memberId, coachId }).catch(()=>{});
   obGoTo('ob-notification-setup', true);
 }
 function applyPlayerDataToApp(){
-  document.getElementById('home-player-title').textContent = (obData.playerName||'Player').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = obData.academyName || 'Ibex FC Academy';
-  document.getElementById('home-status-txt').textContent = `· ${obData.coachName || 'Coach'}`;
-  document.getElementById('profile-age').textContent = obData.playerAge || '—';
-  document.getElementById('profile-coach').textContent = obData.coachName || '—';
-  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${obData.accountId || '—'} · ${obData.academyName || 'Ibex FC Academy'}`;
+  document.getElementById('home-player-title').textContent = (obData.name||'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = obData.tenantName || '—';
+  document.getElementById('home-status-txt').textContent = `· ${obData.role === 'STUDENT' ? 'Student' : obData.role}`;
+  document.getElementById('profile-age').textContent = obData.age || '—';
+  document.getElementById('profile-coach').textContent = '—';
+  document.getElementById('profile-meta').textContent = `Account ID ${obData.accountId || '—'} · ${obData.tenantName || '—'}`;
   const greetEl = document.getElementById('home-greeting-line');
   if(greetEl) greetEl.textContent = `${timeGreeting()},`;
 }
@@ -1727,19 +2250,20 @@ function obConfirmNotifications(){
 function obCompleteOnboarding(skipped){
   markOnboarded();
   const accountKey = obData.accountId ? obData.accountId.toLowerCase() : undefined;
-  saveSession(obData.role || 'player', accountKey);
-  if(accountKey) markDeviceTrusted(accountKey, obData.playerName);
+  saveSession((obData.role || 'player').toLowerCase(), accountKey, obData.memberId, obData.tenantId);
+  if(accountKey) markDeviceTrusted(accountKey, obData.name);
   if(obData.memberId){
     callApi('markOnboarded', { memberId: obData.memberId }).catch(()=>{ /* non-blocking */ });
   }
   if(!skipped) applyPlayerDataToApp();
   document.getElementById('onboard-overlay').classList.add('hidden');
   showScreen('home');
-  const firstName = (obData.playerName || 'Player').split(' ')[0];
-  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId}, PIN ${obData.pin} — save these. ${firstName}'s ByteSense tracking starts now`);
+  const firstName = (obData.name || 'there').split(' ')[0];
+  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId} — keep it saved. Welcome, ${firstName}`);
 }
 function replayOnboarding(){
   obHistoryStack = [];
+  obFromSignIn = false;
   document.getElementById('onboard-overlay').classList.remove('hidden');
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
@@ -1792,7 +2316,7 @@ async function signIn(btnEl){
       overlay.classList.add('hidden');
       overlay.classList.remove('leaving');
       btnEl.classList.remove('loading'); btnEl.classList.remove('success');
-      saveSession(account.role, accountKey);
+      saveSession(account.role, accountKey, account.memberId, account.tenantId);
       markDeviceTrusted(accountKey, account.name);
       routeAfterSignIn(account);
     }, 320);
@@ -1835,7 +2359,7 @@ async function signInTrusted(btnEl){
       overlay.classList.add('hidden');
       overlay.classList.remove('leaving');
       btnEl.classList.remove('loading'); btnEl.classList.remove('success');
-      saveSession(account.role, trustedKey);
+      saveSession(account.role, trustedKey, account.memberId, account.tenantId);
       routeAfterSignIn(account);
     }, 320);
   }, 550);
@@ -1845,21 +2369,31 @@ function switchToFullSignIn(){
   clearDeviceTrust();
   document.getElementById('signin-trusted-form').style.display = 'none';
   document.getElementById('signin-idpin-form').style.display = '';
-  document.getElementById('signin-tagline').textContent = 'Your football academy, in your pocket.';
+  document.getElementById('signin-tagline').textContent = 'The future of sports.';
 }
 function routeAfterSignIn(account){
+  setRoleUI(account.role);
   if(account.role === 'parent'){
     if(account.children.length > 1){ openChildSwitch(account, true); return; }
     applyActiveChild(account.children[0], account);
+    loadPlayerState(account.children[0].memberId);
     enterAppFor(account);
     return;
   }
   if(account.role === 'staff'){
     document.getElementById('onboard-overlay').classList.add('hidden');
-    showScreen('home');
-    showToast('Signed in as staff — open Profile → Coach panel');
+    loadCoachState(account.accountId, account.tenantId);
+    showScreen('coach-home');
+    showToast(`Signed in as ${account.name.split(' ')[0]}`);
     return;
   }
+  document.getElementById('home-player-title').textContent = (account.name || 'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = account.academy || 'Academy';
+  document.getElementById('home-status-txt').textContent = `· ${account.coach || 'No coach assigned'}`;
+  const greetEl0 = document.getElementById('home-greeting-line');
+  if(greetEl0) greetEl0.textContent = `${timeGreeting()},`;
+  loadPlayerState(account.memberId);
+  if(account.onboarded) markOnboarded();
   if(hasOnboarded()){
     document.getElementById('onboard-overlay').classList.add('hidden');
     showScreen('home');
@@ -1874,8 +2408,7 @@ function enterAppFor(account){
   showToast(`Welcome, ${account.name.split(' ')[0]}`);
 }
 
-/* ===== MODULE: Family / Multi-Child =====
-   Martin → Child A / Child B — one account, no duplicate logins. */
+/* ===== MODULE: Family / Multi-Child ===== */
 let pendingAccountForChildSwitch = null;
 function openChildSwitch(account, isFirstSignIn){
   pendingAccountForChildSwitch = isFirstSignIn ? account : null;
@@ -1894,6 +2427,8 @@ function selectChild(i){
   const account = window.__childSwitchAccount;
   const child = account.children[i];
   applyActiveChild(child, account);
+  saveSession('parent', account.accountId.toLowerCase(), child.memberId, account.tenantId);
+  loadPlayerState(child.memberId);
   closeSheet('sheet-child-switch');
   const wasFirstSignIn = !!pendingAccountForChildSwitch;
   pendingAccountForChildSwitch = null;
@@ -1921,38 +2456,63 @@ function renderSigninEntry(){
     trustedForm.style.display = 'none';
   }
 }
-/* Resume an existing session on reload */
-(function initSessionOnLoad(){
+/* Resume an existing session on reload — ACCOUNTS{} is in-memory only and
+   is empty after a reload, so we re-fetch straight from the server using
+   the saved memberId/tenantId instead of relying on the cache. */
+(async function initSessionOnLoad(){
   if(hasSession()){
-    document.getElementById('signin-overlay').classList.add('hidden');
+    // Sign-in stays visible (default state) until the cached session is
+    // confirmed valid against the server. No dashboard is shown on a guess.
     try{
-      const role = localStorage.getItem(ROLE_KEY);
-      const accountKey = localStorage.getItem(ACCOUNT_KEY);
-      const account = ACCOUNTS[accountKey];
-      if(role === 'parent' && account){
-        const activeId = getActiveChildId();
-        const child = account.children.find(c=>c.id===activeId) || account.children[0];
-        if(child) applyActiveChild(child, account);
+      const cachedName = getTrustedDeviceName();
+      if(cachedName && cachedName !== 'there'){
+        document.getElementById('home-player-title').textContent = cachedName.split(' ')[0];
       }
     }catch(e){}
-    if(hasOnboarded()){
+
+    const role = localStorage.getItem(ROLE_KEY);
+    const memberId = localStorage.getItem(MEMBER_ID_KEY);
+    const tenantId = localStorage.getItem(TENANT_ID_KEY);
+    const accountKey = localStorage.getItem(ACCOUNT_KEY);
+
+    let sessionValid = false;
+    try{
+      if(role === 'staff' && accountKey){
+        sessionValid = await loadCoachState(accountKey.toUpperCase(), tenantId);
+      } else if(memberId){
+        sessionValid = await loadPlayerState(memberId);
+      }
+    }catch(e){ sessionValid = false; }
+
+    if(!sessionValid){
+      // Stale/invalid/expired session: never leave the person on an empty
+      // dashboard — force back to the real entry point, the login screen.
+      clearSession();
+      CURRENT_STATE = null;
+      CURRENT_COACH_STATE = null;
+      renderSigninEntry();
+      document.getElementById('signin-overlay').classList.remove('hidden');
+      document.getElementById('onboard-overlay').classList.add('hidden');
+      return;
+    }
+
+    document.getElementById('signin-overlay').classList.add('hidden');
+    if(role === 'staff' || role === 'parent' || hasOnboarded()){
       document.getElementById('onboard-overlay').classList.add('hidden');
     } else {
       document.getElementById('onboard-overlay').classList.remove('hidden');
     }
+    if(role === 'staff') showScreen('coach-home');
+    if(isSuperAdminMode()) showSuperAdminBadge();
   } else {
     renderSigninEntry();
   }
 })();
 
-/* ===== Initial render ===== */
-renderTraining();
-refreshByteSenseSummary();
-renderByteSenseBreakdown();
-renderRewardsActions();
-renderRewardsRedeem();
-renderHomeNeeds();
-renderHomeRecent();
+/* ===== Initial render =====
+   No static seed render here — everything on screen comes only from
+   applyStateToUI() after login (loadPlayerState / loadCoachState), so
+   there is exactly one true source of data regardless of who's signed in. */
 </script>
 </body>
 </html>
