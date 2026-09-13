@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -319,19 +318,19 @@
       </div>
       <div class="top-header-greet">
         <div class="th-hi" id="home-greeting-line">Good afternoon,</div>
-        <div class="th-title" id="home-player-title">Player</div>
+        <div class="th-title" id="home-player-title">Marco</div>
         <div class="th-vehicle-line">
           <span class="dot-green"></span>
-          <span class="name" id="home-academy-title">Academy</span>
-          <span class="status" id="home-status-txt">· Coach</span>
+          <span class="name" id="home-academy-title">Ibex FC Academy</span>
+          <span class="status" id="home-status-txt">· Coach Rafael</span>
         </div>
       </div>
     </div>
 
     <div class="gold-hero" id="home-bytesense-hero" style="margin-top:16px; cursor:pointer;" onclick="haptic('light'); showScreen('bytesense')">
       <div class="l">ByteSense</div>
-      <div class="n" id="home-hero-score">0</div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="home-hero-trend-txt"></span></div>
+      <div class="n" id="home-hero-score">742</div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="home-hero-trend-txt">↑ +18 this month</span></div>
     </div>
 
     <div class="sec-head" style="margin-top:22px;"><h3>Next</h3></div>
@@ -351,10 +350,10 @@
     <div class="sec-head"><h3>Attendance</h3></div>
     <div class="frost-card" style="display:flex; align-items:center; gap:16px;">
       <div style="flex:1;">
-        <div class="row-title" id="attendance-summary-title">0 of 0 sessions attended</div>
-        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:0%; background:var(--pitch);"></div></div>
+        <div class="row-title" id="attendance-summary-title">18 of 21 sessions attended</div>
+        <div class="pbar-track"><div class="pbar-fill" id="attendance-bar" style="width:86%; background:var(--pitch);"></div></div>
       </div>
-      <div class="num-hero" style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">0%</div>
+      <div class="num-hero" style="font-family:var(--font-display); font-size:26px; font-weight:700;" id="attendance-pct">86%</div>
     </div>
     <div class="sec-head"><h3>Session history</h3></div>
     <div class="grouped-card" id="training-history-list"></div>
@@ -365,15 +364,15 @@
     <div class="header"><div class="eyebrow">Player development</div><div class="screen-title">ByteSense score</div></div>
     <div class="gold-hero">
       <div class="l">Overall score</div>
-      <div class="n" id="bytesense-total">0<span>/1000</span></div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt">—</span></div>
+      <div class="n" id="bytesense-total">742<span>/1000</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt" id="bytesense-level-txt">Rising Player</span></div>
     </div>
     <div class="sec-head" style="margin-top:0;"><h3>Score breakdown</h3></div>
     <div class="grouped-card" id="bytesense-breakdown" style="margin-bottom:18px;"></div>
     <div class="sec-head"><h3>Next level</h3></div>
     <div class="frost-card">
       <div class="badge"><span>Progress</span></div>
-      <div style="font-size:14px; line-height:1.5;">You need <b id="bytesense-points-to-next">— more points</b> to reach <b id="bytesense-next-level">—</b>. Consistent training attendance is your fastest path there.</div>
+      <div style="font-size:14px; line-height:1.5;">You need <b id="bytesense-points-to-next">58 more points</b> to reach <b id="bytesense-next-level">Academy Player</b>. Consistent training attendance is your fastest path there.</div>
     </div>
     <div class="sec-head"><h3>Notes from coach</h3></div>
     <div class="grouped-card" id="bytesense-coach-notes"></div>
@@ -381,12 +380,12 @@
 
   <!-- ============ REWARDS ============ -->
   <div class="screen hidden" id="screen-rewards">
-    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Points</div></div>
+    <div class="header"><div class="eyebrow">Rewards</div><div class="screen-title">Ibex Points</div></div>
 
     <div class="gold-hero">
       <div class="l">Points balance</div>
-      <div class="n">0<span>pts</span></div>
-      <div class="status-row"><span class="dot-green"></span><span class="status-txt"></span></div>
+      <div class="n">1,240<span>pts</span></div>
+      <div class="status-row"><span class="dot-green"></span><span class="status-txt">≈ Jersey discount</span></div>
     </div>
 
     <div class="sec-head" style="margin-top:0;"><h3>Ways to earn</h3></div>
@@ -402,15 +401,15 @@
     <div class="header"><div class="eyebrow">Profile</div><div class="screen-title">Account</div></div>
     <div class="profile-hero">
       <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;" id="profile-fullname">—</div>
-      <div class="row-sub" id="profile-meta">—</div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco Villanueva</div>
+      <div class="row-sub" id="profile-meta">ArtiPlay ID AP-2049 · Ibex FC Academy</div>
     </div>
     <div class="sec-head"><h3>Player profile</h3></div>
     <div class="grouped-card">
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">—</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">—</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Age</div><div class="fact-v" id="profile-age">12</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Coach</div><div class="fact-v" id="profile-coach">Coach Rafael</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Level</div><div class="fact-v" id="profile-level">Rising Player</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Parent contact</div><div class="fact-v" style="font-size:12px;" id="profile-parent">Anna V. · 09xx-xxx-2049</div></div>
     </div>
 
     <div class="sec-head"><h3>Settings</h3></div>
@@ -443,16 +442,16 @@
     <div class="sheet-handle"></div>
     <div class="sheet-title">Vex Insight</div>
     <div class="sheet-body">
-      <div class="check-row"><span class="c">✓</span> On a training attendance streak</div>
+      <div class="check-row"><span class="c">✓</span> On a 4-session attendance streak</div>
       <div style="height:1px; background:rgba(0,0,0,0.06); margin:10px 0;"></div>
       <div style="display:flex; flex-direction:column; gap:9px;">
         <div style="display:flex; align-items:flex-start; gap:10px;">
           <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
-          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--t2); font-weight:600;">Next up ·</span> Check your Training tab for the next session</div>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--t2); font-weight:600;">Next up ·</span> Tue Skills Session, 5:30 PM — RSVP before Monday</div>
         </div>
         <div style="display:flex; align-items:flex-start; gap:10px;">
           <span style="flex-shrink:0; margin-top:1px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
-          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--orange); font-weight:600;">Watch ·</span> Check your lowest ByteSense category and ask your coach for a development note</div>
+          <div style="font-size:13.5px; line-height:1.4;"><span style="color:var(--orange); font-weight:600;">Watch ·</span> Growth score is your lowest category — ask Coach Rafael for a development note</div>
         </div>
       </div>
     </div>
@@ -496,7 +495,7 @@
   <div class="sheet-overlay" id="overlay-thread" onclick="closeSheet('sheet-thread')"></div>
   <div class="share-sheet" id="sheet-thread" style="height:78vh; max-height:78vh; display:flex; flex-direction:column;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title" id="thread-title">Coach</div>
+    <div class="sheet-title" id="thread-title">Coach Rafael</div>
     <div class="sheet-body" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
       <div class="chat-log" id="thread-log" style="flex:1; overflow-y:auto;"></div>
       <div class="au-search-dock">
@@ -634,7 +633,7 @@
   <div class="sheet-overlay" id="overlay-coach-panel" onclick="closeSheet('sheet-coach-panel')"></div>
   <div class="share-sheet" id="sheet-coach-panel" style="height:85vh; max-height:85vh;">
     <div class="sheet-handle"></div>
-    <div class="sheet-title" id="coach-panel-title">Coach panel</div>
+    <div class="sheet-title">Coach panel · Coach Rafael</div>
     <div class="sheet-body">
       <div class="role-tab-row" id="coach-tabs">
         <div class="role-tab active" data-tab="roster" onclick="selectCoachTab('roster')">Roster</div>
@@ -671,14 +670,9 @@
   <div class="onboard-overlay" id="signin-overlay" style="z-index:950;">
     <div class="onboard-step" style="cursor:default;">
       <div class="onboard-center">
-            <div class="onboard-mark" style="width:78px; height:78px; cursor:pointer;" onclick="handleLogoTap()">
-          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <polygon points="32,8 51,19.5 51,42.5 32,54 13,42.5 13,19.5" stroke="#1c1c1e" stroke-width="2.2"/>
-            <path d="M32 8v46M13 19.5l38 23M51 19.5l-38 23" stroke="#1c1c1e" stroke-width="1"/>
-          </svg>
-        </div>
+        <div class="onboard-mark"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="32" cy="32" r="22" stroke="#1F6B3C" stroke-width="3.5"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10M17 17l7 7M40 40l7 7M47 17l-7 7M24 40l-7 7" stroke="#1F6B3C" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="32" r="6" fill="#E8CC7A"/></svg></div>
         <div class="onboard-title">ArtiPlay</div>
-        <div class="onboard-sub" id="signin-tagline">The future of sports.</div>
+        <div class="onboard-sub" id="signin-tagline">Your football academy, in your pocket.</div>
       </div>
       <div class="onboard-footer">
         <div id="signin-idpin-form">
@@ -693,9 +687,7 @@
             <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
           </button>
           <button class="btn-ghost" onclick="haptic('light'); showToast('Ask your coach or academy admin for your Account ID')">Forgot your Account ID?</button>
-          <!-- === START: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
-          <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">Sign up instead</button>
-          <!-- === END: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
+          <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">New player? Join with an invite code</button>
         </div>
         <div id="signin-trusted-form" style="display:none;">
           <div class="onboard-sub" id="signin-trusted-greeting" style="text-align:center; margin-bottom:16px;">Welcome back</div>
@@ -715,7 +707,7 @@
     </div>
   </div>
 
-  <!-- ============ ONBOARDING / SIGNUP — invite PIN → profile → set PIN → (coach pick) → notifications ============ -->
+  <!-- ============ ONBOARDING / SIGNUP — 3 steps, ~60–90s ============ -->
   <div class="onboard-overlay hidden" id="onboard-overlay">
     <div class="onboard-topbar">
       <button class="onboard-back" id="ob-back-btn" style="visibility:hidden;" onclick="obBack()">‹</button>
@@ -723,12 +715,13 @@
       <span style="width:26px;"></span>
     </div>
 
-    <!-- === START: OB-VERIFY REPLACEMENT (Academy Invite PIN, not Coach ID) === -->
     <div class="onboard-step" id="ob-verify">
       <div class="onboard-center">
-        <div class="onboard-tag" style="margin-bottom:22px;">Enter the Academy Invite PIN your Academy gave you.</div>
+        <div class="onboard-mark"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none"><circle cx="32" cy="32" r="22" stroke="#1F6B3C" stroke-width="3.5"/><path d="M32 10v10M32 44v10M10 32h10M44 32h10M17 17l7 7M40 40l7 7M47 17l-7 7M24 40l-7 7" stroke="#1F6B3C" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="32" r="6" fill="#E8CC7A"/></svg></div>
+        <div class="onboard-title">Welcome to<br>ArtiPlay</div>
+        <div class="onboard-tag" style="margin-bottom:22px;">Enter the invite code your coach sent you — it links you to the right academy automatically.</div>
         <div class="grouped-card" style="margin:0; width:100%;">
-          <div class="field-row"><div class="row-title" style="font-size:14px;">Academy Invite PIN</div><input type="text" id="ob-invite-input" inputmode="numeric" maxlength="6" placeholder="e.g. 739201"></div>
+          <div class="field-row"><div class="row-title" style="font-size:14px;">Invite code</div><input type="text" id="ob-invite-input" placeholder="e.g. CH-1042"></div>
         </div>
         <div class="row-sub" id="ob-verify-status" style="min-height:16px; margin-top:10px;"></div>
       </div>
@@ -737,49 +730,20 @@
       </div>
     </div>
 
-    <div class="onboard-step hidden" id="ob-profile-form">
-      <div class="onboard-headblock">
-        <div class="eyebrow" id="ob-role-eyebrow">Joining as Student</div>
-        <div class="onboard-title" id="ob-profile-title">Tell us about you</div>
-      </div>
-      <div class="grouped-card" style="margin:0 0 12px;" id="ob-profile-fields"></div>
-      <div class="onboard-footer">
-        <button class="btn-primary oauth-btn" id="ob-profile-btn" onclick="obSubmitProfile(this)">
-          <span class="btn-content">Continue</span>
-          <span class="btn-status status-loading"><span class="oauth-spinner"></span>Creating account…</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="onboard-step hidden" id="ob-set-pin">
+    <div class="onboard-step hidden" id="ob-confirm">
       <div class="onboard-center">
-        <div class="onboard-mark" style="width:60px; height:60px;"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--pitch)" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div class="onboard-title">Set your PIN</div>
-        <div class="onboard-tag" style="margin-bottom:18px;">This is what you'll use to sign in from now on.</div>
-        <div class="grouped-card" style="margin:0; width:100%;">
-          <div class="field-row"><div class="row-title" style="font-size:14px;">New PIN</div><input type="password" id="ob-newpin-input" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px;"></div>
-        </div>
+        <div class="onboard-mark"><svg viewBox="0 0 64 64" width="34" height="34" fill="none"><circle cx="32" cy="32" r="18" stroke="var(--pitch)" stroke-width="4"/><path d="M22 33l7 7 13-15" stroke="var(--pitch)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="onboard-title" id="ob-confirm-title">You're joining Ibex FC</div>
+        <div class="onboard-tag" id="ob-confirm-sub">as Marco's parent.</div>
       </div>
       <div class="onboard-footer">
-        <button class="btn-primary oauth-btn" id="ob-pin-btn" onclick="obConfirmJoin(this)">
-          <span class="btn-content">Continue &amp; create account</span>
+        <button class="btn-primary oauth-btn" id="ob-confirm-btn" onclick="obConfirmJoin(this)">
+          <span class="btn-content">Confirm &amp; continue</span>
           <span class="btn-status status-loading"><span class="oauth-spinner"></span>Setting things up…</span>
         </button>
+        <button class="btn-ghost" onclick="haptic('light'); obBack()">Wrong code? Go back</button>
       </div>
     </div>
-
-    <div class="onboard-step hidden" id="ob-coach-pick">
-      <div class="onboard-headblock">
-        <div class="eyebrow">Optional</div>
-        <div class="onboard-title">Choose your Coach</div>
-        <div class="row-sub">You can skip this — a coach or admin can assign you later.</div>
-      </div>
-      <div class="grouped-card" id="ob-coach-list" style="margin:0 0 14px;"></div>
-      <div class="onboard-footer">
-        <button class="btn-secondary" onclick="haptic('light'); obGoTo('ob-notification-setup', true)">Skip for now</button>
-      </div>
-    </div>
-    <!-- === END: OB-VERIFY REPLACEMENT === -->
 
     <div class="onboard-step hidden" id="ob-notification-setup">
       <div class="onboard-headblock">
@@ -802,56 +766,43 @@
     </div>
   </div>
 
-  <div class="sheet-overlay" id="overlay-super-admin-unlock" onclick="closeSheet('sheet-super-admin-unlock')"></div>
-  <div class="share-sheet" id="sheet-super-admin-unlock">
-    <div class="sheet-handle"></div>
-    <div class="sheet-title">Admin unlock</div>
-    <div class="sheet-body">
-      <div class="grouped-card" style="margin:0 0 12px;">
-        <div class="field-row"><div class="row-title" style="font-size:14px;">Super Admin PIN</div><input type="password" id="super-admin-pin-input" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px; font-size:17px;" onkeydown="if(event.key==='Enter'){ submitSuperAdminPin(); }"></div>
-      </div>
-      <div class="row-sub" id="super-admin-pin-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
-      <button class="btn-primary" id="super-admin-pin-btn" onclick="submitSuperAdminPin()">Unlock</button>
-    </div>
-  </div>
-
   <div class="toast" id="toast"></div>
 </div>
 
 <script>
 /* ============================================================
    ARTIPLAY — MODULE MAP
-   Single-file monolith by design (no build step).
-   Every screen/sheet reads only from CURRENT_STATE (player) or
-   CURRENT_COACH_STATE (staff) — both come from the backend via
-   callApi(). There is no local/static seed data left in this file;
-   all display values are server-driven.
+   Single-file monolith by design (no build step), adapted from
+   the ArtiDrive shell. Boundaries below are logical, not physical.
    ------------------------------------------------------------
    MODULE: Utils          → haptic(), fmtPeso()
    MODULE: Session/Auth   → hasSession(), hasOnboarded(), saveSession(),
                              markOnboarded(), clearSession()
-   MODULE: Icons          → ICONS
+   MODULE: Icons/Data     → ICONS, byteSenseData, trainingSessions,
+                             achievementsData, rewardsActions,
+                             rewardsRedeemables, storeData, messagesData,
+                             announcementsData, notifications, rosterData
    MODULE: Screens        → showScreen()
    MODULE: Sheets         → openSheet(), closeSheet()
-   MODULE: Live State     → loadPlayerState(), loadCoachState(), applyStateToUI()
-   MODULE: ByteSense      → openByteSenseDetail()
-   MODULE: Training       → setRsvp()
-   MODULE: Achievements   → openAchievements()
-   MODULE: Rewards        → openRedeemDetail(), confirmRedeem()
-   MODULE: Store          → openStoreDetail(), requestFromParent()
-   MODULE: Messages       → openMessages(), openThread(), sendThreadMessage()
-   MODULE: Announcements  → openAnnouncements()
+   MODULE: ByteSense      → renderByteSenseBreakdown(), updateByteSenseRing(),
+                             openByteSenseDetail(), computeByteSenseScore()
+   MODULE: Training       → renderTraining(), setRsvp(), renderAttendance()
+   MODULE: Achievements   → renderAchievements(), openAchievements()
+   MODULE: Rewards        → renderRewardsActions(), renderRewardsRedeem(),
+                             openRedeemDetail(), confirmRedeem()
+   MODULE: Store          → renderStore(), openStoreDetail(), requestFromParent()
+   MODULE: Messages       → renderMessages(), openThread(), sendThreadMessage()
+   MODULE: Announcements  → renderAnnouncements(), openAnnouncements()
    MODULE: Vex (AI)       → askVex(), toggleAuPlusMenu(), selectAuPlusAction(),
                              goldMenuAction(), chat rendering, mic/input handling
-                             (local canned-reply assistant, not backend-driven)
-   MODULE: Notifications  → openNotifications()
+   MODULE: Notifications  → renderNotifications(), openNotifications()
    MODULE: Profile        → renderProfileSheet(), openProfileSheet()
    MODULE: Settings       → openSettingsSheet(), renderSettingsSheet(), logoutUser()
    MODULE: Coach Panel    → openCoachPanel(), selectCoachTab(), renderAdminRoster(),
                              openScoreEdit(), saveScoreEdit(), renderAdminSessions(),
                              addAdminSession(), postAdminAnnouncement()
-   MODULE: Onboarding     → obGoTo(), obBack(), obVerifyInvite(), obSubmitProfile(),
-                             obConfirmJoin(), obPickCoach(), applyPlayerDataToApp(),
+   MODULE: Onboarding     → obGoTo(), obBack(), obVerifyInvite(),
+                             obConfirmJoin(), applyPlayerDataToApp(),
                              obCompleteOnboarding()
    MODULE: Toast          → showToast()
    ------------------------------------------------------------
@@ -883,19 +834,9 @@ const ACCOUNT_KEY = 'artiplay_account';
 const ACTIVE_CHILD_KEY = 'artiplay_active_child';
 function hasSession(){ try{ return localStorage.getItem(SESSION_KEY) === '1'; }catch(e){ return false; } }
 function hasOnboarded(){ try{ return localStorage.getItem(ONBOARDED_KEY) === '1'; }catch(e){ return false; } }
-const MEMBER_ID_KEY = 'artiplay_memberid';
-const TENANT_ID_KEY = 'artiplay_tenantid';
-function saveSession(role, accountKey, memberId, tenantId){
-  try{
-    localStorage.setItem(SESSION_KEY, '1');
-    localStorage.setItem(ROLE_KEY, role || 'player');
-    if(accountKey) localStorage.setItem(ACCOUNT_KEY, accountKey);
-    if(memberId) localStorage.setItem(MEMBER_ID_KEY, memberId);
-    if(tenantId) localStorage.setItem(TENANT_ID_KEY, tenantId);
-  }catch(e){}
-}
+function saveSession(role, accountKey){ try{ localStorage.setItem(SESSION_KEY, '1'); localStorage.setItem(ROLE_KEY, role || 'player'); if(accountKey) localStorage.setItem(ACCOUNT_KEY, accountKey); }catch(e){} }
 function markOnboarded(){ try{ localStorage.setItem(ONBOARDED_KEY, '1'); }catch(e){} }
-function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ACCOUNT_KEY); localStorage.removeItem(ACTIVE_CHILD_KEY); localStorage.removeItem(MEMBER_ID_KEY); localStorage.removeItem(TENANT_ID_KEY); }catch(e){} }
+function clearSession(){ try{ localStorage.removeItem(SESSION_KEY); localStorage.removeItem(ROLE_KEY); localStorage.removeItem(ACCOUNT_KEY); localStorage.removeItem(ACTIVE_CHILD_KEY); }catch(e){} }
 function saveActiveChild(childId){ try{ localStorage.setItem(ACTIVE_CHILD_KEY, childId); }catch(e){} }
 function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY); }catch(e){ return null; } }
 /* Trusted device (spec §9) — a returning device skips re-entering the
@@ -904,12 +845,6 @@ function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY);
    and validate the session/device behind it (§11, §22). */
 const TRUSTED_DEVICE_KEY = 'artiplay_trusted_device';
 const TRUSTED_DEVICE_NAME_KEY = 'artiplay_trusted_device_name';
-function clearDeviceTrust(){
-  try{
-    localStorage.removeItem(TRUSTED_DEVICE_KEY);
-    localStorage.removeItem(TRUSTED_DEVICE_NAME_KEY);
-  }catch(e){}
-}
 function markDeviceTrusted(accountKey, name){
   try{
     localStorage.setItem(TRUSTED_DEVICE_KEY, accountKey);
@@ -921,13 +856,13 @@ function getTrustedDeviceName(){ try{ return localStorage.getItem(TRUSTED_DEVICE
 function applyActiveChild(child, account){
   saveActiveChild(child.id);
   document.getElementById('home-player-title').textContent = child.name.split(' ')[0];
-  document.getElementById('home-academy-title').textContent = (account && account.academy) || '—';
+  document.getElementById('home-academy-title').textContent = (account && account.academy) || 'Ibex FC Academy';
   document.getElementById('home-status-txt').textContent = `· ${child.coach || 'Coach'}`;
   const heroScore = document.getElementById('home-hero-score');
   if(heroScore) heroScore.textContent = child.score;
   document.getElementById('profile-age').textContent = child.age || '—';
   document.getElementById('profile-coach').textContent = child.coach || '—';
-  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${child.id} · ${(account && account.academy) || '—'}`;
+  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${child.id} · ${(account && account.academy) || 'Ibex FC Academy'}`;
   if(account){
     document.getElementById('profile-parent').textContent = `${account.name} · ${account.contact || 'On file'}`;
     const greetEl = document.getElementById('home-greeting-line');
@@ -935,7 +870,7 @@ function applyActiveChild(child, account){
   }
 }
 
-/* ===== MODULE: Icons ===== */
+/* ===== MODULE: Icons/Data ===== */
 const ICONS = {
   training: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
   bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
@@ -946,16 +881,118 @@ const ICONS = {
   clock: '<svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
 };
 
-/* Icons kept for rewards "ways to earn" rows — rendered by applyStateToUI() from live data */
+const byteSenseData = [
+  {key:'training', name:'Training', weight:55, score:82, note:'Consistent effort in every drill this month.'},
+  {key:'performance', name:'Performance', weight:20, score:74, note:'Strong on the ball, work on off-ball movement.'},
+  {key:'behavior', name:'Behavior', weight:15, score:88, note:'Great teammate — coachable and disciplined.'},
+  {key:'growth', name:'Growth', weight:10, score:61, note:'Improvement has slowed the last few weeks.'},
+];
+const LEVELS = [
+  {name:'Rookie', min:0}, {name:'Rising Player', min:600}, {name:'Academy Player', min:800},
+  {name:'Elite', min:900}, {name:'Pro Prospect', min:960},
+];
+
+function computeByteSenseScore(){
+  const pct = byteSenseData.reduce((sum,c)=> sum + (c.score * c.weight/100), 0);
+  return Math.round(pct * 10); // scale 0-100 -> 0-1000
+}
+function currentLevel(score){
+  let lvl = LEVELS[0];
+  for(const l of LEVELS){ if(score >= l.min) lvl = l; }
+  return lvl;
+}
+function nextLevel(score){
+  for(const l of LEVELS){ if(l.min > score) return l; }
+  return null;
+}
+
+const trainingSessions = [
+  {id:'s1', day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:'yes'},
+  {id:'s2', day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A', rsvp:''},
+  {id:'s3', day:'Sat', date:'Sep 19', time:'8:00 AM', venue:'Ibex Pitch B', rsvp:''},
+];
+const trainingHistory = [
+  {title:'Skills session', date:'Sep 8', status:'Present'},
+  {title:'Match simulation', date:'Sep 5', status:'Present'},
+  {title:'Fitness &amp; conditioning', date:'Sep 1', status:'Late'},
+  {title:'Skills session', date:'Aug 29', status:'Absent'},
+];
+
+const achievementsData = [
+  {ic:'🔥', name:'4-Session Streak', unlocked:true, desc:'Attended 4 training sessions in a row.'},
+  {ic:'⭐', name:'Level Up', unlocked:true, desc:'Reached Rising Player level.'},
+  {ic:'🎯', name:'Perfect Month', unlocked:false, desc:'Attend every session in a calendar month.'},
+  {ic:'🤝', name:'Team Player', unlocked:true, desc:'Behavior score of 85+ for two straight weeks.'},
+  {ic:'📈', name:'Growth Spurt', unlocked:false, desc:'Improve your Growth score by 15+ points.'},
+  {ic:'🏆', name:'MVP Session', unlocked:false, desc:'Coach-awarded recognition for a standout session.'},
+];
+
+const rewardsActions = [
+  {label:'Attend a training session', done:true},
+  {label:'Perfect week attendance', done:true},
+  {label:'Coach recognition', done:false},
+  {label:'Invite a teammate', done:false},
+  {label:'Complete player profile', done:true},
+  {label:'Weekly ByteSense check-in', done:true},
+];
 const REWARDS_CHECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
 const REWARDS_CIRCLE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+const rewardsRedeemables = [
+  {icon:ICONS.store, label:'Jersey discount', cost:2000, desc:'₱300 off your next official Ibex FC jersey.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>', label:'Boots voucher', cost:3500, desc:'₱500 credit toward football boots at partner shops.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>', label:'Extra training slot', cost:1200, desc:'One free 1-on-1 skills session with a coach.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>', label:'Custom badge frame', cost:800, desc:'Unlock a gold badge frame on your profile.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v15"/><path d="M4 12h8"/></svg>', label:'Gear bundle', cost:2600, desc:'Shin guards + socks bundle from the academy store.'},
+  {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.7 1.1 6.6L12 17.6l-5.8 3.2 1.1-6.6-4.8-4.7 6.6-.9z"/></svg>', label:'ArtiPlay Premium', cost:4500, desc:'1 month of deeper ByteSense insights and priority Vex support.'},
+];
 
+const storeData = [
+  {icon:ICONS.store, name:'Ibex FC Home Jersey', price:1450, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Training Boots — Size 5', price:2600, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Shin Guards', price:450, forLevel:'All levels'},
+  {icon:ICONS.store, name:'Academy Backpack', price:990, forLevel:'Rising Player+'},
+];
+
+const messagesData = [
+  {id:'m1', name:'Coach Rafael', last:'Great session today, keep it up!', time:'2h ago', unread:true},
+  {id:'m2', name:'Ibex FC Front Office', last:'Your boots request was approved.', time:'Yesterday', unread:false},
+];
+const threadSeed = {
+  m1: [ {who:'them', text:'Great session today, keep it up!'}, {who:'me', text:'Thanks Coach! See you Thursday.'} ],
+  m2: [ {who:'them', text:'Your boots request was approved.'}, {who:'me', text:'Thank you po!'} ],
+};
+
+const announcementsData = [
+  {title:'PMS this weekend', body:'Player Movement Session on Saturday, 8AM at Pitch B. Bring both jerseys.', time:'Today'},
+  {title:'Registration renewal', body:'Academy registration for next quarter opens Monday.', time:'2 days ago'},
+];
+
+const notifications = [
+  {ico:ICONS.training, title:'Training tomorrow — Tue Skills Session', time:'Today · Ibex FC Academy'},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', time:'Today · Ibex FC Academy'},
+  {ico:ICONS.badge, title:'New badge unlocked: 4-Session Streak', time:'Yesterday · Ibex FC Academy'},
+];
+
+const rosterData = [
+  {id:'p1', name:'Marco Villanueva', score:742, level:'Rising Player'},
+  {id:'p2', name:'Diego Santos', score:610, level:'Rising Player'},
+  {id:'p3', name:'Liam Cruz', score:895, level:'Academy Player'},
+  {id:'p4', name:'Ken Reyes', score:530, level:'Rookie'},
+];
+const adminSessions = [
+  {day:'Tue', date:'Sep 15', time:'5:30 PM', venue:'Ibex Pitch A'},
+  {day:'Thu', date:'Sep 17', time:'5:30 PM', venue:'Ibex Pitch A'},
+];
+
+/* ===== MODULE: Identity registry =====
+   One login → one record → role + tenant(s) resolved automatically.
+   Keys are lowercased login handles (ID or email). */
 /* ===== MODULE: Backend API (Apps Script Web App) =====
-   API_BASE_URL points at your deployment's /exec URL:
+   Replace API_BASE_URL with your deployment's /exec URL after:
    Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
    text/plain keeps every request a CORS "simple request" (no preflight) — see
    the doPost() comment in the backend for why that matters. */
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw6QYlaYPDE-PSVZ4I8b1dt9DJgwAWBAtlMBtPchO-6gsGwcEVQmPG9c76JwlOTEpv1Yw/exec';
+const API_BASE_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
 async function callApi(action, payload){
   const res = await fetch(API_BASE_URL, {
     method: 'POST',
@@ -976,147 +1013,33 @@ function lookupAccount(raw){
   return ACCOUNTS[key] || null;
 }
 
-/* ===== MODULE: Live State — ONE identity, ONE set of data, always from server ===== */
-let CURRENT_STATE = null;       // clientGetFullState() payload for whoever is logged in as player
-let CURRENT_COACH_STATE = null; // clientGetCoachState() payload for whoever is logged in as staff
-
-async function loadPlayerState(memberId){
-  if(!memberId) return false;
-  let res;
-  try{ res = await callApi('getFullState', { memberId }); }
-  catch(e){ console.error('getFullState network error:', e); showToast('Could not load your data — check your connection'); return false; }
-  if(!res.success){ console.error('getFullState failed:', res.error); showToast(res.error || 'Could not load your data'); return false; }
-  console.log('getFullState payload:', res.data); // TEMP DEBUG — check DevTools console
-  CURRENT_STATE = res.data;
-  try{ applyStateToUI(); }
-  catch(e){ console.error('applyStateToUI crashed:', e); showToast('Loaded data, but UI failed to render — check console'); return false; }
-  return true;
-}
-
-async function loadCoachState(coachId, tenantId){
-  if(!coachId) return false;
-  let res;
-  try{ res = await callApi('getCoachState', { coachId, tenantId }); }
-  catch(e){ showToast('Could not load staff data'); return false; }
-  if(!res.success){ showToast(res.error || 'Could not load staff data'); return false; }
-  CURRENT_COACH_STATE = res.data;
-  document.getElementById('home-player-title').textContent = (CURRENT_COACH_STATE.staffName || 'Staff').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = CURRENT_COACH_STATE.academy || 'Academy';
-  document.getElementById('home-status-txt').textContent = `· ${CURRENT_COACH_STATE.staffRole || 'Staff'}`;
-  const greetEl = document.getElementById('home-greeting-line');
-  if(greetEl) greetEl.textContent = `${timeGreeting()},`;
-  const titleEl = document.getElementById('coach-panel-title');
-  if(titleEl) titleEl.textContent = 'Coach panel · ' + CURRENT_COACH_STATE.staffName;
-  if(document.getElementById('coach-tab-roster').style.display !== 'none') renderAdminRoster();
-  if(document.getElementById('coach-tab-sessions').style.display !== 'none') renderAdminSessions();
-  return true;
-}
-
-function applyStateToUI(){
-  if(!CURRENT_STATE) return;
-  const s = CURRENT_STATE;
-  if(!s.member){ console.error('applyStateToUI: s.member is missing from payload', s); return; }
-
-  document.getElementById('home-player-title').textContent = (s.member.name || 'Player').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = s.member.academy || 'Academy';
-  document.getElementById('home-status-txt').textContent = `· ${s.member.coach || 'No coach assigned'}`;
-  const greetEl = document.getElementById('home-greeting-line');
-  if(greetEl) greetEl.textContent = `${timeGreeting()},`;
-
-  document.getElementById('home-hero-score').textContent = s.score.total;
-  document.getElementById('bytesense-total').innerHTML = `${s.score.total}<span>/1000</span>`;
-  document.getElementById('bytesense-level-txt').textContent = s.score.level;
-  document.getElementById('bytesense-points-to-next').textContent = s.score.nextLevel ? `${s.score.pointsToNext} more points` : "You're at the top level";
-  document.getElementById('bytesense-next-level').textContent = s.score.nextLevel || s.score.level;
-  document.getElementById('bytesense-breakdown').innerHTML = s.score.breakdown.map((c,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openByteSenseDetail(${i})">
-      <div class="icon-tile">${ICONS.bolt}</div>
-      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.weight}% of total</div></div>
-      <div class="fact-v">${c.score}/100</div>
-    </div>`).join('');
-  document.getElementById('bytesense-coach-notes').innerHTML = s.score.breakdown.map(c=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note || 'No notes yet.'}</div></div></div>`).join('');
-
-  document.getElementById('training-list').innerHTML = s.sessions.map(sess=>`
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;"><div class="row-title">${sess.day} ${sess.date} · ${sess.time}</div><div class="row-sub">${sess.venue}</div></div>
-      <div style="display:flex; gap:5px;">
-        <button class="hist-chip${sess.rsvp==='yes'?' active':''}" onclick="setRsvp('${sess.id}','yes')">Yes</button>
-        <button class="hist-chip${sess.rsvp==='no'?' active':''}" onclick="setRsvp('${sess.id}','no')">No</button>
-      </div>
-    </div>`).join('') || '<div class="grouped-row"><div class="row-sub">No sessions scheduled yet.</div></div>';
-  const next = s.sessions[0];
-  document.getElementById('home-next-session').innerHTML = next ? `
-    <div class="grouped-row">
-      <div class="icon-tile">${ICONS.training}</div>
-      <div style="flex:1;"><div class="row-title">${next.day} ${next.date} · ${next.time}</div><div class="row-sub">${next.venue}</div></div>
-      <button class="hist-chip${next.rsvp==='yes'?' active':''}" onclick="setRsvp('${next.id}','yes')">${RSVP_LABEL[next.rsvp]||'RSVP'}</button>
-    </div>` : '<div class="grouped-row"><div class="row-sub">No upcoming sessions.</div></div>';
-  document.getElementById('training-history-list').innerHTML = s.history.map(h=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${h.date}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('');
-  document.getElementById('attendance-summary-title').textContent = `${s.attendance.attended} of ${s.attendance.total} sessions attended`;
-  document.getElementById('attendance-bar').style.width = s.attendance.pct + '%';
-  document.getElementById('attendance-pct').textContent = s.attendance.pct + '%';
-
-  document.getElementById('achievements-scroll').innerHTML = s.achievements.filter(a=>a.unlocked).map(a=>`
-    <div class="badge-card"><span class="b-ic">${a.icon}</span><span class="b-lbl">${a.name}</span></div>`).join('');
-  document.getElementById('achievements-list').innerHTML = s.achievements.map(a=>`
-    <div class="grouped-row">
-      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.icon}</div>
-      <div style="flex:1; ${a.unlocked?'':'opacity:.5;'}"><div class="row-title" style="font-size:14px;">${a.name}</div><div class="row-sub">${a.desc}</div></div>
-      <span class="badge-status ${a.unlocked?'badge-green':'badge-gray'}">${a.unlocked?'Earned':'Locked'}</span>
-    </div>`).join('');
-
-  const rewardsHero = document.querySelector('#screen-rewards .gold-hero .n');
-  if(rewardsHero) rewardsHero.innerHTML = `${s.points.toLocaleString('en-PH')}<span>pts</span>`;
-  document.getElementById('rewards-actions-list').innerHTML = s.wayToEarn.map(a=>`
-    <div class="grouped-row">
-      <div class="icon-tile" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : ''}">${a.done ? REWARDS_CHECK_ICON : REWARDS_CIRCLE_ICON}</div>
-      <div style="flex:1;" class="row-title">${a.label}</div>
-      <span class="badge-status" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : 'background:rgba(0,0,0,0.05); color:var(--t2);'}">${a.done ? 'Earned' : 'Available'}</span>
-    </div>`).join('');
-  document.getElementById('rewards-redeem-grid').innerHTML = s.rewards.map((r,i)=>`
-    <div class="redeem-tile" style="cursor:pointer;" onclick="haptic('light'); openRedeemDetail(${i})">
-      <span class="r-ic">${r.icon}</span><span class="r-lbl">${r.label}</span>
-    </div>`).join('');
-
-  document.getElementById('store-list').innerHTML = s.storeItems.map((it,i)=>`
-    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openStoreDetail(${i})">
-      <div class="icon-tile">${it.icon}</div>
-      <div style="flex:1;"><div class="row-title">${it.name}</div><div class="row-sub">${it.forLevel}</div></div>
-      <div class="fact-v">${fmtPeso(it.price)}</div>
-    </div>`).join('');
-
-  document.getElementById('messages-list').innerHTML = s.messages.map(m=>`
-    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openThread('${m.id}')">
-      <div class="icon-tile">${ICONS.chat}</div>
-      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${m.name}</div><div class="row-sub">${m.last}</div></div>
-      <div style="text-align:right;"><div class="row-sub">${m.time || ''}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
-    </div>`).join('');
-
-  document.getElementById('announcements-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
-    s.announcements.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${a.time}</div></div></div>`).join('') + `</div>`;
-
-  document.getElementById('activity-home-list').innerHTML = s.activity.slice(0,3).map(a=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub||''}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('');
-  document.getElementById('notif-dot').classList.toggle('hidden', s.notifications.length===0);
-
-  const nameEl = document.getElementById('profile-fullname');
-  if(nameEl) nameEl.textContent = s.member.name;
-  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${s.member.accountId} · ${s.member.academy}`;
-  document.getElementById('profile-age').textContent = s.member.age || '—';
-  document.getElementById('profile-coach').textContent = s.member.coach || '—';
-  document.getElementById('profile-level').textContent = s.score.level;
-  document.getElementById('profile-parent').textContent = `${s.member.parentName || 'On file'} · ${s.member.parentContact || ''}`;
-}
-
-/* ===== MODULE: Home ===== */
+/* ===== MODULE: Home =====
+   Answers 3 things: what's my score, what's next, what needs me. */
+const BYTESENSE_MONTH_DELTA = 18;
 function timeGreeting(){
   const h = new Date().getHours();
   if(h < 12) return 'Good morning';
   if(h < 18) return 'Good afternoon';
   return 'Good evening';
+}
+const needsYouData = [
+  { icon:'store', title:'Jersey request', sub:'Boots request from Marco is awaiting your approval', cta:'Review', action:"haptic('light'); openStore();" }
+];
+function renderHomeNeeds(){
+  const head = document.getElementById('home-needs-head');
+  const list = document.getElementById('home-needs-list');
+  if(!needsYouData.length){ head.style.display = 'none'; list.style.display = 'none'; return; }
+  head.style.display = ''; list.style.display = '';
+  list.innerHTML = needsYouData.map(n=>`
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS[n.icon] || ICONS.bolt}</div>
+      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="row-sub">${n.sub}</div></div>
+      <button class="hist-chip active" onclick="${n.action}">${n.cta}</button>
+    </div>`).join('');
+}
+function renderHomeRecent(){
+  document.getElementById('activity-home-list').innerHTML = activityData.slice(0,3).map(a=>`
+    <div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('');
 }
 
 /* ===== MODULE: Screens ===== */
@@ -1157,9 +1080,27 @@ function closeSheet(id){
 function toggleSwitch(el){ haptic('medium'); el.classList.toggle('on'); }
 
 /* ===== MODULE: ByteSense ===== */
+function updateByteSenseRing(score){
+  const circ = 170;
+  const pct = Math.min(100, score/10);
+  const offset = Math.max(0, circ - (circ * pct / 100));
+  const ring = document.getElementById('bytesense-ring-fill');
+  const scoreText = document.getElementById('bytesense-ring-score');
+  if(ring) ring.setAttribute('stroke-dashoffset', offset.toFixed(1));
+  if(scoreText) scoreText.textContent = Math.round(pct);
+}
+function renderByteSenseBreakdown(){
+  document.getElementById('bytesense-breakdown').innerHTML = byteSenseData.map((c,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openByteSenseDetail(${i})">
+      <div class="icon-tile">${ICONS.bolt}</div>
+      <div style="flex:1;"><div class="row-title">${c.name}</div><div class="row-sub">${c.weight}% of total</div></div>
+      <div class="fact-v">${c.score}/100</div>
+    </div>`).join('');
+  document.getElementById('bytesense-coach-notes').innerHTML = byteSenseData.map(c=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${c.name}</div><div class="row-sub">${c.note}</div></div></div>`).join('');
+}
 function openByteSenseDetail(i){
-  if(!CURRENT_STATE) return;
-  const c = CURRENT_STATE.score.breakdown[i];
+  const c = byteSenseData[i];
   document.getElementById('bytesense-detail-title').textContent = c.name;
   document.getElementById('bytesense-detail-body').innerHTML = `
     <div class="fact-grid">
@@ -1167,36 +1108,97 @@ function openByteSenseDetail(i){
       <div><div class="fact-l">Weight</div><div class="fact-v">${c.weight}%</div></div>
     </div>
     <div style="height:1px; background:rgba(0,0,0,0.06); margin:16px 0;"></div>
-    <div style="font-size:14px; line-height:1.5;">${c.note || 'No notes yet.'}</div>`;
+    <div style="font-size:14px; line-height:1.5;">${c.note}</div>`;
   openSheet('sheet-bytesense-detail');
+}
+function refreshByteSenseSummary(){
+  const total = computeByteSenseScore();
+  const lvl = currentLevel(total);
+  const next = nextLevel(total);
+  document.getElementById('bytesense-total').innerHTML = `${total}<span>/1000</span>`;
+  document.getElementById('bytesense-level-txt').textContent = lvl.name;
+  const heroScore = document.getElementById('home-hero-score');
+  const trendTxt = document.getElementById('home-hero-trend-txt');
+  if(heroScore) heroScore.textContent = total;
+  if(trendTxt) trendTxt.textContent = BYTESENSE_MONTH_DELTA >= 0 ? `↑ +${BYTESENSE_MONTH_DELTA} this month` : `↓ ${BYTESENSE_MONTH_DELTA} this month`;
+  updateByteSenseRing(total);
+  if(next){
+    document.getElementById('bytesense-points-to-next').textContent = `${next.min - total} more points`;
+    document.getElementById('bytesense-next-level').textContent = next.name;
+  } else {
+    document.getElementById('bytesense-points-to-next').textContent = 'You\'re at the top level';
+    document.getElementById('bytesense-next-level').textContent = 'Pro Prospect';
+  }
 }
 
 /* ===== MODULE: Training ===== */
 const RSVP_LABEL = {yes:'Going', maybe:'Maybe', no:"Can't go", '':'RSVP'};
-async function setRsvp(id, val){
+function renderTraining(){
+  document.getElementById('training-list').innerHTML = trainingSessions.map(s=>`
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS.training}</div>
+      <div style="flex:1;">
+        <div class="row-title">${s.day} ${s.date} · ${s.time}</div>
+        <div class="row-sub">${s.venue}</div>
+      </div>
+      <div style="display:flex; gap:5px;">
+        <button class="hist-chip${s.rsvp==='yes'?' active':''}" onclick="setRsvp('${s.id}','yes')">Yes</button>
+        <button class="hist-chip${s.rsvp==='no'?' active':''}" onclick="setRsvp('${s.id}','no')">No</button>
+      </div>
+    </div>`).join('');
+  const next = trainingSessions[0];
+  document.getElementById('home-next-session').innerHTML = `
+    <div class="grouped-row">
+      <div class="icon-tile">${ICONS.training}</div>
+      <div style="flex:1;"><div class="row-title">${next.day} ${next.date} · ${next.time}</div><div class="row-sub">${next.venue}</div></div>
+      <button class="hist-chip${next.rsvp==='yes'?' active':''}" onclick="setRsvp('${next.id}','yes')">${RSVP_LABEL[next.rsvp]}</button>
+    </div>`;
+  document.getElementById('training-history-list').innerHTML = trainingHistory.map(h=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.clock}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${h.title}</div><div class="row-sub">${h.date}</div></div><span class="badge-status ${h.status==='Present'?'badge-green':(h.status==='Late'?'badge-orange':'badge-red')}">${h.status}</span></div>`).join('');
+}
+function setRsvp(id, val){
   haptic('medium');
-  if(!CURRENT_STATE || !CURRENT_STATE.member){ showToast('Still loading your data — try again in a moment'); return; }
-  const memberId = CURRENT_STATE.member.memberId;
-  const sess = CURRENT_STATE.sessions.find(x=>x.id===id);
-  const newStatus = (sess && sess.rsvp===val) ? '' : val;
-  let result;
-  try{ result = await callApi('setRsvp', { memberId, sessionId: id, status: newStatus }); }
-  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save RSVP'); return; }
-  await loadPlayerState(memberId);
-  showToast(newStatus==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
+  const s = trainingSessions.find(x=>x.id===id);
+  if(s) s.rsvp = (s.rsvp===val) ? '' : val;
+  renderTraining();
+  showToast(val==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
 }
 
 /* ===== MODULE: Achievements ===== */
-function openAchievements(){ openSheet('sheet-achievements'); }
+function renderAchievements(){
+  document.getElementById('achievements-scroll').innerHTML = achievementsData.filter(a=>a.unlocked).map(a=>`
+    <div class="badge-card"><span class="b-ic">${a.ic}</span><span class="b-lbl">${a.name}</span></div>`).join('');
+  document.getElementById('achievements-list').innerHTML = achievementsData.map(a=>`
+    <div class="grouped-row">
+      <div class="icon-tile" style="font-size:16px; ${a.unlocked?'':'opacity:.4;'}">${a.ic}</div>
+      <div style="flex:1; ${a.unlocked?'':'opacity:.5;'}"><div class="row-title" style="font-size:14px;">${a.name}</div><div class="row-sub">${a.desc}</div></div>
+      <span class="badge-status ${a.unlocked?'badge-green':'badge-gray'}">${a.unlocked?'Earned':'Locked'}</span>
+    </div>`).join('');
+}
+function openAchievements(){ renderAchievements(); openSheet('sheet-achievements'); }
 function openVexHighlight(){ openSheet('sheet-vex-highlight'); }
 
 /* ===== MODULE: Rewards ===== */
+function renderRewardsActions(){
+  document.getElementById('rewards-actions-list').innerHTML = rewardsActions.map(a=>`
+    <div class="grouped-row">
+      <div class="icon-tile" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : ''}">${a.done ? REWARDS_CHECK_ICON : REWARDS_CIRCLE_ICON}</div>
+      <div style="flex:1;" class="row-title">${a.label}</div>
+      <span class="badge-status" style="${a.done ? 'background:rgba(52,199,89,0.14); color:#1c8a3e;' : 'background:rgba(0,0,0,0.05); color:var(--t2);'}">${a.done ? 'Earned' : 'Available'}</span>
+    </div>`).join('');
+}
+function renderRewardsRedeem(){
+  document.getElementById('rewards-redeem-grid').innerHTML = rewardsRedeemables.map((r,i)=>`
+    <div class="redeem-tile" style="cursor:pointer;" onclick="haptic('light'); openRedeemDetail(${i})">
+      <span class="r-ic">${r.icon}</span><span class="r-lbl">${r.label}</span>
+    </div>`).join('');
+}
 let currentRedeemIndex = null;
+const USER_POINTS_BALANCE = 1240;
 function openRedeemDetail(i){
   currentRedeemIndex = i;
-  const r = CURRENT_STATE.rewards[i];
-  const canAfford = CURRENT_STATE.points >= r.cost;
+  const r = rewardsRedeemables[i];
+  const canAfford = USER_POINTS_BALANCE >= r.cost;
   document.querySelector('#sheet-redeem .sheet-title').textContent = r.label;
   document.getElementById('redeem-detail-body').innerHTML = `
     <div style="display:flex; justify-content:center; margin-bottom:16px;">
@@ -1205,31 +1207,32 @@ function openRedeemDetail(i){
     <div style="text-align:center; font-size:13.5px; color:var(--t2); line-height:1.5; margin-bottom:18px;">${r.desc}</div>
     <div class="grouped-card" style="margin:0 0 16px;">
       <div class="grouped-row"><div style="flex:1;" class="row-title">Cost</div><div class="fact-v">${r.cost.toLocaleString('en-PH')} pts</div></div>
-      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${CURRENT_STATE.points.toLocaleString('en-PH')} pts</div></div>
+      <div class="grouped-row"><div style="flex:1;" class="row-title">Your balance</div><div class="fact-v">${USER_POINTS_BALANCE.toLocaleString('en-PH')} pts</div></div>
     </div>
     ${canAfford ? '' : `<div class="row-sub" style="text-align:center; color:var(--red); font-weight:600; margin-bottom:12px;">Not enough points yet — keep earning to unlock this.</div>`}
     <button class="btn-primary${canAfford ? '' : ' disabled'}" onclick="confirmRedeem()">Redeem for ${r.cost.toLocaleString('en-PH')} pts</button>`;
   openSheet('sheet-redeem');
 }
-async function confirmRedeem(){
-  if(currentRedeemIndex === null || !CURRENT_STATE) return;
-  const r = CURRENT_STATE.rewards[currentRedeemIndex];
-  const memberId = CURRENT_STATE.member.memberId;
-  haptic('medium');
-  let result;
-  try{ result = await callApi('redeemReward', { memberId, rewardId: r.id }); }
-  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not redeem'); return; }
+function confirmRedeem(){
+  if(currentRedeemIndex === null) return;
+  const r = rewardsRedeemables[currentRedeemIndex];
   haptic('success');
   closeSheet('sheet-redeem');
-  await loadPlayerState(memberId);
   setTimeout(()=>showToast(`Redeemed ${r.label} — ${r.cost.toLocaleString('en-PH')} pts used`), 280);
 }
 
 /* ===== MODULE: Store ===== */
-function openStore(){ openSheet('sheet-store'); }
+function renderStore(){
+  document.getElementById('store-list').innerHTML = storeData.map((s,i)=>`
+    <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); openStoreDetail(${i})">
+      <div class="icon-tile">${s.icon}</div>
+      <div style="flex:1;"><div class="row-title">${s.name}</div><div class="row-sub">${s.forLevel}</div></div>
+      <div class="fact-v">${fmtPeso(s.price)}</div>
+    </div>`).join('');
+}
+function openStore(){ renderStore(); openSheet('sheet-store'); }
 function openStoreDetail(i){
-  const s = CURRENT_STATE.storeItems[i];
+  const s = storeData[i];
   document.getElementById('store-detail-title').textContent = s.name;
   document.getElementById('store-detail-body').innerHTML = `
     <div style="display:flex; justify-content:center; margin-bottom:16px;">
@@ -1240,53 +1243,43 @@ function openStoreDetail(i){
       <div class="grouped-row"><div style="flex:1;" class="row-title">Recommended for</div><div class="fact-v">${s.forLevel}</div></div>
     </div>
     <div class="row-sub" style="text-align:center; margin-bottom:14px;">This sends a request to your parent for approval — no direct purchase.</div>
-    <button class="btn-primary" onclick="requestFromParent('${s.id}')">Request from parent</button>`;
+    <button class="btn-primary" onclick="requestFromParent('${s.name.replace(/'/g,"")}')">Request from parent</button>`;
   openSheet('sheet-store-detail');
 }
-async function requestFromParent(itemId){
-  if(!CURRENT_STATE) return;
-  const memberId = CURRENT_STATE.member.memberId;
-  const item = CURRENT_STATE.storeItems.find(x=>x.id===itemId);
-  haptic('medium');
-  let result;
-  try{ result = await callApi('requestStoreItem', { memberId, itemId }); }
-  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not send request'); return; }
+function requestFromParent(name){
   haptic('success');
   closeSheet('sheet-store-detail');
-  await loadPlayerState(memberId);
-  setTimeout(()=>showToast(`Request sent to your parent — ${item ? item.name : ''}`), 280);
+  setTimeout(()=>showToast(`Request sent to your parent — ${name}`), 280);
 }
 
 /* ===== MODULE: Messages ===== */
-function openMessages(){ openSheet('sheet-messages'); }
-let activeThreadId = null;
-async function openThread(id){
-  activeThreadId = id;
-  const m = CURRENT_STATE.messages.find(x=>x.id===id);
-  document.getElementById('thread-title').textContent = m ? m.name : 'Coach';
-  const memberId = CURRENT_STATE.member.memberId;
-  const log = document.getElementById('thread-log');
-  log.innerHTML = '';
-  openSheet('sheet-thread');
-  let result;
-  try{ result = await callApi('getThread', { threadId: id, memberId }); }
-  catch(e){ showToast('Could not load messages'); return; }
-  if(result.success){
-    log.innerHTML = result.data.map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
-    setTimeout(()=>log.scrollTop = log.scrollHeight, 100);
-  }
+function renderMessages(){
+  document.getElementById('messages-list').innerHTML = messagesData.map(m=>`
+    <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openThread('${m.id}')">
+      <div class="icon-tile">${ICONS.chat}</div>
+      <div style="flex:1;"><div class="row-title" style="font-size:14px;">${m.name}</div><div class="row-sub">${m.last}</div></div>
+      <div style="text-align:right;"><div class="row-sub">${m.time}</div>${m.unread?'<span class="dot-green" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--pitch); margin-top:4px;"></span>':''}</div>
+    </div>`).join('');
 }
-async function sendThreadMessage(){
+function openMessages(){ renderMessages(); openSheet('sheet-messages'); }
+let activeThreadId = null;
+function openThread(id){
+  activeThreadId = id;
+  const m = messagesData.find(x=>x.id===id);
+  m.unread = false;
+  document.getElementById('thread-title').textContent = m.name;
+  const log = document.getElementById('thread-log');
+  log.innerHTML = (threadSeed[id]||[]).map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
+  openSheet('sheet-thread');
+  setTimeout(()=>log.scrollTop = log.scrollHeight, 200);
+}
+function sendThreadMessage(){
   const field = document.getElementById('thread-input-field');
   const val = field.value.trim();
-  if(!val || !activeThreadId || !CURRENT_STATE) return;
+  if(!val || !activeThreadId) return;
   haptic('light');
-  const memberId = CURRENT_STATE.member.memberId;
-  let result;
-  try{ result = await callApi('sendMessage', { threadId: activeThreadId, memberId, body: val }); }
-  catch(e){ showToast('Could not send message'); return; }
-  if(!result.success){ showToast(result.error || 'Could not send message'); return; }
+  threadSeed[activeThreadId] = threadSeed[activeThreadId] || [];
+  threadSeed[activeThreadId].push({who:'me', text:val});
   const log = document.getElementById('thread-log');
   log.innerHTML += `<div class="bubble user">${val}</div>`;
   field.value = '';
@@ -1294,18 +1287,20 @@ async function sendThreadMessage(){
 }
 
 /* ===== MODULE: Announcements ===== */
-function openAnnouncements(){ openSheet('sheet-announcements'); }
+function renderAnnouncements(){
+  document.getElementById('announcements-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
+    announcementsData.map(a=>`
+      <div class="grouped-row"><div class="icon-tile">${ICONS.news}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${a.title}</div><div class="row-sub">${a.body}</div><div class="row-sub" style="margin-top:4px; color:var(--t3);">${a.time}</div></div></div>`).join('') + `</div>`;
+}
+function openAnnouncements(){ renderAnnouncements(); openSheet('sheet-announcements'); }
 
-/* ===== MODULE: Vex (AI) =====
-   Local canned-reply assistant — not wired to the backend. Kept as a
-   lightweight in-app helper; the replies below are static strings, not
-   player data, so they are intentionally not backend-driven. */
+/* ===== MODULE: Vex (AI) ===== */
 const vexReplies = {
-  'When is my next training?': "Check your Training tab for the next scheduled session and its RSVP status.",
-  "What's my score?": `You're at ${'{{SCORE}}'}/1000 — ${'{{LEVEL}}'}. Check your ByteSense breakdown to see your strongest and weakest categories.`,
-  'What badges did I earn?': "Open Badges from your Profile to see which achievements you've unlocked so far.",
-  'How is my attendance?': "Check the Training tab for your attendance percentage and session history.",
-  'How can I improve?': "Check your ByteSense breakdown for your lowest category, and ask your coach for a development note."
+  'When is my next training?': 'Your next session is Tue Sep 15, 5:30 PM at Ibex Pitch A. You\'ve already RSVP\'d Yes.',
+  "What's my score?": `You're at ${'{{SCORE}}'}/1000 — ${'{{LEVEL}}'}. Training and Behavior are your strongest categories; Growth is the one to watch.`,
+  'What badges did I earn?': "You've earned 4-Session Streak, Level Up, and Team Player. Perfect Month is close — just keep your attendance up this week.",
+  'How is my attendance?': "You've attended 18 of 21 sessions this term — 86%. That's above your academy's average.",
+  'How can I improve?': "Coach Rafael's notes point to Growth as your lowest category. Ask for a 1-on-1 development session — you can redeem one from Rewards."
 };
 function askVex(q){
   haptic('light');
@@ -1315,9 +1310,8 @@ function askVex(q){
   setTimeout(()=>{
     let reply = vexReplies[q] || "Let me check that for you.";
     if(reply.includes('{{SCORE}}')){
-      const total = CURRENT_STATE ? CURRENT_STATE.score.total : 0;
-      const level = CURRENT_STATE ? CURRENT_STATE.score.level : '—';
-      reply = reply.replace('{{SCORE}}', total).replace('{{LEVEL}}', level);
+      const total = computeByteSenseScore();
+      reply = reply.replace('{{SCORE}}', total).replace('{{LEVEL}}', currentLevel(total).name);
     }
     log.innerHTML += `<div class="bubble ai">${reply}</div>`;
     haptic('success');
@@ -1396,32 +1390,32 @@ function handleAuAction(){
 }
 
 /* ===== MODULE: Notifications ===== */
+function renderNotifications(){
+  document.getElementById('notifications-list').innerHTML = notifications.map(n=>`
+    <div class="notif-row"><div class="icon-tile">${n.ico}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.time}</div></div></div>`).join('');
+}
 function openNotifications(){
-  const list = (CURRENT_STATE && CURRENT_STATE.notifications) || [];
-  document.getElementById('notifications-list').innerHTML = list.length ? list.map(n=>`
-    <div class="notif-row"><div class="icon-tile">${ICONS[n.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${n.title}</div><div class="n-time">${n.sub||''} · ${n.at||''}</div></div></div>`).join('') : '<div class="row-sub" style="text-align:center; padding:20px 0;">No new notifications.</div>';
+  renderNotifications();
   document.getElementById('notif-dot').classList.add('hidden');
   openSheet('sheet-notifications');
-  if(CURRENT_STATE && CURRENT_STATE.member){
-    callApi('markNotificationsSeen', { memberId: CURRENT_STATE.member.memberId }).catch(()=>{});
-  }
 }
+const activityData = [
+  {ico:ICONS.badge, title:'Badge earned: Attendance Streak', sub:'Today', val:'+50 pts'},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'Today', val:'+8'},
+  {ico:ICONS.training, title:"RSVP'd Yes — Tue Skills Session", sub:'Yesterday', val:''},
+  {ico:ICONS.store, title:'Requested new boots from parent', sub:'2 days ago', val:''},
+  {ico:ICONS.chat, title:'Message from Coach Rafael', sub:'2 days ago', val:''},
+  {ico:ICONS.bolt, title:'ByteSense updated by Coach Rafael', sub:'1 week ago', val:'+5'},
+];
 function openAllActivity(){
-  const list = (CURRENT_STATE && CURRENT_STATE.activity) || [];
   document.getElementById('activity-full-list').innerHTML = `<div class="grouped-card" style="margin:0;">` +
-    (list.length ? list.map(a=>`<div class="grouped-row"><div class="icon-tile">${ICONS[a.icon]||ICONS.bolt}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub||''}</div></div>${a.value?`<div class="fact-v">${a.value}</div>`:''}</div>`).join('') : '<div class="grouped-row"><div class="row-sub">No activity yet.</div></div>') + `</div>`;
+    activityData.map(a=>`<div class="grouped-row"><div class="icon-tile">${a.ico}</div><div style="flex:1;"><div class="row-title">${a.title}</div><div class="row-sub">${a.sub}</div></div>${a.val?`<div class="fact-v">${a.val}</div>`:''}</div>`).join('') + `</div>`;
   openSheet('sheet-activity');
 }
 
 /* ===== MODULE: Profile ===== */
-function renderProfileSheet(){
-  const s = CURRENT_STATE;
-  const total = (s && s.score) ? s.score.total : 0;
-  const level = s ? s.score.level : '—';
-  const points = s ? s.points : 0;
-  const pct = s ? s.attendance.pct : 0;
-  const badgeCount = s ? s.achievements.filter(a=>a.unlocked).length : 0;
-  const firstName = s && s.member ? s.member.name.split(' ')[0] : '—';
+ function renderProfileSheet(){
+  const total = computeByteSenseScore();
   let role = 'player';
   try{ role = localStorage.getItem(ROLE_KEY) || 'player'; }catch(e){}
   const coachRow = role === 'staff' ? `
@@ -1429,14 +1423,14 @@ function renderProfileSheet(){
   document.getElementById('profile-sheet-body').innerHTML = `
     <div class="profile-hero" style="margin:0 0 18px;">
       <div class="avatar"></div>
-      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">${firstName}</div>
-      <div class="profile-badge-premium">${level}</div>
+      <div style="font-family:var(--font-display); font-size:17px; font-weight:700;">Marco</div>
+      <div class="profile-badge-premium">Rising Player</div>
     </div>
     <div class="profile-stat-grid">
       <div class="profile-stat-tile"><div class="v">${total}</div><div class="l">ByteSense Score</div></div>
-      <div class="profile-stat-tile"><div class="v">${points.toLocaleString('en-PH')}</div><div class="l">Points</div></div>
-      <div class="profile-stat-tile"><div class="v">${pct}%</div><div class="l">Attendance</div></div>
-      <div class="profile-stat-tile"><div class="v">${badgeCount}</div><div class="l">Badges</div></div>
+      <div class="profile-stat-tile"><div class="v">1,240</div><div class="l">Points</div></div>
+      <div class="profile-stat-tile"><div class="v">86%</div><div class="l">Attendance</div></div>
+      <div class="profile-stat-tile"><div class="v">${achievementsData.filter(a=>a.unlocked).length}</div><div class="l">Badges</div></div>
     </div>
     <div class="grouped-card">
       <div class="grouped-row" style="cursor:pointer;" onclick="closeSheet('sheet-profile'); setTimeout(()=>showScreen('training'),280)"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;" class="row-title">Training</div><span style="color:var(--t3); font-size:16px;">›</span></div>
@@ -1459,7 +1453,7 @@ function renderSettingsSheet(){
   let accountKey = '';
   try{ role = localStorage.getItem(ROLE_KEY) || 'player'; accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
   const account = ACCOUNTS[accountKey];
-  const displayName = account ? account.name : (CURRENT_STATE && CURRENT_STATE.member ? CURRENT_STATE.member.name : (CURRENT_COACH_STATE ? CURRENT_COACH_STATE.staffName : '—'));
+  const displayName = account ? account.name : 'Marco Villanueva';
   const roleLabel = role==='staff' ? 'Coach/Staff' : (role==='parent' ? 'Parent' : 'Player');
   const switchChildRow = (role==='parent' && account && account.children.length>1) ? `
       <div class="grouped-row" style="cursor:pointer;" onclick="haptic('light'); closeSheet('sheet-settings'); setTimeout(()=>openChildSwitch(ACCOUNTS['${accountKey}'], false),280)"><div style="flex:1;" class="row-title">Switch child</div><span style="color:var(--t3); font-size:16px;">›</span></div>` : '';
@@ -1516,12 +1510,7 @@ function deleteAccountConfirm(){
 }
 
 /* ===== MODULE: Coach Panel ===== */
-function openCoachPanel(){
-  selectCoachTab('roster');
-  const titleEl = document.getElementById('coach-panel-title');
-  if(titleEl) titleEl.textContent = 'Coach panel' + (CURRENT_COACH_STATE ? ' · ' + CURRENT_COACH_STATE.staffName : '');
-  openSheet('sheet-coach-panel');
-}
+function openCoachPanel(){ selectCoachTab('roster'); openSheet('sheet-coach-panel'); }
 function selectCoachTab(tab){
   haptic('light');
   document.querySelectorAll('#coach-tabs .role-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===tab));
@@ -1532,16 +1521,15 @@ function selectCoachTab(tab){
   if(tab==='sessions') renderAdminSessions();
 }
 function renderAdminRoster(){
-  const roster = (CURRENT_COACH_STATE && CURRENT_COACH_STATE.roster) || [];
-  document.getElementById('admin-roster-list').innerHTML = roster.length ? roster.map((p,i)=>`
+  document.getElementById('admin-roster-list').innerHTML = rosterData.map((p,i)=>`
     <div class="grouped-row" style="cursor:pointer; margin:0 -20px; padding-left:20px; padding-right:20px;" onclick="haptic('light'); openScoreEdit(${i})">
       <div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke="#1c1c1e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg></div>
       <div style="flex:1;"><div class="row-title" style="font-size:14px;">${p.name}</div><div class="row-sub">${p.level}</div></div>
       <div class="fact-v">${p.score}</div>
-    </div>`).join('') : '<div class="grouped-row"><div class="row-sub">No players assigned yet.</div></div>';
+    </div>`).join('');
 }
 function openScoreEdit(i){
-  const p = CURRENT_COACH_STATE.roster[i];
+  const p = rosterData[i];
   document.getElementById('score-edit-title').textContent = p.name;
   document.getElementById('score-edit-body').innerHTML = `
     <div class="grouped-card" style="margin:0 0 14px;">
@@ -1550,139 +1538,36 @@ function openScoreEdit(i){
     <button class="btn-primary" onclick="saveScoreEdit(${i})">Save score</button>`;
   openSheet('sheet-score-edit');
 }
-async function saveScoreEdit(i){
+function saveScoreEdit(i){
   const raw = document.getElementById('score-edit-input').value.replace(/[^0-9]/g,'');
   const val = parseInt(raw||'0',10);
   if(val<=0){ haptic('error'); return; }
-  const p = CURRENT_COACH_STATE.roster[i];
-  let accountKey = '';
-  try{ accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
-  const coachId = accountKey.toUpperCase();
-  const tenantId = (function(){ try{ return localStorage.getItem(TENANT_ID_KEY); }catch(e){ return ''; } })();
-  haptic('medium');
-  showToast(`Saving ${p.name}'s ByteSense score…`);
-  let result;
-  try{
-    result = await callApi('saveScoreEdit', { coachId, memberId: p.memberId, scores: { TrainingScore: val } });
-  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save score'); return; }
+  rosterData[i].score = val;
+  rosterData[i].level = currentLevel(val).name;
   haptic('success');
   closeSheet('sheet-score-edit');
-  await loadCoachState(coachId, tenantId);
-  setTimeout(()=>showToast(`${p.name}'s ByteSense score updated`), 280);
+  renderAdminRoster();
+  setTimeout(()=>showToast(`${rosterData[i].name}'s ByteSense score updated to ${val}`), 280);
 }
 function renderAdminSessions(){
-  const sessions = (CURRENT_COACH_STATE && CURRENT_COACH_STATE.sessions) || [];
-  document.getElementById('admin-sessions-list').innerHTML = sessions.length ? sessions.map(s=>`
-    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${s.date} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('') : '<div class="grouped-row"><div class="row-sub">No sessions scheduled yet.</div></div>';
+  document.getElementById('admin-sessions-list').innerHTML = adminSessions.map(s=>`
+    <div class="grouped-row"><div class="icon-tile">${ICONS.training}</div><div style="flex:1;"><div class="row-title" style="font-size:14px;">${s.day} ${s.date} · ${s.time}</div><div class="row-sub">${s.venue}</div></div></div>`).join('');
 }
-async function addAdminSession(){
-  let accountKey = '', tenantId = '';
-  try{
-    accountKey = localStorage.getItem(ACCOUNT_KEY) || '';
-    tenantId = localStorage.getItem(TENANT_ID_KEY) || '';
-  }catch(e){}
-  const coachId = accountKey.toUpperCase();
-  haptic('medium');
-  let result;
-  try{
-    result = await callApi('addAdminSession', { coachId, tenantId, session: { day:'New', date:'TBD', time:'TBD', venue:'TBD', slots:'' } });
-  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not add session'); return; }
-  haptic('success');
-  await loadCoachState(coachId, tenantId);
+function addAdminSession(){
+  adminSessions.push({day:'New', date:'TBD', time:'TBD', venue:'Ibex Pitch A'});
   renderAdminSessions();
+  haptic('success');
   showToast('Session added — edit the details from the roster view');
 }
-async function postAdminAnnouncement(){
+function postAdminAnnouncement(){
   const title = document.getElementById('admin-post-title').value.trim();
   const body = document.getElementById('admin-post-body').value.trim();
   if(!title || !body){ haptic('error'); showToast('Add a title and message first'); return; }
-  let accountKey = '', tenantId = '', staffRole = 'COACH', actorName = '';
-  try{
-    accountKey = localStorage.getItem(ACCOUNT_KEY) || '';
-    tenantId = localStorage.getItem(TENANT_ID_KEY) || '';
-  }catch(e){}
-  const account = ACCOUNTS[accountKey];
-  if(account){ staffRole = account.staffRole || 'COACH'; actorName = account.name || ''; }
-  haptic('medium');
-  let result;
-  try{
-    result = await callApi('postAnnouncement', { staffRole, tenantId, title, body, actorName });
-  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not post announcement'); return; }
-  haptic('success');
+  announcementsData.unshift({title, body, time:'Just now'});
   document.getElementById('admin-post-title').value = '';
   document.getElementById('admin-post-body').value = '';
-  showToast('Announcement posted to the academy');
-}
-
-/* ===== MODULE: Super Admin Unlock (hidden dev/admin entrance) =====
-   5 quick taps on the logo reveals a PIN sheet — it grants nothing by
-   itself. The backend (clientSuperAdminUnlock) verifies the PIN against a
-   real SUPER_ADMIN staff record before any session is created. */
-let logoTapCount = 0;
-let logoTapTimer = null;
-const SUPER_ADMIN_FLAG_KEY = 'artiplay_superadmin';
-function handleLogoTap(){
-  logoTapCount++;
-  clearTimeout(logoTapTimer);
-  logoTapTimer = setTimeout(()=>{ logoTapCount = 0; }, 1200);
-  if(logoTapCount >= 5){
-    logoTapCount = 0;
-    haptic('medium');
-    document.getElementById('super-admin-pin-input').value = '';
-    document.getElementById('super-admin-pin-error').style.display = 'none';
-    openSheet('sheet-super-admin-unlock');
-  }
-}
-async function submitSuperAdminPin(){
-  const btn = document.getElementById('super-admin-pin-btn');
-  const pinVal = document.getElementById('super-admin-pin-input').value.trim();
-  const errEl = document.getElementById('super-admin-pin-error');
-  errEl.style.display = 'none';
-  if(!pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter the PIN'; return; }
-  haptic('medium');
-  let result;
-  try{ result = await callApi('superAdminUnlock', { pin: pinVal }); }
-  catch(e){ haptic('error'); errEl.style.display='block'; errEl.textContent='Could not reach the server'; return; }
-  if(!result.success){
-    haptic('error');
-    errEl.style.display = 'block';
-    errEl.textContent = result.error || 'Incorrect PIN';
-    return;
-  }
-  const account = result.data;
-  const accountKey = account.accountId.toLowerCase();
-  ACCOUNTS[accountKey] = account;
   haptic('success');
-  closeSheet('sheet-super-admin-unlock');
-  try{ localStorage.setItem(SUPER_ADMIN_FLAG_KEY, '1'); }catch(e){}
-  saveSession('staff', accountKey, '', account.tenantId);
-  setTimeout(()=>{
-    document.getElementById('signin-overlay').classList.add('hidden');
-    loadCoachState(account.accountId, account.tenantId);
-    showScreen('home');
-    showSuperAdminBadge();
-    showToast(account.usingDefaultPin ? '⚠️ Super Admin mode — still using the DEFAULT PIN, change it now' : 'Super Admin mode');
-  }, 280);
-}
-function isSuperAdminMode(){ try{ return localStorage.getItem(SUPER_ADMIN_FLAG_KEY) === '1'; }catch(e){ return false; } }
-function showSuperAdminBadge(){
-  if(document.getElementById('super-admin-badge')) return;
-  const badge = document.createElement('div');
-  badge.id = 'super-admin-badge';
-  badge.style.cssText = 'position:absolute; top:max(14px, env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:800; background:#1c1c1e; color:#fff; font-size:10.5px; font-weight:700; letter-spacing:.06em; padding:5px 14px; border-radius:20px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);';
-  badge.innerHTML = 'SUPER ADMIN <span style="opacity:.6; font-weight:600;">· Exit</span>';
-  badge.onclick = exitSuperAdminMode;
-  document.querySelector('.phone').appendChild(badge);
-}
-function exitSuperAdminMode(){
-  haptic('medium');
-  try{ localStorage.removeItem(SUPER_ADMIN_FLAG_KEY); }catch(e){}
-  const badge = document.getElementById('super-admin-badge');
-  if(badge) badge.remove();
-  logoutUser();
+  showToast('Announcement posted to the academy');
 }
 
 /* ===== MODULE: Toast ===== */
@@ -1694,19 +1579,15 @@ function showToast(msg){
 }
 
 /* ===== MODULE: Onboarding ===== */
-const obData = { tenantId:'', tenantName:'', role:'', name:'', age:'', parentName:'', parentContact:'', parentEmail:'', email:'', phone:'', club:'', pin:'', accountId:'', memberId:'' };
-
-const ROLE_FIELDS_ = {
-  STUDENT: [{k:'name', label:'Full name'}, {k:'age', label:'Age'}, {k:'parentName', label:'Parent name'}, {k:'parentContact', label:'Parent contact'}, {k:'parentEmail', label:'Parent email'}],
-  COACH:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
-  STAFF:   [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}],
-  PARENT:  [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}]
+const obData = { inviteCode:'', role:'player', playerName:'', playerAge:'', academyName:'', coachName:'', pin:'', accountId:'' };
+const INVITES = {
+  'ch-1042':   { role:'player', playerName:'Marco Villanueva', playerAge:'12', academy:'Ibex FC Academy', coachName:'Coach Rafael' },
+  'ch-1042-p': { role:'parent', playerName:'Marco Villanueva', academy:'Ibex FC Academy', coachName:'Coach Rafael' }
 };
 
-  const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
-let obCurrentId = 'ob-verify';
+const OB_STEPS = ['ob-verify','ob-confirm','ob-notification-setup'];
+let obCurrentId = 'ob-welcome';
 let obHistoryStack = [];
-let obFromSignIn = false; // true lang kapag pumasok galing sa "Sign up instead" sa sign-in screen
 
 function renderObDots(activeId){
   const idx = OB_STEPS.indexOf(activeId);
@@ -1728,23 +1609,13 @@ function obGoTo(id, pushHistory){
 }
 function obBack(){
   haptic('light');
-  if(!obHistoryStack.length){
-    if(obCurrentId === 'ob-verify' && obFromSignIn){ exitSignupToSignIn(); }
-    return;
-  }
+  if(!obHistoryStack.length) return;
   const prev = obHistoryStack.pop();
   document.getElementById(obCurrentId).classList.add('hidden');
   document.getElementById(prev).classList.remove('hidden');
   obCurrentId = prev;
   renderObDots(prev);
-  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-verify' && !obFromSignIn) ? 'hidden' : 'visible';
-}
-function exitSignupToSignIn(){
-  haptic('light');
-  document.getElementById('onboard-overlay').classList.add('hidden');
-  obFromSignIn = false;
-  renderSigninEntry();
-  document.getElementById('signin-overlay').classList.remove('hidden');
+  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-welcome') ? 'hidden' : 'visible';
 }
 function obSkipToDashboard(){ obCompleteOnboarding(true); }
 
@@ -1753,91 +1624,95 @@ function startSignupFlow(){
   document.getElementById('onboard-overlay').classList.remove('hidden');
   obHistoryStack = [];
   obCurrentId = 'ob-verify';
-  obFromSignIn = true;
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
   document.getElementById('ob-invite-input').value = '';
   document.getElementById('ob-verify-status').textContent = '';
   renderObDots('ob-verify');
-  document.getElementById('ob-back-btn').style.visibility = 'visible';
 }
 
 async function obVerifyInvite(){
   const raw = document.getElementById('ob-invite-input').value.trim();
   const statusEl = document.getElementById('ob-verify-status');
-  if(!raw){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Enter your Academy Invite PIN'; return; }
-  statusEl.style.color = 'var(--t2)'; statusEl.textContent = 'Checking…';
-  let result;
-  try{ result = await callApi('validateInvitePin', { pin: raw }); }
-  catch(e){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Could not reach the server.'; return; }
-  if(!result.success){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent=result.error; return; }
-
-  obData.tenantId = result.data.tenantId;
-  obData.tenantName = result.data.tenantName;
-  obData.role = result.data.role;
-  haptic('success');
-  statusEl.style.color = '#1c8a3e';
-  statusEl.textContent = `Linked to ${obData.tenantName}`;
-
-  document.getElementById('ob-role-eyebrow').textContent = `Joining ${obData.tenantName} as ${obData.role.charAt(0)+obData.role.slice(1).toLowerCase()}`;
-  document.getElementById('ob-profile-fields').innerHTML = (ROLE_FIELDS_[obData.role]||[]).map(f=>
-    `<div class="field-row"><div class="row-title" style="font-size:14px;">${f.label}</div><input type="text" id="ob-field-${f.k}" placeholder="${f.label}"></div>`).join('');
-
-  setTimeout(()=>obGoTo('ob-profile-form', true), 350);
-}
-
-function obSubmitProfile(btnEl){
-  haptic('medium');
-  const fields = ROLE_FIELDS_[obData.role] || [];
-  for(const f of fields) obData[f.k] = document.getElementById('ob-field-'+f.k).value.trim();
-  if(!obData.name){ haptic('error'); showToast('Name is required'); return; }
-  obGoTo('ob-set-pin', true);
-}
-
-async function obConfirmJoin(btnEl){
-  const newPin = document.getElementById('ob-newpin-input').value.trim();
-  if(!/^\d{4,6}$/.test(newPin)){ haptic('error'); showToast('PIN must be 4-6 digits'); return; }
-  haptic('medium');
-  btnEl.classList.add('loading');
+  if(!raw){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Enter the invite code your coach gave you'; return; }
+  statusEl.style.color = 'var(--t2)';
+  statusEl.textContent = 'Checking…';
   let result;
   try{
-    result = await callApi('claimAccount', Object.assign({}, obData, { pin: newPin }));
+    result = await callApi('validateCoachId', { coachId: raw });
   }catch(e){
-    btnEl.classList.remove('loading'); haptic('error'); showToast('Could not reach the server'); return;
+    haptic('error');
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = 'Could not reach the server — check your connection.';
+    return;
+  }
+  if(!result.success){
+    haptic('error');
+    statusEl.style.color = 'var(--red)';
+    statusEl.textContent = result.error || 'Invite code not found — check with your coach and try again.';
+    return;
+  }
+  const coach = result.data;
+  obData.role = 'player';
+  obData.coachId = coach.coachId;
+  obData.academyName = coach.academyName;
+  obData.coachName = coach.name;
+  statusEl.style.color = '#1c8a3e';
+  statusEl.textContent = `Linked to ${coach.name} · ${coach.academyName}`;
+  haptic('success');
+  document.getElementById('ob-confirm-title').textContent = `You're joining ${coach.academyName}`;
+  document.getElementById('ob-confirm-sub').textContent = `coached by ${coach.name}.`;
+  setTimeout(()=>obGoTo('ob-confirm', true), 350);
+}
+function genAccountId(prefix){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/1/I
+  let suffix = '';
+  for(let i=0;i<4;i++) suffix += chars[Math.floor(Math.random()*chars.length)];
+  return `${prefix}-${suffix}`;
+}
+async function obConfirmJoin(btnEl){
+  haptic('medium');
+  btnEl.classList.add('loading');
+  /* Background setup — nothing for the user to configure. clientPlayerSignup
+     on the backend generates the real Account ID, hashes the PIN, seeds
+     starter ByteSense/attendance rows, and emails the parent — all server-side. */
+  obData.pin = String(Math.floor(1000 + Math.random()*9000)); // 4 digits — matches clientPlayerSignup's check
+  let result;
+  try{
+    result = await callApi('playerSignup', {
+      name: obData.playerName || 'New Player',
+      age: obData.playerAge || '',
+      coach: obData.coachId,
+      pin: obData.pin
+    });
+  }catch(e){
+    btnEl.classList.remove('loading');
+    haptic('error');
+    showToast('Could not reach the server — check your connection');
+    return;
   }
   btnEl.classList.remove('loading');
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not create your account'); return; }
-
-  obData.accountId = result.data.accountId;
-  obData.memberId = result.data.memberId || '';
-  obData.pin = newPin;
-  ACCOUNTS[obData.accountId.toLowerCase()] = { role: obData.role.toLowerCase(), accountId: obData.accountId, memberId: obData.memberId, name: obData.name, academy: obData.tenantName };
-  haptic('success');
-
-  if(obData.role === 'STUDENT'){
-    const coachRes = await callApi('getCoaches', { tenantId: obData.tenantId }).catch(()=>null);
-    const coaches = (coachRes && coachRes.success) ? coachRes.data : [];
-    if(coaches.length){
-      document.getElementById('ob-coach-list').innerHTML = coaches.map(c=>
-        `<div class="grouped-row" style="cursor:pointer;" onclick="obPickCoach('${c.coachId}')"><div style="flex:1;" class="row-title">${c.name}</div><span style="color:var(--t3);">›</span></div>`).join('');
-      obGoTo('ob-coach-pick', true);
-      return;
-    }
+  if(!result.success){
+    haptic('error');
+    showToast(result.error || 'Could not create your account — try again');
+    return;
   }
-  obGoTo('ob-notification-setup', true);
-}
-async function obPickCoach(coachId){
-  haptic('medium');
-  await callApi('assignCoach', { memberId: obData.memberId, coachId }).catch(()=>{});
+  obData.accountId = result.data.artiPlayId;
+  obData.memberId = result.data.memberId;
+  ACCOUNTS[obData.accountId.toLowerCase()] = {
+    role:'player', accountId: obData.accountId, memberId: obData.memberId,
+    name: obData.playerName, academy: obData.academyName, coach: obData.coachName
+  };
+  haptic('success');
   obGoTo('ob-notification-setup', true);
 }
 function applyPlayerDataToApp(){
-  document.getElementById('home-player-title').textContent = (obData.name||'Player').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = obData.tenantName || '—';
-  document.getElementById('home-status-txt').textContent = `· ${obData.role === 'STUDENT' ? 'Student' : obData.role}`;
-  document.getElementById('profile-age').textContent = obData.age || '—';
-  document.getElementById('profile-coach').textContent = '—';
-  document.getElementById('profile-meta').textContent = `Account ID ${obData.accountId || '—'} · ${obData.tenantName || '—'}`;
+  document.getElementById('home-player-title').textContent = (obData.playerName||'Player').split(' ')[0];
+  document.getElementById('home-academy-title').textContent = obData.academyName || 'Ibex FC Academy';
+  document.getElementById('home-status-txt').textContent = `· ${obData.coachName || 'Coach'}`;
+  document.getElementById('profile-age').textContent = obData.playerAge || '—';
+  document.getElementById('profile-coach').textContent = obData.coachName || '—';
+  document.getElementById('profile-meta').textContent = `ArtiPlay ID ${obData.accountId || '—'} · ${obData.academyName || 'Ibex FC Academy'}`;
   const greetEl = document.getElementById('home-greeting-line');
   if(greetEl) greetEl.textContent = `${timeGreeting()},`;
 }
@@ -1852,20 +1727,19 @@ function obConfirmNotifications(){
 function obCompleteOnboarding(skipped){
   markOnboarded();
   const accountKey = obData.accountId ? obData.accountId.toLowerCase() : undefined;
-  saveSession((obData.role || 'player').toLowerCase(), accountKey, obData.memberId, obData.tenantId);
-  if(accountKey) markDeviceTrusted(accountKey, obData.name);
+  saveSession(obData.role || 'player', accountKey);
+  if(accountKey) markDeviceTrusted(accountKey, obData.playerName);
   if(obData.memberId){
     callApi('markOnboarded', { memberId: obData.memberId }).catch(()=>{ /* non-blocking */ });
   }
   if(!skipped) applyPlayerDataToApp();
   document.getElementById('onboard-overlay').classList.add('hidden');
   showScreen('home');
-  const firstName = (obData.name || 'there').split(' ')[0];
-  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId} — keep it saved. Welcome, ${firstName}`);
+  const firstName = (obData.playerName || 'Player').split(' ')[0];
+  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId}, PIN ${obData.pin} — save these. ${firstName}'s ByteSense tracking starts now`);
 }
 function replayOnboarding(){
   obHistoryStack = [];
-  obFromSignIn = false;
   document.getElementById('onboard-overlay').classList.remove('hidden');
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
@@ -1918,7 +1792,7 @@ async function signIn(btnEl){
       overlay.classList.add('hidden');
       overlay.classList.remove('leaving');
       btnEl.classList.remove('loading'); btnEl.classList.remove('success');
-      saveSession(account.role, accountKey, account.memberId, account.tenantId);
+      saveSession(account.role, accountKey);
       markDeviceTrusted(accountKey, account.name);
       routeAfterSignIn(account);
     }, 320);
@@ -1961,7 +1835,7 @@ async function signInTrusted(btnEl){
       overlay.classList.add('hidden');
       overlay.classList.remove('leaving');
       btnEl.classList.remove('loading'); btnEl.classList.remove('success');
-      saveSession(account.role, trustedKey, account.memberId, account.tenantId);
+      saveSession(account.role, trustedKey);
       routeAfterSignIn(account);
     }, 320);
   }, 550);
@@ -1971,35 +1845,21 @@ function switchToFullSignIn(){
   clearDeviceTrust();
   document.getElementById('signin-trusted-form').style.display = 'none';
   document.getElementById('signin-idpin-form').style.display = '';
-  document.getElementById('signin-tagline').textContent = 'The future of sports.';
+  document.getElementById('signin-tagline').textContent = 'Your football academy, in your pocket.';
 }
 function routeAfterSignIn(account){
   if(account.role === 'parent'){
     if(account.children.length > 1){ openChildSwitch(account, true); return; }
     applyActiveChild(account.children[0], account);
-    loadPlayerState(account.children[0].memberId);
     enterAppFor(account);
     return;
   }
   if(account.role === 'staff'){
-    document.getElementById('home-player-title').textContent = (account.name || 'Staff').split(' ')[0];
-    document.getElementById('home-academy-title').textContent = account.academy || 'Academy';
-    document.getElementById('home-status-txt').textContent = `· ${account.staffRole || 'Staff'}`;
-    const greetElS = document.getElementById('home-greeting-line');
-    if(greetElS) greetElS.textContent = `${timeGreeting()},`;
     document.getElementById('onboard-overlay').classList.add('hidden');
-    loadCoachState(account.accountId, account.tenantId);
     showScreen('home');
-    showToast(`Signed in as ${account.name.split(' ')[0]} — open Profile → Coach panel`);
+    showToast('Signed in as staff — open Profile → Coach panel');
     return;
   }
-  document.getElementById('home-player-title').textContent = (account.name || 'Player').split(' ')[0];
-  document.getElementById('home-academy-title').textContent = account.academy || 'Academy';
-  document.getElementById('home-status-txt').textContent = `· ${account.coach || 'No coach assigned'}`;
-  const greetEl0 = document.getElementById('home-greeting-line');
-  if(greetEl0) greetEl0.textContent = `${timeGreeting()},`;
-  loadPlayerState(account.memberId);
-  if(account.onboarded) markOnboarded();
   if(hasOnboarded()){
     document.getElementById('onboard-overlay').classList.add('hidden');
     showScreen('home');
@@ -2014,7 +1874,8 @@ function enterAppFor(account){
   showToast(`Welcome, ${account.name.split(' ')[0]}`);
 }
 
-/* ===== MODULE: Family / Multi-Child ===== */
+/* ===== MODULE: Family / Multi-Child =====
+   Martin → Child A / Child B — one account, no duplicate logins. */
 let pendingAccountForChildSwitch = null;
 function openChildSwitch(account, isFirstSignIn){
   pendingAccountForChildSwitch = isFirstSignIn ? account : null;
@@ -2033,8 +1894,6 @@ function selectChild(i){
   const account = window.__childSwitchAccount;
   const child = account.children[i];
   applyActiveChild(child, account);
-  saveSession('parent', account.accountId.toLowerCase(), child.memberId, account.tenantId);
-  loadPlayerState(child.memberId);
   closeSheet('sheet-child-switch');
   const wasFirstSignIn = !!pendingAccountForChildSwitch;
   pendingAccountForChildSwitch = null;
@@ -2062,62 +1921,38 @@ function renderSigninEntry(){
     trustedForm.style.display = 'none';
   }
 }
-/* Resume an existing session on reload — ACCOUNTS{} is in-memory only and
-   is empty after a reload, so we re-fetch straight from the server using
-   the saved memberId/tenantId instead of relying on the cache. */
-(async function initSessionOnLoad(){
+/* Resume an existing session on reload */
+(function initSessionOnLoad(){
   if(hasSession()){
-    // Sign-in stays visible (default state) until the cached session is
-    // confirmed valid against the server. No dashboard is shown on a guess.
+    document.getElementById('signin-overlay').classList.add('hidden');
     try{
-      const cachedName = getTrustedDeviceName();
-      if(cachedName && cachedName !== 'there'){
-        document.getElementById('home-player-title').textContent = cachedName.split(' ')[0];
+      const role = localStorage.getItem(ROLE_KEY);
+      const accountKey = localStorage.getItem(ACCOUNT_KEY);
+      const account = ACCOUNTS[accountKey];
+      if(role === 'parent' && account){
+        const activeId = getActiveChildId();
+        const child = account.children.find(c=>c.id===activeId) || account.children[0];
+        if(child) applyActiveChild(child, account);
       }
     }catch(e){}
-
-    const role = localStorage.getItem(ROLE_KEY);
-    const memberId = localStorage.getItem(MEMBER_ID_KEY);
-    const tenantId = localStorage.getItem(TENANT_ID_KEY);
-    const accountKey = localStorage.getItem(ACCOUNT_KEY);
-
-    let sessionValid = false;
-    try{
-      if(role === 'staff' && accountKey){
-        sessionValid = await loadCoachState(accountKey.toUpperCase(), tenantId);
-      } else if(memberId){
-        sessionValid = await loadPlayerState(memberId);
-      }
-    }catch(e){ sessionValid = false; }
-
-    if(!sessionValid){
-      // Stale/invalid/expired session: never leave the person on an empty
-      // dashboard — force back to the real entry point, the login screen.
-      clearSession();
-      CURRENT_STATE = null;
-      CURRENT_COACH_STATE = null;
-      renderSigninEntry();
-      document.getElementById('signin-overlay').classList.remove('hidden');
-      document.getElementById('onboard-overlay').classList.add('hidden');
-      return;
-    }
-
-    document.getElementById('signin-overlay').classList.add('hidden');
-    if(role === 'staff' || role === 'parent' || hasOnboarded()){
+    if(hasOnboarded()){
       document.getElementById('onboard-overlay').classList.add('hidden');
     } else {
       document.getElementById('onboard-overlay').classList.remove('hidden');
     }
-    if(isSuperAdminMode()) showSuperAdminBadge();
   } else {
     renderSigninEntry();
   }
 })();
 
-/* ===== Initial render =====
-   No static seed render here — everything on screen comes only from
-   applyStateToUI() after login (loadPlayerState / loadCoachState), so
-   there is exactly one true source of data regardless of who's signed in. */
+/* ===== Initial render ===== */
+renderTraining();
+refreshByteSenseSummary();
+renderByteSenseBreakdown();
+renderRewardsActions();
+renderRewardsRedeem();
+renderHomeNeeds();
+renderHomeRecent();
 </script>
 </body>
 </html>
