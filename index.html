@@ -1693,9 +1693,10 @@ const ROLE_FIELDS_ = {
   PARENT:  [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}]
 };
 
-const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
+  const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
 let obCurrentId = 'ob-verify';
 let obHistoryStack = [];
+let obFromSignIn = false; // true lang kapag pumasok galing sa "Sign up instead" sa sign-in screen
 
 function renderObDots(activeId){
   const idx = OB_STEPS.indexOf(activeId);
@@ -1717,13 +1718,23 @@ function obGoTo(id, pushHistory){
 }
 function obBack(){
   haptic('light');
-  if(!obHistoryStack.length) return;
+  if(!obHistoryStack.length){
+    if(obCurrentId === 'ob-verify' && obFromSignIn){ exitSignupToSignIn(); }
+    return;
+  }
   const prev = obHistoryStack.pop();
   document.getElementById(obCurrentId).classList.add('hidden');
   document.getElementById(prev).classList.remove('hidden');
   obCurrentId = prev;
   renderObDots(prev);
-  document.getElementById('ob-back-btn').style.visibility = (prev==='ob-verify') ? 'hidden' : 'visible';
+  document.getElementById('ob-back-btn').style.visibility = 'visible';
+}
+function exitSignupToSignIn(){
+  haptic('light');
+  document.getElementById('onboard-overlay').classList.add('hidden');
+  obFromSignIn = false;
+  renderSigninEntry();
+  document.getElementById('signin-overlay').classList.remove('hidden');
 }
 function obSkipToDashboard(){ obCompleteOnboarding(true); }
 
@@ -1732,11 +1743,13 @@ function startSignupFlow(){
   document.getElementById('onboard-overlay').classList.remove('hidden');
   obHistoryStack = [];
   obCurrentId = 'ob-verify';
+  obFromSignIn = true;
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
   document.getElementById('ob-invite-input').value = '';
   document.getElementById('ob-verify-status').textContent = '';
   renderObDots('ob-verify');
+  document.getElementById('ob-back-btn').style.visibility = 'visible';
 }
 
 async function obVerifyInvite(){
@@ -1842,6 +1855,7 @@ function obCompleteOnboarding(skipped){
 }
 function replayOnboarding(){
   obHistoryStack = [];
+  obFromSignIn = false;
   document.getElementById('onboard-overlay').classList.remove('hidden');
   OB_STEPS.forEach(id=> id!=='ob-verify' && document.getElementById(id).classList.add('hidden'));
   document.getElementById('ob-verify').classList.remove('hidden');
@@ -2062,4 +2076,3 @@ function renderSigninEntry(){
 </script>
 </body>
 </html>
-
