@@ -7,6 +7,7 @@
 <title>ArtiPlay</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
   :root{
     /* §1.1 core palette — pitch green + gold, same family as the other Arti apps */
@@ -1123,15 +1124,209 @@ const REWARDS_CIRCLE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="curren
    Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
    text/plain keeps every request a CORS "simple request" (no preflight) — see
    the doPost() comment in the backend for why that matters. */
-const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw6QYlaYPDE-PSVZ4I8b1dt9DJgwAWBAtlMBtPchO-6gsGwcEVQmPG9c76JwlOTEpv1Yw/exec';
+/* ===== MODULE: Supabase connection ===== */
+const SUPABASE_URL = 'https://jbgwyebknzimbqdlslky.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_Og0yHMqEJGG1MUZy6IAxhQ_PiGcTlqp';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: { persistSession: false }
+});
+
+function sbOk(data){ return { success: true, data: data || {} }; }
+function sbErr(err, fallback){
+  const msg = (err && (err.message || err.error_description || err.details)) || fallback || 'Server error';
+  console.error('Supabase error:', err);
+  return { success: false, error: msg };
+}
+
+/* Drop-in replacement for the old GAS callApi(). Same action names, same
+   {success, data, error} shape, so applyStateToUI() and the rest of the
+   frontend don't need to change. */
 async function callApi(action, payload){
-  const res = await fetch(API_BASE_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ action, payload: payload || {} })
+  payload = payload || {};
+  try {
+    switch(action){
+
+      /* ----- AUTH ----- */
+      case 'unifiedLogin': {
+        const { data, error } = await sb.rpc('rpc_unified_login', {
+          p_identifier: payload.identifier, p_pin: payload.pin
+        });
+        if(error) return sbErr(error, 'Account ID or PIN not recognized');
+        const row = data && data[0];
+        if(!row) return sbErr(null, 'No account found with that Account ID.');
+        return sbOk({
+          role: row.role, accountId: row.account_id, memberId: row.member_id,
+          name: row.name, academy: row.academy_name, tenantId: row.tenant_id,
+          coach: row.coach_name, staffRole: row.role === 'staff' ? row.role : undefined,
+          mustChangePin: row.must_change_pin, onboarded: true
+        });
+      }
+
+      case 'validateInvitePin': {
+        const { data, error } = await sb.rpc('rpc_validate_invite_pin', { p_pin: payload.pin });
+        if(error) return sbErr(error);
+        const row = data && data[0];
+        if(!row) return sbErr(null, 'That Invite PIN was not recognized.');
+        return sbOk({ tenantId: row.tenant_id, tenantName: row.tenant_name, role: row.role });
+      }
+
+      case 'superAdminUnlock': {
+        const { data, error } = await sb.rpc('rpc_super_admin_unlock', { p_pin: payload.pin });
+        if(error) return sbErr(error, 'Incorrect PIN.');
+        const row = data && data[0];
+        return sbOk({
+          role: 'staff', accountId: row.staff_id, name: row.name, tenantId: row.tenant_id,
+          staffRole: 'SUPER_ADMIN', mustChangePin: false, usingDefaultPin: row.using_default_pin
+        });
+      }
+
+      /* ----- PLAYER: FULL STATE ----- */
+      case 'getFullState':
+        return await fetchFullState(payload.memberId);
+
+      /* ----- TRAINING ----- */
+      case 'setRsvp': {
+        const { error } = await sb.from('session_rsvps').upsert({
+          session_id: payload.sessionId, member_id: payload.memberId,
+          status: payload.status || '', updated_at: new Date().toISOString()
+        }, { onConflict: 'session_id,member_id' });
+        if(error) return sbErr(error, 'Could not save RSVP');
+        if(payload.status === 'yes'){
+          const { data: mem } = await sb.from('members').select('tenant_id').eq('member_id', payload.memberId).single();
+          await sb.from('points_ledger').insert({ member_id: payload.memberId, delta: 10, reason: 'RSVP confirmed', ref_type: 'rsvp', ref_id: payload.sessionId });
+          await sb.from('activity').insert({ member_id: payload.memberId, tenant_id: mem && mem.tenant_id, icon: 'training', title: "RSVP'd Yes to a training session", value: '+10 pts' });
+        }
+        return sbOk({});
+      }
+
+      /* ----- REWARDS ----- */
+      case 'redeemReward': {
+        const { data, error } = await sb.rpc('redeem_reward', { p_member_id: payload.memberId, p_reward_id: payload.rewardId });
+        if(error) return sbErr(error, 'Could not redeem');
+        const row = data && data[0];
+        if(!row || !row.success) return sbErr(null, (row && row.message) || 'Not enough points yet.');
+        return sbOk({ newBalance: row.new_balance });
+      }
+
+      /* ----- STORE ----- */
+      case 'requestStoreItem': {
+        const { data: item, error: itemErr } = await sb.from('store_items').select('*').eq('item_id', payload.itemId).single();
+        if(itemErr || !item) return sbErr(itemErr, 'Item not found.');
+        const { data: mem } = await sb.from('members').select('tenant_id').eq('member_id', payload.memberId).single();
+        const { error } = await sb.from('store_requests').insert({
+          member_id: payload.memberId, tenant_id: mem.tenant_id,
+          item_id: item.item_id, item_name: item.name, price: item.price
+        });
+        if(error) return sbErr(error, 'Could not send request');
+        await sb.from('activity').insert({ member_id: payload.memberId, tenant_id: mem.tenant_id, icon: 'store', title: 'Requested ' + item.name + ' from parent' });
+        return sbOk({});
+      }
+
+      /* ----- NOTIFICATIONS ----- */
+      case 'markNotificationsSeen': {
+        const { error } = await sb.from('notification_state').upsert({ member_id: payload.memberId, seen_at: new Date().toISOString() });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      /* ----- ACHIEVEMENTS ----- */
+      case 'awardAchievement': {
+        const { data, error } = await sb.rpc('award_achievement', {
+          p_member_id: payload.memberId, p_achievement_id: payload.achievementId, p_awarded_by: payload.coachId
+        });
+        if(error) return sbErr(error);
+        const row = data && data[0];
+        if(!row || !row.success) return sbErr(null, (row && row.message) || 'Could not award');
+        return sbOk({});
+      }
+
+      /* ----- TODO: iprito mo ito same pattern (table/RPC pointers) -----
+        claimAccount     -> insert to members/staff/parents + check tenant_invites.status
+        getCoaches       -> sb.from('staff').select('*').eq('tenant_id',payload.tenantId).eq('role','COACH')
+        assignCoach      -> sb.from('members').update({coach_id:payload.coachId}).eq('member_id',payload.memberId)
+        markOnboarded    -> sb.from('members').update({onboarded_at:new Date().toISOString()}).eq('member_id',payload.memberId)
+        setOwnPin        -> sb.from('staff').update({pin_hash: <hash via RPC>, must_change_pin:false}).eq('staff_id',payload.userId)
+        getThread        -> sb.from('messages').select('*').eq('thread_id',payload.threadId).order('sent_at')
+        sendMessage      -> sb.from('messages').insert({...})
+        getCoachState    -> sb.from('v_coach_roster').select('*').eq('coach_id',payload.coachId)
+        saveScoreEdit    -> sb.from('bytesense_scores').update({...}).eq('member_id',payload.memberId)
+        sendCoachMessage -> sb.from('messages').insert({...})
+        addAdminSession  -> sb.from('training_sessions').insert({...})
+        postAnnouncement -> sb.from('announcements').insert({...})
+      ------------------------------------------------------------------ */
+
+      default:
+        return sbErr(null, 'Not yet ported to Supabase: ' + action);
+    }
+  } catch (e) {
+    return sbErr(e);
+  }
+}
+
+/* Assembles the getFullState() payload from Supabase tables/views to match
+   exactly what applyStateToUI() expects. Extend the TODO sections as you
+   wire more features (announcements, store, messages, etc.). */
+async function fetchFullState(memberId){
+  if(!memberId) return sbErr(null, 'Missing memberId.');
+
+  const { data: base, error: baseErr } = await sb.from('v_member_full_state').select('*').eq('member_id', memberId).single();
+  if(baseErr || !base) return sbErr(baseErr, 'Member not found.');
+
+  const [
+    { data: sessions },
+    { data: rsvps },
+    { data: achievements },
+    { data: unlocked },
+    { data: rewards },
+    { data: pointsHistory },
+    { data: activity },
+  ] = await Promise.all([
+    sb.from('training_sessions').select('*').eq('tenant_id', base.tenant_id).order('session_date'),
+    sb.from('session_rsvps').select('*').eq('member_id', memberId),
+    sb.from('achievements').select('*').or(`tenant_id.eq.${base.tenant_id},tenant_id.is.null`),
+    sb.from('member_achievements').select('*').eq('member_id', memberId),
+    sb.from('rewards').select('*').or(`tenant_id.eq.${base.tenant_id},tenant_id.is.null`),
+    sb.from('points_ledger').select('*').eq('member_id', memberId).order('created_at', { ascending: false }).limit(30),
+    sb.from('activity').select('*').eq('member_id', memberId).order('created_at', { ascending: false }).limit(20),
+  ]);
+
+  const rsvpBySession = Object.fromEntries((rsvps || []).map(r => [r.session_id, r.status]));
+
+  return sbOk({
+    member: {
+      memberId: base.member_id, accountId: base.artiplay_id, name: base.name, age: base.age,
+      coach: base.coach_name, academy: base.academy_name, tenantId: base.tenant_id,
+      parentName: base.parent_name, parentContact: base.parent_contact
+    },
+    score: {
+      total: base.total_score, level: base.level_name,
+      breakdown: [
+        { key: 'training', name: 'Training', score: base.training_score, note: base.training_note },
+        { key: 'performance', name: 'Performance', score: base.performance_score, note: base.performance_note },
+        { key: 'behavior', name: 'Behavior', score: base.behavior_score, note: base.behavior_note },
+        { key: 'growth', name: 'Growth', score: base.growth_score, note: base.growth_note }
+      ],
+      nextLevel: null, pointsToNext: 0   // TODO: query `levels` for the next tier above total_score
+    },
+    attendance: { pct: base.attendance_pct, attended: base.sessions_attended, total: base.total_sessions },
+    sessions: (sessions || []).map(s => ({
+      id: s.session_id, day: s.day_label, date: s.session_date, time: s.session_time,
+      venue: s.venue, rsvp: rsvpBySession[s.session_id] || ''
+    })),
+    history: [],   // TODO: sb.from('attendance_log').select('*').eq('member_id',memberId)
+    achievements: (achievements || []).map(a => {
+      const u = (unlocked || []).find(x => x.achievement_id === a.achievement_id);
+      return { id: a.achievement_id, icon: a.icon, name: a.name, desc: a.description, unlocked: !!u, unlockedAt: u ? u.unlocked_at : null };
+    }),
+    points: base.points_balance,
+    rewards: (rewards || []).map(r => ({ id: r.reward_id, icon: r.icon, label: r.label, cost: r.cost, desc: r.description })),
+    wayToEarn: [],   // TODO: port computeEarnActions_() logic client-side or as an RPC
+    pointsHistory: (pointsHistory || []).map(p => ({ reason: p.reason, delta: p.delta, at: p.created_at })),
+    storeItems: [], storeRequests: [], announcements: [],   // TODO: same pattern as sessions above
+    activity: (activity || []).map(a => ({ icon: a.icon, title: a.title, sub: a.sub, value: a.value, at: a.created_at })),
+    notifications: [],   // TODO: filter activity by notification_state.seen_at
+    messages: []          // TODO: sb.from('message_threads')... + last message per thread
   });
-  if(!res.ok) throw new Error('Network error: ' + res.status);
-  return res.json();
 }
 
 /* Session-only cache of the account record the backend returned at login.
