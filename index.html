@@ -877,6 +877,13 @@ function getActiveChildId(){ try{ return localStorage.getItem(ACTIVE_CHILD_KEY);
    and validate the session/device behind it (§11, §22). */
 const TRUSTED_DEVICE_KEY = 'artiplay_trusted_device';
 const TRUSTED_DEVICE_NAME_KEY = 'artiplay_trusted_device_name';
+function getTrustedDeviceName(){ try{ return localStorage.getItem(TRUSTED_DEVICE_NAME_KEY) || 'there'; }catch(e){ return 'there'; } }
+function clearDeviceTrust(){
+  try{
+    localStorage.removeItem(TRUSTED_DEVICE_KEY);
+    localStorage.removeItem(TRUSTED_DEVICE_NAME_KEY);
+  }catch(e){}
+}
 function markDeviceTrusted(accountKey, name){
   try{
     localStorage.setItem(TRUSTED_DEVICE_KEY, accountKey);
