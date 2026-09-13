@@ -1024,7 +1024,7 @@ const adminSessions = [
    Deploy → New deployment → Web app → Execute as: Me → Who has access: Anyone.
    text/plain keeps every request a CORS "simple request" (no preflight) — see
    the doPost() comment in the backend for why that matters. */
-const API_BASE_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+const API_BASE_URL = 'https://script.google.com/macros/s/AKfycbw6QYlaYPDE-PSVZ4I8b1dt9DJgwAWBAtlMBtPchO-6gsGwcEVQmPG9c76JwlOTEpv1Yw/exec';
 async function callApi(action, payload){
   const res = await fetch(API_BASE_URL, {
     method: 'POST',
