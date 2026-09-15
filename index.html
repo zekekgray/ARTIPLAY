@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,8 +247,7 @@
   .nav-btn .ic{ font-size:19px; }
   .nav-btn.active{ color:#1c1c1e; }
 
-  .toast{ position:fixed; bottom:190px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:rgba(28,28,30,0.92); backdrop-filter:blur(20px) saturate(180%); border-radius:14px; padding:12px 20px; color:#fff; font-size:13px; font-weight:500; z-index:9900; pointer-events:none; }
-  .toast.show{ animation:toastIn .3s var(--ease-sheet-in) forwards; }
+ .toast{ position:absolute; bottom:calc(64px + max(14px, env(safe-area-inset-bottom)) + 14px); left:50%; transform:translateX(-50%) translateY(20px); opacity:0; background:rgba(28,28,30,0.92); backdrop-filter:blur(20px) saturate(180%); border-radius:14px; padding:12px 20px; color:#fff; font-size:13px; font-weight:500; z-index:9900; pointer-events:none; max-width:calc(100% - 40px); text-align:center; }  .toast.show{ animation:toastIn .3s var(--ease-sheet-in) forwards; }
   @keyframes toastIn{ to{ opacity:1; transform:translateX(-50%) translateY(0); } }
 
   .profile-hero{ margin:0 20px 18px; padding:24px; background:rgba(255,255,255,0.72); border-radius:20px; text-align:center; }
@@ -347,6 +345,8 @@
   .coach-search input::placeholder{ color:var(--t3); }
   .insight-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; display:inline-block; }
   .navbar.hidden{ display:none; }
+  #overlay-forgot-pin, #overlay-super-admin-unlock{ z-index:960; }
+  #sheet-forgot-pin, #sheet-super-admin-unlock{ z-index:961; }
 </style>
 </head>
 <body>
@@ -652,10 +652,10 @@
     <div class="sheet-title" id="thread-title">Coach</div>
     <div class="sheet-body" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
       <div class="chat-log" id="thread-log" style="flex:1; overflow-y:auto;"></div>
+      <div class="row-sub" id="thread-error" style="display:none; color:var(--red); font-weight:600; text-align:center; padding:0 0 6px;"></div>
       <div class="au-search-dock">
         <div class="au-input-pill">
-          <input type="text" class="au-input-field" id="thread-input-field" placeholder="Message…" onkeydown="if(event.key==='Enter'){ sendThreadMessage(); }">
-          <div class="au-mic-btn" onclick="sendThreadMessage()">
+          <input type="text" class="au-input-field" id="thread-input-field" placeholder="Message…" onkeydown="if(event.key==='Enter'){ sendThreadMessage(); }">          <div class="au-mic-btn" onclick="sendThreadMessage()">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></svg>
           </div>
         </div>
@@ -822,8 +822,9 @@
         <div class="grouped-card" style="margin:0 0 12px;">
           <div class="field-row"><div class="row-title" style="font-size:14px;">Title</div><input type="text" id="admin-post-title" placeholder="e.g. PMS this weekend"></div>
         </div>
-        <textarea class="field-textarea" id="admin-post-body" placeholder="Write the announcement…" style="margin-bottom:14px;"></textarea>
-        <button class="btn-primary" onclick="postAdminAnnouncement()">Post to academy</button>
+       <textarea class="field-textarea" id="admin-post-body" placeholder="Write the announcement…" style="margin-bottom:10px;"></textarea>
+        <div class="row-sub" id="admin-post-error" style="display:none; color:var(--red); font-weight:600; margin:-4px 0 10px;"></div>
+         <button class="btn-primary" id="admin-post-btn" onclick="postAdminAnnouncement()">Post to academy</button>
       </div>
     </div>
   </div>
@@ -858,9 +859,9 @@
           <button class="btn-primary oauth-btn" id="signin-btn" onclick="signIn(this)">
             <span class="btn-content">Log in</span>
             <span class="btn-status status-loading"><span class="oauth-spinner"></span>Signing in…</span>
-            <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
+            <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Welcome back</span>
           </button>
-          <button class="btn-ghost" onclick="haptic('light'); showToast('Ask your coach or academy admin for your Account ID')">Forgot your Account ID?</button>
+          <button class="btn-ghost" onclick="haptic('light'); openForgotPin();">Forgot PIN?</button>
           <!-- === START: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
           <button class="btn-ghost" onclick="haptic('light'); startSignupFlow()">Sign up instead</button>
           <!-- === END: SIGN-IN ENTRY POINT TO SELF-PROVISIONING === -->
@@ -871,12 +872,11 @@
             <div class="field-row"><div class="row-title" style="font-size:14px;">PIN</div><input type="password" id="signin-trusted-pin" inputmode="numeric" maxlength="6" placeholder="••••••" style="letter-spacing:3px; font-size:17px;" onkeydown="if(event.key==='Enter'){ signInTrusted(document.getElementById('signin-trusted-btn')); }"></div>
           </div>
           <div class="row-sub" id="signin-trusted-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
-          <button class="btn-primary oauth-btn" id="signin-trusted-btn" onclick="signInTrusted(this)">
+           <button class="btn-primary oauth-btn" id="signin-trusted-btn" onclick="signInTrusted(this)">
             <span class="btn-content">Continue</span>
             <span class="btn-status status-loading"><span class="oauth-spinner"></span>Verifying…</span>
-            <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Signed in</span>
-          </button>
-          <button class="btn-ghost" onclick="haptic('light'); switchToFullSignIn()">Not you? Use a different account</button>
+            <span class="btn-status status-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Welcome back</span>
+          </button>          <button class="btn-ghost" onclick="haptic('light'); switchToFullSignIn()">Not you? Use a different account</button>
         </div>
         <div class="row-sub" style="text-align:center; margin-top:16px; padding:0 6px; line-height:1.5;">By continuing, you agree to the Terms of Service and Data Privacy Policy.</div>
       </div>
@@ -968,8 +968,20 @@
         <button class="btn-primary" onclick="obConfirmNotifications()">Continue</button>
       </div>
     </div>
-  </div>
 
+    <div class="onboard-step hidden" id="ob-success">
+      <div class="onboard-center">
+        <div class="onboard-mark" style="width:60px; height:60px;"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--pitch)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <div class="onboard-title">Account created</div>
+        <div class="onboard-tag" style="margin-bottom:4px;">Your ArtiPlay ID</div>
+        <div style="font-family:var(--font-mono); font-size:22px; font-weight:700; color:var(--t1); letter-spacing:.04em; margin-bottom:14px;" id="ob-success-id">—</div>
+        <div class="onboard-tag">Save this ID for future sign-ins.</div>
+      </div>
+      <div class="onboard-footer">
+        <button class="btn-primary" onclick="obFinishSuccess()">Continue</button>
+      </div>
+    </div>
+  </div>
   <div class="sheet-overlay" id="overlay-super-admin-unlock" onclick="closeSheet('sheet-super-admin-unlock')"></div>
   <div class="share-sheet" id="sheet-super-admin-unlock">
     <div class="sheet-handle"></div>
@@ -980,6 +992,20 @@
       </div>
       <div class="row-sub" id="super-admin-pin-error" style="display:none; color:var(--red); font-weight:600; text-align:center; margin:-4px 0 12px;"></div>
       <button class="btn-primary" id="super-admin-pin-btn" onclick="submitSuperAdminPin()">Unlock</button>
+    </div>
+  </div>
+
+ <div class="sheet-overlay" id="overlay-forgot-pin" onclick="closeSheet('sheet-forgot-pin')"></div>
+  <div class="share-sheet" id="sheet-forgot-pin">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Forgot PIN</div>
+    <div class="sheet-body" id="forgot-pin-body">
+      <div class="row-sub" style="text-align:center; margin-bottom:16px;">First, identify your account. Enter any one of the details associated with your account.</div>
+      <div class="grouped-card" style="margin:0 0 12px;">
+        <div class="field-row"><div class="row-title" style="font-size:14px;">Name, email, or mobile</div><input type="text" id="forgot-pin-query" placeholder="e.g. Juan Dela Cruz"></div>
+      </div>
+      <div class="row-sub" id="forgot-pin-status" style="display:none; text-align:center; margin:-4px 0 12px; font-weight:600;"></div>
+      <button class="btn-primary" id="forgot-pin-btn" onclick="submitForgotPinLookup()">Continue</button>
     </div>
   </div>
 
@@ -1132,50 +1158,6 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: { persistSession: false }
 });
 
-/* ===== MODULE: Tenant Resolution (subdomain-based multi-tenancy) ===== */
-let CURRENT_TENANT = null;
-
-function getTenantSlugFromSubdomain(){
-  const host = window.location.hostname;
-  const parts = host.split('.');
-  if(parts.length >= 3 && parts[0] !== 'www' && parts[0] !== 'app'){
-    return parts[0].toLowerCase();
-  }
-  return null;
-}
-
-async function resolveTenant(){
-  const slug = getTenantSlugFromSubdomain();
-  if(!slug) return null;
-  try{
-    const { data, error } = await sb.from('academies').select('*').eq('slug', slug).single();
-    if(error || !data){ showTenantNotFound(slug); return null; }
-    CURRENT_TENANT = data;
-    applyTenantBranding(data);
-    return data;
-  }catch(e){ console.error('resolveTenant failed:', e); return null; }
-}
-
-function applyTenantBranding(tenant){
-  if(!tenant) return;
-  document.title = (tenant.brand_name || tenant.name || 'ArtiPlay') + ' — Academy Portal';
-  if(tenant.primary_color) document.documentElement.style.setProperty('--pitch', tenant.primary_color);
-  if(tenant.accent_color) document.documentElement.style.setProperty('--gold', tenant.accent_color);
-  document.querySelectorAll('[data-tenant-name]').forEach(el => el.textContent = tenant.brand_name || tenant.name);
-  const markEl = document.getElementById('signin-logo-mark');
-  if(markEl && tenant.logo_url){
-    markEl.innerHTML = `<img src="${tenant.logo_url}" alt="${tenant.brand_name||tenant.name}" style="width:100%;height:100%;object-fit:contain;">`;
-  }
-  const taglineEl = document.getElementById('signin-tagline');
-  if(taglineEl && tenant.tagline) taglineEl.textContent = tenant.tagline;
-}
-
-function showTenantNotFound(slug){
-  document.body.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100dvh;width:100%;font-family:-apple-system,sans-serif;text-align:center;padding:30px;">
-    <div><div style="font-size:40px;margin-bottom:14px;">⚠️</div><div style="font-size:18px;font-weight:700;margin-bottom:8px;">Academy not found</div><div style="color:#888;font-size:14px;">No academy is set up at <b>${slug}.artiplay.app</b> yet.</div></div>
-  </div>`;
-}
-
 function sbOk(data){ return { success: true, data: data || {} }; }
 function sbErr(err, fallback){
   const msg = (err && (err.message || err.error_description || err.details)) || fallback || 'Server error';
@@ -1184,18 +1166,19 @@ function sbErr(err, fallback){
 }
 
 /* Drop-in replacement for the old GAS callApi(). Same action names, same
-   {success, data, error} shape, so applyStateToUI() and the rest of the
-   frontend don't need to change. */
+   {success, data, error} shape — pure Supabase RPC calls na lahat.
+   NOTE: rpc_get_full_state must return JSON na kapareho ng shape na
+   inaasahan ng applyStateToUI(): { member, score, attendance, sessions,
+   history, achievements, points, rewards, wayToEarn, pointsHistory,
+   storeItems, storeRequests, announcements, activity, notifications,
+   messages }. Kulang ang kahit isa → mag-e-error ang render. */
 async function callApi(action, payload){
   payload = payload || {};
   try {
     switch(action){
 
-      /* ----- AUTH ----- */
       case 'unifiedLogin': {
-        const { data, error } = await sb.rpc('rpc_unified_login', {
-          p_identifier: payload.identifier, p_pin: payload.pin
-        });
+        const { data, error } = await sb.rpc('rpc_unified_login', { p_identifier: payload.identifier, p_pin: payload.pin });
         if(error) return sbErr(error, 'Account ID or PIN not recognized');
         const row = data && data[0];
         if(!row) return sbErr(null, 'No account found with that Account ID.');
@@ -1219,32 +1202,25 @@ async function callApi(action, payload){
         const { data, error } = await sb.rpc('rpc_super_admin_unlock', { p_pin: payload.pin });
         if(error) return sbErr(error, 'Incorrect PIN.');
         const row = data && data[0];
-        return sbOk({
-          role: 'staff', accountId: row.staff_id, name: row.name, tenantId: row.tenant_id,
-          staffRole: 'SUPER_ADMIN', mustChangePin: false, usingDefaultPin: row.using_default_pin
-        });
+        if(!row) return sbErr(null, 'Incorrect PIN.');
+        return sbOk({ role: 'staff', accountId: row.staff_id, name: row.name, tenantId: row.tenant_id,
+          staffRole: 'SUPER_ADMIN', mustChangePin: false, usingDefaultPin: row.using_default_pin });
       }
 
-      /* ----- PLAYER: FULL STATE ----- */
-      case 'getFullState':
-        return await fetchFullState(payload.memberId);
+      case 'getFullState': {
+        if(!payload.memberId) return sbErr(null, 'Missing memberId.');
+        const { data, error } = await sb.rpc('rpc_get_full_state', { p_member_id: payload.memberId });
+        if(error) return sbErr(error, 'Could not load your data');
+        if(!data) return sbErr(null, 'Member not found.');
+        return sbOk(data);
+      }
 
-      /* ----- TRAINING ----- */
       case 'setRsvp': {
-        const { error } = await sb.from('session_rsvps').upsert({
-          session_id: payload.sessionId, member_id: payload.memberId,
-          status: payload.status || '', updated_at: new Date().toISOString()
-        }, { onConflict: 'session_id,member_id' });
+        const { error } = await sb.rpc('rpc_set_rsvp', { p_member_id: payload.memberId, p_session_id: payload.sessionId, p_status: payload.status || '' });
         if(error) return sbErr(error, 'Could not save RSVP');
-        if(payload.status === 'yes'){
-          const { data: mem } = await sb.from('members').select('tenant_id').eq('member_id', payload.memberId).single();
-          await sb.from('points_ledger').insert({ member_id: payload.memberId, delta: 10, reason: 'RSVP confirmed', ref_type: 'rsvp', ref_id: payload.sessionId });
-          await sb.from('activity').insert({ member_id: payload.memberId, tenant_id: mem && mem.tenant_id, icon: 'training', title: "RSVP'd Yes to a training session", value: '+10 pts' });
-        }
         return sbOk({});
       }
 
-      /* ----- REWARDS ----- */
       case 'redeemReward': {
         const { data, error } = await sb.rpc('redeem_reward', { p_member_id: payload.memberId, p_reward_id: payload.rewardId });
         if(error) return sbErr(error, 'Could not redeem');
@@ -1253,32 +1229,20 @@ async function callApi(action, payload){
         return sbOk({ newBalance: row.new_balance });
       }
 
-      /* ----- STORE ----- */
       case 'requestStoreItem': {
-        const { data: item, error: itemErr } = await sb.from('store_items').select('*').eq('item_id', payload.itemId).single();
-        if(itemErr || !item) return sbErr(itemErr, 'Item not found.');
-        const { data: mem } = await sb.from('members').select('tenant_id').eq('member_id', payload.memberId).single();
-        const { error } = await sb.from('store_requests').insert({
-          member_id: payload.memberId, tenant_id: mem.tenant_id,
-          item_id: item.item_id, item_name: item.name, price: item.price
-        });
+        const { error } = await sb.rpc('rpc_request_store_item', { p_member_id: payload.memberId, p_item_id: payload.itemId });
         if(error) return sbErr(error, 'Could not send request');
-        await sb.from('activity').insert({ member_id: payload.memberId, tenant_id: mem.tenant_id, icon: 'store', title: 'Requested ' + item.name + ' from parent' });
         return sbOk({});
       }
 
-      /* ----- NOTIFICATIONS ----- */
       case 'markNotificationsSeen': {
-        const { error } = await sb.from('notification_state').upsert({ member_id: payload.memberId, seen_at: new Date().toISOString() });
+        const { error } = await sb.rpc('rpc_mark_notifications_seen', { p_member_id: payload.memberId });
         if(error) return sbErr(error);
         return sbOk({});
       }
 
-      /* ----- ACHIEVEMENTS ----- */
       case 'awardAchievement': {
-        const { data, error } = await sb.rpc('award_achievement', {
-          p_member_id: payload.memberId, p_achievement_id: payload.achievementId, p_awarded_by: payload.coachId
-        });
+        const { data, error } = await sb.rpc('award_achievement', { p_member_id: payload.memberId, p_achievement_id: payload.achievementId, p_awarded_by: payload.coachId });
         if(error) return sbErr(error);
         const row = data && data[0];
         if(!row || !row.success) return sbErr(null, (row && row.message) || 'Could not award');
@@ -1291,8 +1255,7 @@ async function callApi(action, payload){
           p_age: payload.age ? parseInt(payload.age, 10) : null,
           p_parent_name: payload.parentName || null, p_parent_contact: payload.parentContact || null,
           p_parent_email: payload.parentEmail || null, p_club: payload.club || null,
-          p_coach_id: payload.coachId || null,
-          p_email: payload.email || null, p_phone: payload.phone || null
+          p_coach_id: payload.coachId || null, p_email: payload.email || null, p_phone: payload.phone || null
         });
         if(error) return sbErr(error, 'Could not create your account.');
         const row = data && data[0];
@@ -1300,92 +1263,79 @@ async function callApi(action, payload){
         return sbOk({ accountId: row.account_id, memberId: row.member_id, tenantId: row.tenant_id });
       }
 
-      /* ----- TODO: iprito mo ito same pattern (table/RPC pointers) -----
-        getCoaches       -> sb.from('staff').select('*').eq('tenant_id',payload.tenantId).eq('role','COACH')
-        assignCoach      -> sb.from('members').update({coach_id:payload.coachId}).eq('member_id',payload.memberId)
-        markOnboarded    -> sb.from('members').update({onboarded_at:new Date().toISOString()}).eq('member_id',payload.memberId)
-        setOwnPin        -> sb.from('staff').update({pin_hash: <hash via RPC>, must_change_pin:false}).eq('staff_id',payload.userId)
-        getThread        -> sb.from('messages').select('*').eq('thread_id',payload.threadId).order('sent_at')
-        sendMessage      -> sb.from('messages').insert({...})
-        getCoachState    -> sb.from('v_coach_roster').select('*').eq('coach_id',payload.coachId)
-        saveScoreEdit    -> sb.from('bytesense_scores').update({...}).eq('member_id',payload.memberId)
-        sendCoachMessage -> sb.from('messages').insert({...})
-        addAdminSession  -> sb.from('training_sessions').insert({...})
-        postAnnouncement -> sb.from('announcements').insert({...})
-      ------------------------------------------------------------------ */
+      case 'getCoaches': {
+        const { data, error } = await sb.rpc('rpc_get_coaches', { p_tenant_id: payload.tenantId });
+        if(error) return sbErr(error);
+        return sbOk(data || []);
+      }
+
+      case 'assignCoach': {
+        const { error } = await sb.rpc('rpc_assign_coach', { p_member_id: payload.memberId, p_coach_id: payload.coachId });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      case 'markOnboarded': {
+        const { error } = await sb.rpc('rpc_mark_onboarded', { p_member_id: payload.memberId });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      case 'setOwnPin': {
+        const { data, error } = await sb.rpc('rpc_set_own_pin', { p_user_id: payload.userId, p_temp_pin: payload.tempPin, p_new_pin: payload.newPin });
+        if(error) return sbErr(error);
+        return sbOk(data || {});
+      }
+
+      case 'getThread': {
+        const { data, error } = await sb.rpc('rpc_get_thread', { p_thread_id: payload.threadId, p_self_id: payload.memberId });
+        if(error) return sbErr(error);
+        return sbOk(data || []);
+      }
+
+      case 'sendMessage': {
+        const { error } = await sb.rpc('rpc_send_message', { p_thread_id: payload.threadId, p_member_id: payload.memberId, p_body: payload.body });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      case 'getCoachState': {
+        const { data, error } = await sb.rpc('rpc_get_coach_state', { p_coach_id: payload.coachId, p_tenant_id: payload.tenantId });
+        if(error) return sbErr(error, 'Could not load staff data');
+        if(!data) return sbErr(null, 'Staff record not found.');
+        return sbOk(data);
+      }
+
+      case 'saveScoreEdit': {
+        const { error } = await sb.rpc('rpc_save_score_edit', { p_coach_id: payload.coachId, p_member_id: payload.memberId, p_scores: payload.scores });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      case 'sendCoachMessage': {
+        const { error } = await sb.rpc('rpc_send_coach_message', { p_thread_id: payload.threadId, p_coach_id: payload.coachId, p_body: payload.body });
+        if(error) return sbErr(error);
+        return sbOk({});
+      }
+
+      case 'addAdminSession': {
+        const { data, error } = await sb.rpc('rpc_add_admin_session', { p_coach_id: payload.coachId, p_tenant_id: payload.tenantId, p_session: payload.session });
+        if(error) return sbErr(error);
+        return sbOk({ sessionId: data });
+      }
+
+      case 'postAnnouncement': {
+        const { data, error } = await sb.rpc('rpc_post_announcement', { p_staff_role: payload.staffRole || 'COACH', p_tenant_id: payload.tenantId, p_title: payload.title, p_body: payload.body, p_actor_name: payload.actorName });
+        if(error) return sbErr(error);
+        return sbOk({ id: data });
+      }
 
       default:
-        return sbErr(null, 'Not yet ported to Supabase: ' + action);
+        return sbErr(null, 'Unknown action: ' + action);
     }
   } catch (e) {
     return sbErr(e);
   }
-}
-
-/* Assembles the getFullState() payload from Supabase tables/views to match
-   exactly what applyStateToUI() expects. Extend the TODO sections as you
-   wire more features (announcements, store, messages, etc.). */
-async function fetchFullState(memberId){
-  if(!memberId) return sbErr(null, 'Missing memberId.');
-
-  const { data: base, error: baseErr } = await sb.from('v_member_full_state').select('*').eq('member_id', memberId).single();
-  if(baseErr || !base) return sbErr(baseErr, 'Member not found.');
-
-  const [
-    { data: sessions },
-    { data: rsvps },
-    { data: achievements },
-    { data: unlocked },
-    { data: rewards },
-    { data: pointsHistory },
-    { data: activity },
-  ] = await Promise.all([
-    sb.from('training_sessions').select('*').eq('tenant_id', base.tenant_id).order('session_date'),
-    sb.from('session_rsvps').select('*').eq('member_id', memberId),
-    sb.from('achievements').select('*').or(`tenant_id.eq.${base.tenant_id},tenant_id.is.null`),
-    sb.from('member_achievements').select('*').eq('member_id', memberId),
-    sb.from('rewards').select('*').or(`tenant_id.eq.${base.tenant_id},tenant_id.is.null`),
-    sb.from('points_ledger').select('*').eq('member_id', memberId).order('created_at', { ascending: false }).limit(30),
-    sb.from('activity').select('*').eq('member_id', memberId).order('created_at', { ascending: false }).limit(20),
-  ]);
-
-  const rsvpBySession = Object.fromEntries((rsvps || []).map(r => [r.session_id, r.status]));
-
-  return sbOk({
-    member: {
-      memberId: base.member_id, accountId: base.artiplay_id, name: base.name, age: base.age,
-      coach: base.coach_name, academy: base.academy_name, tenantId: base.tenant_id,
-      parentName: base.parent_name, parentContact: base.parent_contact
-    },
-    score: {
-      total: base.total_score, level: base.level_name,
-      breakdown: [
-        { key: 'training', name: 'Training', score: base.training_score, note: base.training_note },
-        { key: 'performance', name: 'Performance', score: base.performance_score, note: base.performance_note },
-        { key: 'behavior', name: 'Behavior', score: base.behavior_score, note: base.behavior_note },
-        { key: 'growth', name: 'Growth', score: base.growth_score, note: base.growth_note }
-      ],
-      nextLevel: null, pointsToNext: 0   // TODO: query `levels` for the next tier above total_score
-    },
-    attendance: { pct: base.attendance_pct, attended: base.sessions_attended, total: base.total_sessions },
-    sessions: (sessions || []).map(s => ({
-      id: s.session_id, day: s.day_label, date: s.session_date, time: s.session_time,
-      venue: s.venue, rsvp: rsvpBySession[s.session_id] || ''
-    })),
-    history: [],   // TODO: sb.from('attendance_log').select('*').eq('member_id',memberId)
-    achievements: (achievements || []).map(a => {
-      const u = (unlocked || []).find(x => x.achievement_id === a.achievement_id);
-      return { id: a.achievement_id, icon: a.icon, name: a.name, desc: a.description, unlocked: !!u, unlockedAt: u ? u.unlocked_at : null };
-    }),
-    points: base.points_balance,
-    rewards: (rewards || []).map(r => ({ id: r.reward_id, icon: r.icon, label: r.label, cost: r.cost, desc: r.description })),
-    wayToEarn: [],   // TODO: port computeEarnActions_() logic client-side or as an RPC
-    pointsHistory: (pointsHistory || []).map(p => ({ reason: p.reason, delta: p.delta, at: p.created_at })),
-    storeItems: [], storeRequests: [], announcements: [],   // TODO: same pattern as sessions above
-    activity: (activity || []).map(a => ({ icon: a.icon, title: a.title, sub: a.sub, value: a.value, at: a.created_at })),
-    notifications: [],   // TODO: filter activity by notification_state.seen_at
-    messages: []          // TODO: sb.from('message_threads')... + last message per thread
-  });
 }
 
 /* Session-only cache of the account record the backend returned at login.
@@ -1675,7 +1625,7 @@ async function saveCoachPlayerEdit(i){
   let result;
   try{ result = await callApi('saveScoreEdit', { coachId, memberId: p.memberId, scores }); }
   catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save'); return; }
+   if(!result.success){ haptic('error'); showToast(result.error || "Couldn't save changes. Try again."); return; }
   haptic('success'); closeSheet('sheet-score-edit');
   await loadCoachState(coachId, tenantId);
   renderCoachPlayers();
@@ -1772,9 +1722,8 @@ async function setRsvp(id, val){
   let result;
   try{ result = await callApi('setRsvp', { memberId, sessionId: id, status: newStatus }); }
   catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not save RSVP'); return; }
-  await loadPlayerState(memberId);
-  showToast(newStatus==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
+   if(!result.success){ haptic('error'); showToast(result.error || "Couldn't save your RSVP. Try again."); return; }
+  await loadPlayerState(memberId);  showToast(newStatus==='yes' ? 'RSVP saved — see you there!' : 'RSVP updated');
 }
 
 /* ===== MODULE: Achievements ===== */
@@ -1808,13 +1757,20 @@ async function confirmRedeem(){
   haptic('medium');
   let result;
   try{ result = await callApi('redeemReward', { memberId, rewardId: r.id }); }
-  catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not redeem'); return; }
-  haptic('success');
+  catch(e){ haptic('error'); showToast("Couldn't connect. Check your connection and try again."); return; }
+  const shortfall = r.cost - CURRENT_STATE.points;
+  if(!result.success){
+    haptic('error');
+    if(result.error === 'Not enough points yet.' && shortfall > 0){
+      showToast('Not enough points', `You need ${shortfall.toLocaleString('en-PH')} more pts`);
+    } else {
+      showToast(result.error || "Couldn't redeem this reward right now.");
+    }
+    return;
+  }  haptic('success');
   closeSheet('sheet-redeem');
   await loadPlayerState(memberId);
-  setTimeout(()=>showToast(`Redeemed ${r.label} — ${r.cost.toLocaleString('en-PH')} pts used`), 280);
-}
+  setTimeout(()=>showToast('Reward redeemed', `${r.cost.toLocaleString('en-PH')} pts used`), 280);}
 
 /* ===== MODULE: Store ===== */
 function openStore(){ openSheet('sheet-store'); }
@@ -1841,7 +1797,7 @@ async function requestFromParent(itemId){
   let result;
   try{ result = await callApi('requestStoreItem', { memberId, itemId }); }
   catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not send request'); return; }
+  if(!result.success){ haptic('error'); showToast(result.error || "Couldn't send your request. Try again."); return; }
   haptic('success');
   closeSheet('sheet-store-detail');
   await loadPlayerState(memberId);
@@ -1873,8 +1829,7 @@ async function openThread(id){
   openSheet('sheet-thread');
   let result;
   try{ result = await callApi('getThread', { threadId: id, memberId: selfId }); }
-  catch(e){ showToast('Could not load messages'); return; }
-  if(result.success){
+ catch(e){ showToast("Couldn't load messages. Try again."); return; }  if(result.success){
     log.innerHTML = result.data.map(t=>`<div class="bubble ${t.who==='me'?'user':'ai'}">${t.text}</div>`).join('');
     setTimeout(()=>log.scrollTop = log.scrollHeight, 100);
   }
@@ -1882,26 +1837,29 @@ async function openThread(id){
 async function sendThreadMessage(){
   const field = document.getElementById('thread-input-field');
   const val = field.value.trim();
+  const errEl = document.getElementById('thread-error');
+  errEl.style.display = 'none';
   if(!val || !activeThreadId) return;
   haptic('light');
+  const offlineMsg = "You're offline. Your message wasn't sent.";
+  const genericFailMsg = "Couldn't send your message. Try again.";
   let result;
   if(CURRENT_STATE){
     const memberId = CURRENT_STATE.member.memberId;
     try{ result = await callApi('sendMessage', { threadId: activeThreadId, memberId, body: val }); }
-    catch(e){ showToast('Could not send message'); return; }
+    catch(e){ errEl.style.display='block'; errEl.textContent = (navigator.onLine === false) ? offlineMsg : genericFailMsg; return; }
   } else if(CURRENT_COACH_STATE){
     let accountKey=''; try{ accountKey = localStorage.getItem(ACCOUNT_KEY) || ''; }catch(e){}
     const coachId = accountKey.toUpperCase();
     try{ result = await callApi('sendCoachMessage', { threadId: activeThreadId, coachId, body: val }); }
-    catch(e){ showToast('Could not send message'); return; }
+    catch(e){ errEl.style.display='block'; errEl.textContent = (navigator.onLine === false) ? offlineMsg : genericFailMsg; return; }
   } else return;
-  if(!result.success){ showToast(result.error || 'Could not send message'); return; }
+  if(!result.success){ errEl.style.display='block'; errEl.textContent = result.error || genericFailMsg; return; }
   const log = document.getElementById('thread-log');
   log.innerHTML += `<div class="bubble user">${val}</div>`;
   field.value = '';
   log.scrollTop = log.scrollHeight;
 }
-
 /* ===== MODULE: Announcements ===== */
 function openAnnouncements(){ openSheet('sheet-announcements'); }
 
@@ -1984,7 +1942,8 @@ function closeGoldMenu(){
 }
 function goldMenuAction(key){
   haptic('medium'); closeGoldMenu();
-  showToast(`${key==='help'?'Help & Support':'About Vex'} — coming soon`);
+  if(key==='help'){ openSheet('sheet-help'); return; }
+  // 'about' intentionally has no destination yet — see note below
 }
 document.addEventListener('click', (e)=>{
   if(!goldMenuOpen) return;
@@ -2240,7 +2199,7 @@ async function addAdminSession(){
   try{
     result = await callApi('addAdminSession', { coachId, tenantId, session: { day:'New', date:'TBD', time:'TBD', venue:'TBD', slots:'' } });
   }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not add session'); return; }
+   if(!result.success){ haptic('error'); showToast(result.error || "Couldn't add the session. Try again."); return; }
   haptic('success');
   await loadCoachState(coachId, tenantId);
   renderAdminSessions();
@@ -2249,7 +2208,10 @@ async function addAdminSession(){
 async function postAdminAnnouncement(){
   const title = document.getElementById('admin-post-title').value.trim();
   const body = document.getElementById('admin-post-body').value.trim();
-  if(!title || !body){ haptic('error'); showToast('Add a title and message first'); return; }
+  const errEl = document.getElementById('admin-post-error');
+  const btn = document.getElementById('admin-post-btn');
+  errEl.style.display = 'none';
+  if(!title || !body){ haptic('error'); errEl.style.display='block'; errEl.textContent = 'Title and message are required.'; return; }
   let accountKey = '', tenantId = '', staffRole = 'COACH', actorName = '';
   try{
     accountKey = localStorage.getItem(ACCOUNT_KEY) || '';
@@ -2258,15 +2220,22 @@ async function postAdminAnnouncement(){
   const account = ACCOUNTS[accountKey];
   if(account){ staffRole = account.staffRole || 'COACH'; actorName = account.name || ''; }
   haptic('medium');
+  btn.disabled = true;
+  btn.textContent = 'Posting…';
   let result;
   try{
     result = await callApi('postAnnouncement', { staffRole, tenantId, title, body, actorName });
-  }catch(e){ haptic('error'); showToast('Could not reach the server'); return; }
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not post announcement'); return; }
+  }catch(e){
+    btn.disabled = false; btn.textContent = 'Post to academy';
+    haptic('error'); errEl.style.display='block'; errEl.textContent = "Couldn't post the announcement. Try again.";
+    return;
+  }
+  btn.disabled = false; btn.textContent = 'Post to academy';
+  if(!result.success){ haptic('error'); errEl.style.display='block'; errEl.textContent = result.error || "Couldn't post the announcement. Try again."; return; }
   haptic('success');
   document.getElementById('admin-post-title').value = '';
   document.getElementById('admin-post-body').value = '';
-  showToast('Announcement posted to the academy');
+  showToast('Announcement posted');
 }
 
 /* ===== MODULE: Super Admin Unlock (hidden dev/admin entrance) =====
@@ -2315,17 +2284,18 @@ async function submitSuperAdminPin(){
     document.getElementById('signin-overlay').classList.add('hidden');
     loadCoachState(account.accountId, account.tenantId);
     showScreen('home');
-    showSuperAdminBadge();
-    showToast(account.usingDefaultPin ? '⚠️ Super Admin mode — still using the DEFAULT PIN, change it now' : 'Super Admin mode');
+    showSuperAdminBadge(account.usingDefaultPin);
+      if(!account.usingDefaultPin) showToast('Super Admin mode');
   }, 280);
 }
 function isSuperAdminMode(){ try{ return localStorage.getItem(SUPER_ADMIN_FLAG_KEY) === '1'; }catch(e){ return false; } }
-function showSuperAdminBadge(){
+function showSuperAdminBadge(usingDefaultPin){
   if(document.getElementById('super-admin-badge')) return;
   const badge = document.createElement('div');
   badge.id = 'super-admin-badge';
-  badge.style.cssText = 'position:absolute; top:max(14px, env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:800; background:#1c1c1e; color:#fff; font-size:10.5px; font-weight:700; letter-spacing:.06em; padding:5px 14px; border-radius:20px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);';
-  badge.innerHTML = 'SUPER ADMIN <span style="opacity:.6; font-weight:600;">· Exit</span>';
+  const warn = !!usingDefaultPin;
+  badge.style.cssText = `position:absolute; top:max(14px, env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:800; background:${warn ? '#c22a20' : '#1c1c1e'}; color:#fff; font-size:10.5px; font-weight:700; letter-spacing:.06em; padding:5px 14px; border-radius:20px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25);`;
+  badge.innerHTML = warn ? 'DEFAULT PIN ACTIVE <span style="opacity:.75; font-weight:600;">· Exit</span>' : 'SUPER ADMIN <span style="opacity:.6; font-weight:600;">· Exit</span>';
   badge.onclick = exitSuperAdminMode;
   document.querySelector('.phone').appendChild(badge);
 }
@@ -2337,14 +2307,57 @@ function exitSuperAdminMode(){
   logoutUser();
 }
 
+/* ===== MODULE: Forgot PIN ===== */
+function openForgotPin(){
+  document.getElementById('forgot-pin-query').value = '';
+  const statusEl = document.getElementById('forgot-pin-status');
+  statusEl.style.display = 'none';
+  statusEl.style.color = 'var(--t2)';
+  const btn = document.getElementById('forgot-pin-btn');
+  btn.disabled = false;
+  btn.textContent = 'Continue';
+  openSheet('sheet-forgot-pin');
+}
+async function submitForgotPinLookup(){
+  const query = document.getElementById('forgot-pin-query').value.trim();
+  const statusEl = document.getElementById('forgot-pin-status');
+  const btn = document.getElementById('forgot-pin-btn');
+  statusEl.style.display = 'none';
+  if(!query){ haptic('error'); statusEl.style.display='block'; statusEl.style.color='var(--red)'; statusEl.textContent='Enter your name, email, or mobile number.'; return; }
+  haptic('medium');
+  btn.disabled = true;
+  btn.textContent = 'Checking…';
+  let result;
+  try{
+    // TODO: not yet ported — needs a real backend action that looks up a
+    // member/parent/staff record by name, email, or phone and (if found)
+    // triggers a reset code via email/SMS. See the TODO block inside
+    // callApi() for the same "table/RPC pointer" pattern used elsewhere.
+    result = await callApi('lookupAccountForPinReset', { query });
+  }catch(e){
+    btn.disabled = false; btn.textContent = 'Continue';
+    haptic('error'); statusEl.style.display='block'; statusEl.style.color='var(--red)';
+    statusEl.textContent = "Couldn't check that right now. Check your connection and try again.";
+    return;
+  }
+  btn.disabled = false; btn.textContent = 'Continue';
+  if(!result.success){
+    haptic('error');
+    statusEl.style.display = 'block'; statusEl.style.color = 'var(--red)';
+    statusEl.textContent = "We couldn't find an account with those details. Check your information and try again.";
+    return;
+  }
+  haptic('success');
+  statusEl.style.display = 'block'; statusEl.style.color = '#1c8a3e';
+  statusEl.textContent = "We found your account. We'll send instructions to reset your PIN.";
+}
+
 /* ===== MODULE: Toast ===== */
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
+function showToast(msg, sub){  const t = document.getElementById('toast');
+  t.innerHTML = sub ? `${msg}<div style="font-size:11px; font-weight:500; opacity:.75; margin-top:2px;">${sub}</div>` : msg;
   t.classList.remove('show'); void t.offsetWidth; t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'), 2800);
 }
-
 /* ===== MODULE: Onboarding ===== */
 const obData = { tenantId:'', tenantName:'', role:'', name:'', age:'', parentName:'', parentContact:'', parentEmail:'', email:'', phone:'', club:'', pin:'', accountId:'', memberId:'' };
 
@@ -2355,7 +2368,7 @@ const ROLE_FIELDS_ = {
   PARENT:  [{k:'name', label:'Full name'}, {k:'email', label:'Email'}, {k:'phone', label:'Phone'}]
 };
 
-  const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup'];
+  const OB_STEPS = ['ob-verify','ob-profile-form','ob-set-pin','ob-coach-pick','ob-notification-setup','ob-success'];
 let obCurrentId = 'ob-verify';
 let obHistoryStack = [];
 let obFromSignIn = false; // true lang kapag pumasok galing sa "Sign up instead" sa sign-in screen
@@ -2421,45 +2434,42 @@ async function obVerifyInvite(){
   statusEl.style.color = 'var(--t2)'; statusEl.textContent = 'Checking…';
   let result;
   try{ result = await callApi('validateInvitePin', { pin: raw }); }
-  catch(e){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent='Could not reach the server.'; return; }
-  if(!result.success){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent=result.error; return; }
+  catch(e){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent="Couldn't verify your invite right now. Check your connection and try again."; return; }
+ if(!result.success){ haptic('error'); statusEl.style.color='var(--red)'; statusEl.textContent="That invite PIN isn't valid. Check it and try again."; return; }
 
   obData.tenantId = result.data.tenantId;
   obData.tenantName = result.data.tenantName;
   obData.role = result.data.role;
   haptic('success');
-  statusEl.style.color = '#1c8a3e';
-  statusEl.textContent = `Linked to ${obData.tenantName}`;
+  statusEl.textContent = '';
 
   document.getElementById('ob-role-eyebrow').textContent = `Joining ${obData.tenantName} as ${obData.role.charAt(0)+obData.role.slice(1).toLowerCase()}`;
   document.getElementById('ob-profile-fields').innerHTML = (ROLE_FIELDS_[obData.role]||[]).map(f=>
     `<div class="field-row"><div class="row-title" style="font-size:14px;">${f.label}</div><input type="text" id="ob-field-${f.k}" placeholder="${f.label}"></div>`).join('');
 
-  setTimeout(()=>obGoTo('ob-profile-form', true), 350);
+  obGoTo('ob-profile-form', true);
 }
 
 function obSubmitProfile(btnEl){
   haptic('medium');
   const fields = ROLE_FIELDS_[obData.role] || [];
   for(const f of fields) obData[f.k] = document.getElementById('ob-field-'+f.k).value.trim();
-  if(!obData.name){ haptic('error'); showToast('Name is required'); return; }
+  if(!obData.name){ haptic('error'); showToast('Enter your full name.'); return; }
   obGoTo('ob-set-pin', true);
 }
 
 async function obConfirmJoin(btnEl){
   const newPin = document.getElementById('ob-newpin-input').value.trim();
-  if(!/^\d{4,6}$/.test(newPin)){ haptic('error'); showToast('PIN must be 4-6 digits'); return; }
-  haptic('medium');
+ if(!/^\d{4,6}$/.test(newPin)){ haptic('error'); showToast('PIN must be 4–6 digits.'); return; }  haptic('medium');
   btnEl.classList.add('loading');
   let result;
   try{
     result = await callApi('claimAccount', Object.assign({}, obData, { pin: newPin }));
   }catch(e){
-    btnEl.classList.remove('loading'); haptic('error'); showToast('Could not reach the server'); return;
+    btnEl.classList.remove('loading'); haptic('error'); showToast("Couldn't connect. Check your connection and try again."); return;
   }
   btnEl.classList.remove('loading');
-  if(!result.success){ haptic('error'); showToast(result.error || 'Could not create your account'); return; }
-
+  if(!result.success){ haptic('error'); showToast(result.error || "We couldn't create your account. Please try again."); return; }
   obData.accountId = result.data.accountId;
   obData.memberId = result.data.memberId || '';
   obData.pin = newPin;
@@ -2499,9 +2509,13 @@ function obConfirmNotifications(){
     const masterOn = document.getElementById('notif-toggle-master').classList.contains('on');
     if(masterOn && 'Notification' in window && Notification.requestPermission){ Notification.requestPermission().catch(()=>{}); }
   }catch(e){}
-  obCompleteOnboarding();
+  document.getElementById('ob-success-id').textContent = obData.accountId || '—';
+  obGoTo('ob-success', true);
 }
-function obCompleteOnboarding(skipped){
+function obFinishSuccess(){
+  haptic('light');
+  obCompleteOnboarding();
+}function obCompleteOnboarding(skipped){
   markOnboarded();
   const accountKey = obData.accountId ? obData.accountId.toLowerCase() : undefined;
   saveSession((obData.role || 'player').toLowerCase(), accountKey, obData.memberId, obData.tenantId);
@@ -2509,11 +2523,10 @@ function obCompleteOnboarding(skipped){
   if(obData.memberId){
     callApi('markOnboarded', { memberId: obData.memberId }).catch(()=>{ /* non-blocking */ });
   }
-  if(!skipped) applyPlayerDataToApp();
+    if(!skipped) applyPlayerDataToApp();
   document.getElementById('onboard-overlay').classList.add('hidden');
   showScreen('home');
-  const firstName = (obData.name || 'there').split(' ')[0];
-  showToast(skipped ? 'Welcome to ArtiPlay' : `You're in! Account ID ${obData.accountId} — keep it saved. Welcome, ${firstName}`);
+  if(skipped) showToast('Welcome to ArtiPlay');
 }
 function replayOnboarding(){
   obHistoryStack = [];
@@ -2538,7 +2551,9 @@ async function signIn(btnEl){
   const pinVal = document.getElementById('signin-pin').value.trim();
   const errEl = document.getElementById('signin-error');
   errEl.style.display = 'none';
-  if(!idVal || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your Account ID and PIN'; return; }
+   if(!idVal && !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your Account ID and PIN.'; return; }
+  if(!idVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your Account ID.'; return; }
+  if(!pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your PIN.'; return; }
   haptic('medium');
   btnEl.classList.add('loading');
   let result;
@@ -2548,7 +2563,7 @@ async function signIn(btnEl){
     btnEl.classList.remove('loading');
     haptic('error');
     errEl.style.display = 'block';
-    errEl.textContent = 'Could not reach the server — check your connection';
+     errEl.textContent = "Couldn't sign you in. Check your connection and try again.";
     return;
   }
   if(!result.success){
@@ -2582,7 +2597,7 @@ async function signInTrusted(btnEl){
   const pinVal = document.getElementById('signin-trusted-pin').value.trim();
   const errEl = document.getElementById('signin-trusted-error');
   errEl.style.display = 'none';
-  if(!trustedKey || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your PIN'; return; }
+  if(!trustedKey || !pinVal){ haptic('error'); errEl.style.display='block'; errEl.textContent='Enter your PIN.'; return; }
   haptic('medium');
   btnEl.classList.add('loading');
   let result;
@@ -2592,14 +2607,14 @@ async function signInTrusted(btnEl){
     btnEl.classList.remove('loading');
     haptic('error');
     errEl.style.display = 'block';
-    errEl.textContent = 'Could not reach the server — check your connection';
+   errEl.textContent = "Couldn't sign you in. Check your connection and try again.";
     return;
   }
   if(!result.success){
     btnEl.classList.remove('loading');
     haptic('error');
     errEl.style.display = 'block';
-    errEl.textContent = result.error || 'PIN not recognized';
+     errEl.textContent = result.error || 'PIN not recognized.';
     return;
   }
   const account = result.data;
@@ -2714,7 +2729,6 @@ function renderSigninEntry(){
    is empty after a reload, so we re-fetch straight from the server using
    the saved memberId/tenantId instead of relying on the cache. */
 (async function initSessionOnLoad(){
-  await resolveTenant();
   if(hasSession()){
     // Sign-in stays visible (default state) until the cached session is
     // confirmed valid against the server. No dashboard is shown on a guess.
